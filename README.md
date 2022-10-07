@@ -1,3 +1,13 @@
+<<<<<<< HEAD
+# react-burger
+## json-server db.json  
+## npm start
+=======
+<<<<<<< HEAD
+# react-burger
+## json-server db.json  
+## npm start
+=======
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
@@ -44,3 +54,5 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+>>>>>>> a1ad213 (Merge branch 'main' of https://github.com/dimualdos/react-burger)
+>>>>>>> 4ee1f3e (first commit)

@@ -1,0 +1,11 @@
+.App {
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.mainApp {
+  display: flex;
+  flex-direction: row;
+  position: absolute;
+  width: 1200px;
+}
