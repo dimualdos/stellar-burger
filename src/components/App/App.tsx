@@ -1,22 +1,19 @@
 import AppHeader from '../AppHeader/header';
-import Burger from '../BurgerIngredients/burger';
-import BurgerConstructor from '../BurgerConstructor/burgerConstructor';
+import BurgerIngredients from '../BurgerIngredients/burger-ingridients';
+import BurgerConstructor from '../BurgerConstructor/burger-constructor';
 
 
-import './App.css';
+import styles from './app.module.css';
 
 function App() {
 
 
   return (
-    <div className="App">
+    <div className={styles.page}>
       <AppHeader />
-
-        <Burger />
-        <BurgerConstructor />
-     
-
-    </div>
+      <BurgerIngredients />
+      <BurgerConstructor />
+ </div>
   );
 }
 

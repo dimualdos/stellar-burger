@@ -1,11 +1,11 @@
 
 
-import BurgerTabs from './BurgerTabs/burgerTabs';
+import BurgerTabs from './BurgerTabs/burger-tabs';
 import Ingridients from './Ingridients/ingridients';
 
-import style from './burger.module.css';
+import style from './burger-ingridients.module.css';
 
-const Burger = () => {
+const BurgerIngredients = () => {
     return (
         <main className={style.mainBurger}>
             <section className={style.titleBurger}>
@@ -13,8 +13,8 @@ const Burger = () => {
             </section>
             <BurgerTabs />
             <Ingridients />
-         </main>
+        </main>
     )
 }
 
-export default Burger;
+export default BurgerIngredients;

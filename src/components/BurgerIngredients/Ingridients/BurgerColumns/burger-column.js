@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import BurgerService from '../../../Utils/burgerService';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-
-import styles from './columnBurger.module.css';
+import styles from './burger-column.module.css';
 
 
 
@@ -10,16 +10,16 @@ import styles from './columnBurger.module.css';
 const BurgerColumn = () => {
     const [burgerItem, setBurgerItem] = useState([]);
 
+
+
+
     useEffect(() => {
         onrequest()
     }, [])
 
 
 
-
     const burgerservise = new BurgerService();
-
-    //onCharLoading();
     const onrequest = () => {
         burgerservise.getMenu('http://localhost:3000/menu')
             .then(data => onBurgerLoading(data))
@@ -30,8 +30,9 @@ const BurgerColumn = () => {
     const onBurgerLoading = (arr) => {
         setBurgerItem([...arr])
     }
+   
 
-    const burger = (arr) => {
+    const Burger = (arr) => {
         //console.log(arr)
         const itemsBurger = arr.filter((item) => item.type !== 'sauce' && item.type !== 'main').map((item, i) => {
 
@@ -67,13 +68,25 @@ const BurgerColumn = () => {
         )
 
     }
-    const items = burger(burgerItem)
-    return (
-        <section className={styles.mainColumn}>
-            {items}
-
+    const items = Burger(burgerItem);
+   
+    
+        return (
+        <section className={styles.sectionColumn}>
+            <div className={styles.headlineBurger}>
+                <div className={styles.headlineText}>
+                    Булки
+                </div>
+            </div>
+            <div className={styles.mainColumn}>
+                {items}
+            </div>
         </section>
+
 
     )
 }
+
+
+
 export default BurgerColumn;

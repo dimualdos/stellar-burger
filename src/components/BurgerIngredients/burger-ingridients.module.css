@@ -1,17 +1,16 @@
 .mainBurger {
     z-index: 1;
     position: absolute;
+    display: flex;
+    flex-wrap: wrap;
     width: 600px;
     height: 912px;
     left: 100px;
     top: 128px;
     overflow: hidden;
     /* interface/bg */
-
     background: #131316;
-    /* interface/accent */
 
-    border: 2px solid #4C4CFF;
 }
 
 .titleBurger {
@@ -22,8 +21,6 @@
     top: 40px;
     /* interface/bg */
     background: #131316;
-    /* interface/accent */
-    border: 1px dashed #4C4CFF;
 }
 
 .titleText {
@@ -33,21 +30,15 @@
     height: 40px;
     left: 0px;
     top: 0px;
-
     /* desktop/display large */
-
     font-family: 'JetBrains Mono', sans-serif;
-
     font-style: normal;
     font-weight: 700;
     font-size: 36px;
     line-height: 40px;
     /* identical to box height, or 111% */
-
     display: flex;
     align-items: center;
-
     /* text/primary-light (standart text) */
-
     color: #F2F2F3;
 }

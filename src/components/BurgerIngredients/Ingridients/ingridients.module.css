@@ -1,6 +1,9 @@
 .ingridients {
     z-index: 0;
     position: absolute;
+    display: flex;
+    
+    flex-direction: column;
     width: 600px;
     height: 756px;
     left: 0px;
@@ -14,9 +17,7 @@
     width: 8px;
    /* interface/input */
     background: #2F2F37;
-    /* interface/accent */
-    border: 1px dashed #4C4CFF;
-}
+   }
 
 
 

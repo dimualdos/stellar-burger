@@ -8,7 +8,7 @@
     /* interface/modal-bg */
     background: #1C1C21;
     /* interface/accent */
-    border: 2px solid #4C4CFF;
+
     /* card/x-large */
     box-shadow: 0px 24px 32px rgba(0, 0, 0, 0.04), 0px 16px 24px rgba(0, 0, 0, 0.04), 0px 4px 8px rgba(0, 0, 0, 0.04), 0px 0px 1px rgba(0, 0, 0, 0.04);
 }
@@ -27,13 +27,9 @@
     height: 40px;
     left: 495px;
     top: 8px;
-
     /* interface/modal-bg */
-
     background: #1C1C21;
-    /* interface/accent */
 
-    border: 1px dashed #4C4CFF;
 }
 
 .navLink {
@@ -51,8 +47,6 @@
     left: 0px;
     top: calc(50% - 56px/2);
 
-    /* interface/modal-bg */
-
     background: #1C1C21;
 }
 
@@ -66,8 +60,7 @@
 
     /* interface/modal-bg */
     background: #1C1C21;
-    /* interface/accent */
-    border: 1px dashed #4C4CFF;
+
     border-radius: 40px;
 }
 
@@ -105,23 +98,18 @@
     /* interface/modal-bg */
 
     background: #1C1C21;
-    /* interface/accent */
 
-    border: 1px dashed #4C4CFF;
     border-radius: 40px;
 }
 
 .navText {
+  /* desktop/text */
 
-
-/* desktop/text */
-
-font-family: 'JetBrains Mono', sans-serif;
-font-style: normal;
-font-weight: 400;
-font-size: 16px;
-line-height: 24px;
-/* identical to box height, or 150% */
-
+    font-family: 'JetBrains Mono', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    /* identical to box height, or 150% */
 
 }
