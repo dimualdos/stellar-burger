@@ -10,10 +10,11 @@ import styles from './components-constructor.module.css'
 
 const ComponentsContructor = () => {
 
-  
-  
+
+
   return (
     <div className={styles.constructorElement}>
+
       <ConstructorElement
         type="top"
         isLocked={true}
@@ -21,27 +22,30 @@ const ComponentsContructor = () => {
         price={200}
         thumbnail={img}
       />
-      <div className={styles.constructorCenterElem}>
-        <div className={styles.constructorIcon}>
-          <DragIcon type="primary" />
-        </div>
-        <ConstructorElement
-          text="Соус галактический"
-          price={50}
-          thumbnail={sause}
-        />
-      </div>
-      <div className={styles.constructorCenterElem}>
-        <div className={styles.constructorIcon}>
-          <DragIcon type="primary" />
-        </div>
-        <ConstructorElement
-          text="Мясо бессмертных моллюсков"
-          price={300}
-          thumbnail={meat}
-        />
-      </div>
 
+      <div className={styles.constructorElemScroll}>
+        <div className={styles.constructorCenterElem}>
+          <div className={styles.constructorIcon}>
+            <DragIcon type="primary" />
+          </div>
+          <ConstructorElement
+            text="Соус галактический"
+            price={50}
+            thumbnail={sause}
+          />
+        </div>
+
+        <div className={styles.constructorCenterElem}>
+          <div className={styles.constructorIcon}>
+            <DragIcon type="primary" />
+          </div>
+          <ConstructorElement
+            text="Мясо бессмертных моллюсков"
+            price={300}
+            thumbnail={meat}
+          />
+        </div>
+      </div>
 
       <ConstructorElement
         type="bottom"

@@ -8,10 +8,12 @@ const BurgerConstructor = () => {
     return (
 
         <section className={styles.burgerConstructor}>
-            <div className={styles.scroll}> </div>
-            <div className={styles.constructorComponents}>
-                <ComponentsContructor />
+            <div className={styles.scroll}>
+                <div className={styles.constructorComponents}>
+                    <ComponentsContructor />
+                </div>
             </div>
+
             <div className={styles.constructorInfo}>
                 <div className={styles.constructorPrice}>
                     <div className={styles.constructorText}>610</div>

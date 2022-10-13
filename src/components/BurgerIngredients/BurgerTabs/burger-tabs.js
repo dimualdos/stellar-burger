@@ -5,19 +5,19 @@ const BurgerTabs = () => {
     let nameIngridients = ['Булки', 'Соусы', 'Начинки'];
     nameIngridients = nameIngridients.map((item, index) => {
         return (
-            <li className={styles.burgerBase} key={index}>
+            <div className={styles.burgerBase} key={index}>
                 <div className={styles.breadTab}>
                     <p className={styles.burgerText}>{item}</p>
                 </div>
-            </li>
+            </div>
         )
 
     })
 
     return (
-        <ol className={styles.burgerTabs}>
+        <section className={styles.burgerTabs}>
             {nameIngridients}
-        </ol>
+        </section>
     )
 }
 export default BurgerTabs;

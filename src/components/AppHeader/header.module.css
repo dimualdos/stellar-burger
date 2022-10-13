@@ -1,20 +1,20 @@
 .navPanel {
-    box-sizing: border-box;
-    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     height: 88px;
     left: 2%;
     right: 2%;
     top: 40px;
     /* interface/modal-bg */
     background: #1C1C21;
-    /* interface/accent */
-
-    /* card/x-large */
     box-shadow: 0px 24px 32px rgba(0, 0, 0, 0.04), 0px 16px 24px rgba(0, 0, 0, 0.04), 0px 4px 8px rgba(0, 0, 0, 0.04), 0px 0px 1px rgba(0, 0, 0, 0.04);
 }
 
 .navContent {
-    position: absolute;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
     width: 1280px;
     height: 56px;
     left: calc(50% - 1280px/2);
@@ -22,13 +22,13 @@
 }
 
 .navLogo {
-    position: absolute;
     width: 289.15px;
     height: 40px;
-    left: 495px;
-    top: 8px;
+    top: 5px;
     /* interface/modal-bg */
     background: #1C1C21;
+    position: relative;
+    right: 120px;
 
 }
 
@@ -37,30 +37,23 @@
     margin-top: 0px;
     display: flex;
     flex-direction: row;
-    align-items: center;
-    padding: 0px;
-    gap: 8px;
 
-    position: absolute;
+    align-items: center;
+    gap: 8px;
     width: 383px;
     height: 56px;
     left: 0px;
     top: calc(50% - 56px/2);
-
     background: #1C1C21;
 }
 
 .mainNav {
-    box-sizing: border-box;
     display: flex;
     flex-direction: row;
     align-items: center;
-    padding: 16px 20px;
     gap: 8px;
-
     /* interface/modal-bg */
     background: #1C1C21;
-
     border-radius: 40px;
 }
 
@@ -79,7 +72,6 @@
     width: 197px;
     height: 56px;
     /* interface/modal-bg */
-
     /* Inside auto layout */
     flex: none;
     order: 1;
@@ -88,28 +80,21 @@
 
 .accountNav {
     composes: mainNav;
-
-    position: absolute;
     width: 207px;
     height: 56px;
-    left: 1073px;
-    top: 0px;
-
     /* interface/modal-bg */
-
     background: #1C1C21;
-
     border-radius: 40px;
 }
 
 .navText {
-  /* desktop/text */
-
     font-family: 'JetBrains Mono', sans-serif;
     font-style: normal;
     font-weight: 400;
     font-size: 16px;
     line-height: 24px;
     /* identical to box height, or 150% */
-
+    display: flex;
+    align-items: center;
+    color: #8585AD;
 }

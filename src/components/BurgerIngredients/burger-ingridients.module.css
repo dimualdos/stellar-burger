@@ -1,44 +1,31 @@
 .mainBurger {
     z-index: 1;
-    position: absolute;
     display: flex;
     flex-wrap: wrap;
     width: 600px;
     height: 912px;
-    left: 100px;
-    top: 128px;
-    overflow: hidden;
+    justify-content: center;
     /* interface/bg */
     background: #131316;
 
 }
 
 .titleBurger {
-    position: absolute;
+    display: flex;
     width: 600px;
     height: 40px;
-    left: 0px;
-    top: 40px;
-    /* interface/bg */
     background: #131316;
+    align-items: center;
+    margin-top: 40px;
 }
 
 .titleText {
-    margin: 0;
-    position: absolute;
-    width: 600px;
-    height: 40px;
-    left: 0px;
-    top: 0px;
-    /* desktop/display large */
     font-family: 'JetBrains Mono', sans-serif;
     font-style: normal;
     font-weight: 700;
     font-size: 36px;
     line-height: 40px;
-    /* identical to box height, or 111% */
-    display: flex;
-    align-items: center;
-    /* text/primary-light (standart text) */
     color: #F2F2F3;
+    align-items: center;
+    text-align: center;
 }

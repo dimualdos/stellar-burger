@@ -1,40 +1,59 @@
 .constructorElement {
     display: flex;
-    position: absolute;
     flex-direction: column;
-    align-items: flex-start;
-    padding: 0px;
+    align-items: center;
     gap: 16px;
     width: 568px;
 }
 
+.constructorElemScroll {
+    overflow-y: scroll;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    padding-right: 10px;
+    align-items: flex-start;
+}
+
+.constructorElemScroll::-webkit-scrollbar {
+    width: 8px;
+    background: #2F2F37;
+}
+
+.constructorElemScroll::-webkit-scrollbar-thumb {
+    left: 0px;
+    right: 0px;
+    top: 0px;
+    bottom: 172px;
+    background: #8585AD;
+    border: 3px solid #8585AD;
+}
+
 .constructorCenterElem {
     display: flex;
-    max-width: 536px;
+    max-width: 568px;
     width: 100%;
-    font-family: 'Jet Brains Mono';
+    font-family: 'Jet Brains Mono', sans-serif;
     font-size: 16px;
     align-items: center;
     color: #F2F2F3;
     flex-grow: 1;
+    margin-bottom: 20px;
+}
+.constructorCenterElem :last-child {
+    margin-bottom: 0;
 }
 
 .constructorIcon {
-    position: absolute;
     width: 24px;
     height: 24px;
-    left: 0px;
     align-items: center;
-    margin-right: 40px;
-    left: -34px;
+    margin-right: 10px;
 }
 
 .constructorVector {
-    position: absolute;
     left: 22.92%;
     right: 22.92%;
     top: 12.5%;
     bottom: 11.22%;
-    /* text/primary-light (standart text) */
-
 }
