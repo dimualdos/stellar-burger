@@ -4,8 +4,7 @@
 ## npm start
 =======
 <<<<<<< HEAD
-# react-burger
-## json-server db.json  
+# react-burger  
 ## npm start
 =======
 # Getting Started with Create React App
