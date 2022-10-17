@@ -14,14 +14,16 @@ const ComponentsContructor = () => {
 
   return (
     <div className={styles.constructorElement}>
+      <div className={styles.constructorElemTopBottom}>
+        <ConstructorElement
+          type="top"
+          isLocked={true}
+          text="Краторная булка N-200i (верх)"
+          price={200}
+          thumbnail={img}
+        />
+      </div>
 
-      <ConstructorElement
-        type="top"
-        isLocked={true}
-        text="Краторная булка N-200i (верх)"
-        price={200}
-        thumbnail={img}
-      />
 
       <div className={styles.constructorElemScroll}>
         <div className={styles.constructorCenterElem}>
@@ -46,14 +48,16 @@ const ComponentsContructor = () => {
           />
         </div>
       </div>
+      <div className={styles.constructorElemTopBottom}>
+        <ConstructorElement
+          type="bottom"
+          isLocked={true}
+          text="Краторная булка N-200i (низ)"
+          price={200}
+          thumbnail={img}
+        />
+      </div>
 
-      <ConstructorElement
-        type="bottom"
-        isLocked={true}
-        text="Краторная булка N-200i (низ)"
-        price={200}
-        thumbnail={img}
-      />
     </div>
   )
 }

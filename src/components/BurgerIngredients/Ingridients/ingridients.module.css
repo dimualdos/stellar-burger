@@ -7,7 +7,7 @@
     overflow-y: scroll;
     border-radius: 0px;
     margin-top: 20px;
-    overflow-x:hidden;
+    overflow-x: hidden;
 }
 
 .ingridients::-webkit-scrollbar {

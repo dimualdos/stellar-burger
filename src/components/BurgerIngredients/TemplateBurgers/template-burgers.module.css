@@ -21,34 +21,15 @@
     width: 272px;
     height: 208px;
     order: 0;
-    flex-grow: 0;
+
 }
 
 .counterColumn {
     width: 32px;
     height: 32px;
-    right: 0px;
-    top: 0px;
     background: #131316;
+    position: relative;
 
-}
-
-.counterText {
-    text-align: center;
-    font-family: 'Iceland', sans-serif;
-    font-style: normal;
-    font-weight: 400;
-    font-size: 28px;
-    color: #F2F2F3;
-}
-
-.roundedText {
-    left: 0%;
-    right: 0%;
-    top: 0%;
-    bottom: 0%;
-    border-radius: 16px;
-    background: #4C4CFF;
 }
 
 .content {
@@ -71,8 +52,6 @@
     order: 0;
     flex-grow: 0;
 }
-
-
 
 .price {
     display: flex;
@@ -126,3 +105,38 @@
     color: #F2F2F3;
 }
 
+.mainBurgerColumn {
+    display: flex;
+    justify-content: center;
+    width: 600px;
+    margin-top: 20px;
+    flex-direction: column;
+}
+
+.mainColumn {
+    display: flex;
+    justify-content: center;
+    width: 600px;
+    margin-top: 20px;
+    flex-direction: column;
+}
+
+
+.headlineBurger {
+    width: 600px;
+    height: 30px;
+    background: #131316;
+
+}
+
+.headlineText {
+    width: 600px;
+    height: 30px;
+    /* desktop/display small */
+    font-family: 'JetBrains Mono', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    /* text/primary-light (standart text) */
+    color: #F2F2F3;
+}

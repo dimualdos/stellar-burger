@@ -13,6 +13,7 @@
     flex-direction: column;
     padding-right: 10px;
     align-items: flex-start;
+    gap: 16px;
 }
 
 .constructorElemScroll::-webkit-scrollbar {
@@ -37,12 +38,8 @@
     font-size: 16px;
     align-items: center;
     color: #F2F2F3;
-    flex-grow: 1;
-    margin-bottom: 20px;
 }
-.constructorCenterElem :last-child {
-    margin-bottom: 0;
-}
+
 
 .constructorIcon {
     width: 24px;
@@ -56,4 +53,9 @@
     right: 22.92%;
     top: 12.5%;
     bottom: 11.22%;
+}
+
+.constructorElemTopBottom {
+    padding-right: 18px;
+    padding-left: 33px;
 }

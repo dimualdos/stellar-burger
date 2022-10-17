@@ -1,66 +1,67 @@
-
+import {useState} from 'react';
+import { PropTypes } from "prop-types";
 import TemlateBurger from '../TemplateBurgers/template-burgers';
-
+import IngidientDetails from '../../IngredientDetails/ingredient-details';
 import styles from './ingridients.module.css';
+import Modal from '../../Modal/modal';
 
 
-const BurgerColumn = (props) => {
-    const item = props.data.filter(value => value.type === 'bun');
+const BurgerColumn = ({onIngridientSelected, headlineText, id, data }) => {
+    const item = data.data.filter(value => value.type === 'bun');
     return (
-        <section className={styles.mainBurgerColumn}>
-            <div className={styles.headlineBurger}>
-                <div className={styles.headlineText}>
-                    Булки
-                </div>
-            </div>
-            <div className={styles.mainColumn}>
-                <TemlateBurger data={item} />
-            </div>
-        </section>
+        <>
+            <TemlateBurger onIngridientSelected={ onIngridientSelected} headlineText={headlineText} id={id} data={item} />
+        </>
     )
 }
-const SauceColumn = (props) => {
-    const item = props.data.filter(value => value.type === 'sauce');
+const SauceColumn = ({onIngridientSelected, headlineText, id, data }) => {
+    const item = data.data.filter(value => value.type === 'sauce');
     return (
-        <section className={styles.mainBurgerColumn}>
-            <div className={styles.headlineBurger}>
-                <div className={styles.headlineText}>
-                    Соусы
-                </div>
-            </div>
-            <div className={styles.mainColumn}>
-                <TemlateBurger data={item} />
-            </div>
-        </section>
+        <>
+            <TemlateBurger onIngridientSelected={ onIngridientSelected} headlineText={headlineText} id={id} data={item} />
+        </>
     )
-
 }
-const FillingColumn = (props) => {
-    const item = props.data.filter(value => value.type === 'main');
+
+const FillingColumn = ({onIngridientSelected,  headlineText, id, data }) => {
+    const item = data.data.filter(value => value.type === 'main');
     return (
-        <section className={styles.mainBurgerColumn}>
-            <div className={styles.headlineBurger}>
-                <div className={styles.headlineText}>
-                    Ингридиенты
-                </div>
-            </div>
-            <div className={styles.mainColumn}>
-                <TemlateBurger data={item} />
-            </div>
-        </section>
+        <>
+            <TemlateBurger onIngridientSelected={ onIngridientSelected} headlineText={headlineText} id={id} data={item} />
+        </>
     )
 }
 
 
-const Ingridients = (props) => {
+const Ingridients = ({data}) => {
+    const [ingridientInModal, setIngridientInModal] = useState(null);
+
+    const onIngridientSelected = (id, image, name, proteins, fat, carbohydrates, calories) => {
+        setIngridientInModal({ id, image, name, proteins, fat, carbohydrates, calories })
+    }
+    const closeModal = () => {
+      setIngridientInModal(null)
+    }
+   
     return (
+        <>
         <section className={styles.ingridients}>
-            <BurgerColumn data={props.data} />
-            <SauceColumn data={props.data} />
-            <FillingColumn data={props.data} />
-
+            <BurgerColumn   onIngridientSelected={ onIngridientSelected} headlineText={'Булки'} id={'bun'} data={data} />
+            <SauceColumn  onIngridientSelected={ onIngridientSelected} headlineText={'Соусы'} id={'sauce'} data={data} />
+            <FillingColumn  onIngridientSelected={ onIngridientSelected} headlineText={'Начинки'} id={'main'} data={data} />
         </section>
+             {ingridientInModal ?
+                    (<Modal onClose={closeModal} title='Детали ингридиента'>
+                        <IngidientDetails data={ingridientInModal} />
+                    </Modal>) : null
+                }
+        </>
+        
     )
+}
+
+Ingridients.propTypes = {
+    data: PropTypes.object.isRequired
 }
 
 export default Ingridients;

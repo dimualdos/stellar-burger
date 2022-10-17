@@ -3,38 +3,43 @@ import { useState, useEffect } from 'react';
 import AppHeader from '../AppHeader/header';
 import BurgerIngredients from '../BurgerIngredients/burger-ingridients';
 import BurgerConstructor from '../BurgerConstructor/burger-constructor';
-
+import { getResourse } from '../Utils/burger-api';
+import Spinner from '../Spinner/Spinner';
 
 import styles from './app.module.css';
-let _url = 'https://norma.nomoreparties.space/api/ingredients';
+
 
 function App() {
 
-  const [state, setState] = useState([]);
+  const [stateIngridients, setStateidients] = useState([]);
+  const [loading, setLoading] = useState(true)
+
 
   useEffect(() => {
-    fetch(_url)
-      .then(res => res.json())
-      .then(data => {
-        //console.log(data.data)
-        setState(data.data)
-      })
+    getResourse()
+      .then(setStateidients)
       .catch(error => console.error(error))
+      .finally(() => setLoading(false))
   }, [])
 
-  const data = [...state];
 
   return (
     <div className={styles.page}>
-      <AppHeader />
-      <ErrorBoundary>
-        <section className={styles.mainApp1}>
-          {data && <BurgerIngredients data={data} />}
-          <BurgerConstructor />
-        </section>
-      </ErrorBoundary>
 
+      <AppHeader />
+
+      {loading ? (<Spinner />) : (
+        <ErrorBoundary>
+          <section className={styles.mainApp1}>
+            <BurgerIngredients data={stateIngridients} />
+            <BurgerConstructor />
+          </section>
+        </ErrorBoundary>
+      )
+      }
     </div>
+
+
   );
 }
 

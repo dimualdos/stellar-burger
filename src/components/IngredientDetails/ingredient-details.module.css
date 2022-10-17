@@ -1,0 +1,78 @@
+.article {
+    display: flex;
+    width: 520px;
+    height: 520px;
+    background: #1C1C21;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.img {
+    width: 480px;
+    height: 240px;
+    left: calc(50% - 480px/2);
+    top: 0px;
+}
+
+.frame2 {
+    width: 520px;
+    background: #1C1C21
+}
+
+.frame2Text {
+    font-family: 'JetBrains Mono', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 30px;
+    text-align: center;
+    color: #F2F2F3
+}
+
+.nutrionValues {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    width: 516px;
+    height: 56px;
+}
+
+
+.valueDiv {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    width: 120px;
+    order: 0;
+    flex-grow: 0;
+}
+
+.textValue {
+    width: 120px;
+    height: 24px;
+    font-family: 'JetBrains Mono', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    text-align: center;
+    color: #8585AD;
+}
+
+.value {
+    width: 120px;
+    height: 24px;
+    font-family: 'Iceland', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 28px;
+    line-height: 24px;
+    align-items: center;
+    text-align: center;
+    color: #8585AD;
+    flex: none;
+    order: 1;
+    align-self: stretch;
+    flex-grow: 0;
+}
