@@ -1,10 +1,10 @@
-
+import{PropTypes} from 'prop-types'
 import BurgerTabs from './BurgerTabs/burger-tabs';
 import Ingridients from './Ingridients/ingridients';
 
 import style from './burger-ingridients.module.css';
 
-const BurgerIngredients = (props) => {
+const BurgerIngredients = ({data}) => {
 
     return (
         <main className={style.mainBurger}>
@@ -12,10 +12,13 @@ const BurgerIngredients = (props) => {
                 <p className={style.titleText}>Соберите бургер</p>
             </section>
             <BurgerTabs />
-            <Ingridients data={props.data} />
+            <Ingridients data={data} />
         </main>
     )
 }
 
+BurgerIngredients.propTypes = {
+    data: PropTypes.object.isRequired
+}
 
 export default BurgerIngredients;

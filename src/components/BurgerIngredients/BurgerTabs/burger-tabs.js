@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
-
+import styles from './burger-tabs.module.css'
 
 const BurgerTabs = () => {
   const [current, setCurrent] = useState('bun');
@@ -16,7 +16,7 @@ const BurgerTabs = () => {
 
   return (
 
-    <div style={{ display: 'flex' }}>
+    <div className={styles.burgerMain}>
       <Tab
         value="bun"
         active={current === 'bun'}

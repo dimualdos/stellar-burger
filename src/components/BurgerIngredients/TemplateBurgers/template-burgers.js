@@ -1,6 +1,8 @@
+import { PropTypes } from "prop-types";
+
 import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './template-burgers.module.css';
-import { PropTypes } from "prop-types";
+
 
 
 const TemlateBurger = ({ onIngridientSelected, data, headlineText, id }) => {
@@ -51,7 +53,7 @@ TemlateBurger.propTypes = {
     onIngridientSelected: PropTypes.func.isRequired,
     data: PropTypes.array.isRequired,
     headlineText: PropTypes.string.isRequired,
-    id: PropTypes.string
+    id: PropTypes.string.isRequired
 }
 
 

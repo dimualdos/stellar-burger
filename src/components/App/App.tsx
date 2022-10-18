@@ -11,16 +11,17 @@ import styles from './app.module.css';
 
 function App() {
 
-  const [stateIngridients, setStateidients] = useState([]);
+  const [ingridients, setIngridients] = useState([]);
   const [loading, setLoading] = useState(true)
 
 
   useEffect(() => {
     getResourse()
-      .then(setStateidients)
+      .then(setIngridients)
       .catch(error => console.error(error))
       .finally(() => setLoading(false))
   }, [])
+
 
 
   return (
@@ -30,10 +31,10 @@ function App() {
 
       {loading ? (<Spinner />) : (
         <ErrorBoundary>
-          <section className={styles.mainApp1}>
-            <BurgerIngredients data={stateIngridients} />
+          <main className={styles.mainApp1}>
+            <BurgerIngredients data={ingridients} />
             <BurgerConstructor />
-          </section>
+          </main>
         </ErrorBoundary>
       )
       }

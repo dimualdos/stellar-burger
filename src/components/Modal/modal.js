@@ -12,20 +12,20 @@ const modalItems = document.getElementById('modals');
 
 
 const Modal = ({ title, children, onClose }) => {
-    const [overlay, setOverlay] = useState(false);
+    const [overlay, setOverlay] = useState(true);
 
     useEffect(() => {
         const removeModal = (e) => {
             e.key === 'Escape' && onClose();
         }
-        setOverlay(true);
+
         modalItems.classList.add('modalWrapper');
         document.addEventListener('keydown', removeModal);
-        document.addEventListener('click', removeModal);
+
         return () => {
             document.removeEventListener('keydown', removeModal);
             modalItems.classList.remove('modalWrapper');
-            document.addEventListener('click', removeModal);
+
         }
     }, [onClose])
 
@@ -45,7 +45,7 @@ const Modal = ({ title, children, onClose }) => {
                 </div>
                 <div className={styles.content}>{children}</div>
             </div>
-            {overlay ? (<ModalOverlay data={onClose} />) : null}
+            {overlay ? (<ModalOverlay onClose={onClose} />) : null}
 
         </>, modalItems
     )
@@ -54,8 +54,7 @@ const Modal = ({ title, children, onClose }) => {
 Modal.propTypes = {
     title: PropTypes.string,
     onClose: PropTypes.func.isRequired,
-    children: PropTypes.node.isRequired,
-
+    children: PropTypes.node.isRequired
 }
 
 export default Modal;

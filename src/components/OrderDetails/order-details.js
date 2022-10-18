@@ -6,23 +6,23 @@ const OrderDetails = ({ numberOrder }) => {
 
     return (
 
-        <div className="order">
+        <div className={styles.order}>
             <div className={styles.divOrderNumber}>
-                <p className={`${styles.orderNumber} text text_type_digits-large`}>{numberOrder}</p>
+                <p className={styles.orderNumber} >{numberOrder}</p>
             </div>
             <div className={styles.divOrderText}>
-                <p className={`${styles.orderText} text text_type_main-large`}>
+                <p className={styles.idOrderText}>
                     Идентификатор заказа
                 </p>
             </div>
             <div className={styles.done}></div>
             <div className={styles.divOrderText}>
-                <p className={`${styles.orderText} text text_type_main-medium`}>
+                <p className={styles.orderText}>
                     Ваш заказ начали готовить
                 </p>
             </div>
             <div className={styles.divOrderText}>
-                <p className={`${styles.orderText} text text_type_main-medium `} style={{ 'color': '#8585AD' }}>
+                <p className={styles.orderTextOrbital} >
                     Дождитесь готовности на орбитальной станции
                 </p>
             </div>
@@ -31,7 +31,7 @@ const OrderDetails = ({ numberOrder }) => {
 }
 
 OrderDetails.propTypes = {
-    numberOrder: PropTypes.string
+    numberOrder: PropTypes.string.isRequired
 }
 
 export default OrderDetails;
