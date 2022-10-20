@@ -1,0 +1,66 @@
+/* modal */
+
+
+.order {
+    display: flex;
+    width: 520px;
+    height: 520px;
+    background: #1C1C21;
+    flex-wrap: wrap;
+    justify-content: center;
+
+}
+
+.divOrderNumber {
+    width: 520px;
+    height: 120px;
+}
+
+.orderNumber {
+    font-family: 'Iceland', sans-serif;
+    font-style: normal;
+    font-size: 144px;
+    line-height: 120px;
+    text-align: center;
+    color: #F2F2F3;
+    text-shadow: 0px 0px 16px rgb(51 51 255 / 25%), 0px 0px 8px rgb(51 51 255 / 25%), 0px 4px 32px rgb(51 51 255 / 50%);
+    padding: 0;
+    margin: 0;
+}
+
+.divOrderText {
+    width: 520px;
+    height: 30px;
+    background: #1C1C21;
+}
+
+.idOrderText {
+    composes: orderNumber;
+    height: 30px;
+    font-family: 'JetBrains Mono', sans-serif;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 30px;
+}
+
+.orderText {
+    composes: idOrderText;
+    height: 24px;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+}
+
+
+.done {
+    width: 120px;
+    height: 120px;
+    background: url(./../../images/popup/done.png);
+}
+
+.orderTextOrbital {
+    composes: orderText;
+    color: #8585AD;
+}
+
+/* style={{ 'color': '#8585AD' }} */

@@ -1,23 +1,42 @@
+import { useState } from 'react';
 
-import styles from './burger-tabs.module.css';
+import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
+import styles from './burger-tabs.module.css'
 
 const BurgerTabs = () => {
-    let nameIngridients = ['Булки', 'Соусы', 'Начинки'];
-    nameIngridients = nameIngridients.map((item, index) => {
-        return (
-            <li className={styles.burgerBase} key={index}>
-                <div className={styles.breadTab}>
-                    <p className={styles.burgerText}>{item}</p>
-                </div>
-            </li>
-        )
+  const [current, setCurrent] = useState('bun');
 
-    })
+  const onTabClick = (tab) => {
+    setCurrent(tab);
+    const elem = document.getElementById(tab);
+    if (elem) {
+      return elem.scrollIntoView({ behavior: "smooth" })
+    }
+  }
 
-    return (
-        <ol className={styles.burgerTabs}>
-            {nameIngridients}
-        </ol>
-    )
+  return (
+
+    <div className={styles.burgerMain}>
+      <Tab
+        value="bun"
+        active={current === 'bun'}
+        onClick={onTabClick}>
+        Булки
+      </Tab>
+      <Tab
+        value="sauce"
+        active={current === 'sauce'}
+        onClick={onTabClick}>
+        Соусы
+      </Tab>
+      <Tab
+        value="main"
+        active={current === 'main'}
+        onClick={onTabClick}>
+        Начинки
+      </Tab>
+    </div>
+
+  )
 }
 export default BurgerTabs;

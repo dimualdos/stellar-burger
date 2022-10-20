@@ -11,9 +11,6 @@ const AppHeader = () => {
 
         <header className={styles.navPanel}>
             <nav className={styles.navContent}>
-                <div className={styles.navLogo}>
-                    <Logo />
-                </div>
                 <ol className={styles.navLink}>
                     <li className={styles.constructorNav}>
                         <BurgerIcon type="primary" />
@@ -22,13 +19,16 @@ const AppHeader = () => {
                         <MenuIcon type="secondary" />
                         <p className={styles.navText}>Лента заказов</p>
                     </li>
-                    <li className={styles.accountNav}>
-                        <ProfileIcon type="primary" />
-                        <p className={styles.navText}>
-                            Личный кабинет
-                        </p>
-                    </li>
                 </ol>
+                <div className={styles.navLogo}>
+                    <Logo />
+                </div>
+                <div className={styles.accountNav}>
+                    <ProfileIcon type="primary" />
+                    <p className={styles.navText}>
+                        Личный кабинет
+                    </p>
+                </div>
             </nav>
         </header>
 
