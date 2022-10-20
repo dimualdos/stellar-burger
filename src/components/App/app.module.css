@@ -1,0 +1,16 @@
+.App {
+  text-align: center;
+  box-sizing: border-box;
+  
+}
+.page {
+  margin: 0 auto;
+  max-width: 1480px
+}
+
+.mainApp {
+  display: flex;
+  flex-direction: row;
+  position: absolute;
+  width: 1200px;
+}

@@ -1,0 +1,34 @@
+.ingridients {
+    z-index: 0;
+    position: absolute;
+    display: flex;
+    
+    flex-direction: column;
+    width: 600px;
+    height: 756px;
+    left: 0px;
+    top: 176px;
+    overflow-y: scroll;
+    border-radius: 0px;
+}
+
+.ingridients::-webkit-scrollbar {
+    position: absolute;
+    width: 8px;
+   /* interface/input */
+    background: #2F2F37;
+   }
+
+
+
+.ingridients::-webkit-scrollbar-thumb {
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    top: 0px;
+    bottom: 172px;
+    /* text/dark grey (secondary text) */
+    background: #8585AD;
+    /* text/dark grey (secondary text) */
+    border: 3px solid #8585AD;
+}
