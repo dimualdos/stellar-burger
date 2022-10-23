@@ -1,9 +1,10 @@
-import {useState} from 'react';
-import { PropTypes } from "prop-types";
+import {useState, useContext} from 'react';
 import TemlateBurger from '../TemplateBurgers/template-burgers';
 import IngidientDetails from '../../IngredientDetails/ingredient-details';
 import styles from './ingridients.module.css';
 import Modal from '../../Modal/modal';
+import { BurgerContext } from '../../Services/burger-context';
+
 
 
 const BurgerColumn = ({onIngridientSelected, headlineText, id, data }) => {
@@ -33,7 +34,7 @@ const FillingColumn = ({onIngridientSelected,  headlineText, id, data }) => {
 }
 
 
-const Ingridients = ({data}) => {
+const Ingridients = () => {
     const [ingridientInModal, setIngridientInModal] = useState(null);
 
     const onIngridientSelected = (id, image, name, proteins, fat, carbohydrates, calories) => {
@@ -42,17 +43,19 @@ const Ingridients = ({data}) => {
     const closeModal = () => {
       setIngridientInModal(null)
     }
+
+    const burgerSelect = useContext(BurgerContext);
    
     return (
         <>
         <section className={styles.ingridients}>
-            <BurgerColumn   onIngridientSelected={ onIngridientSelected} headlineText={'Булки'} id={'bun'} data={data} />
-            <SauceColumn  onIngridientSelected={ onIngridientSelected} headlineText={'Соусы'} id={'sauce'} data={data} />
-            <FillingColumn  onIngridientSelected={ onIngridientSelected} headlineText={'Начинки'} id={'main'} data={data} />
+            <BurgerColumn   onIngridientSelected={ onIngridientSelected} headlineText={'Булки'} id={'bun'} data={burgerSelect} />
+            <SauceColumn  onIngridientSelected={ onIngridientSelected} headlineText={'Соусы'} id={'sauce'} data={burgerSelect} />
+            <FillingColumn  onIngridientSelected={ onIngridientSelected} headlineText={'Начинки'} id={'main'} data={burgerSelect} />
         </section>
              {ingridientInModal ?
-                    (<Modal onClose={closeModal} title='Детали ингридиента'>
-                        <IngidientDetails data={ingridientInModal} />
+                    (<Modal onClose={closeModal} itemBurger={ingridientInModal} title='Детали ингридиента'>
+                        <IngidientDetails itemBurger={ingridientInModal} />
                     </Modal>) : null
                 }
         </>
@@ -60,8 +63,6 @@ const Ingridients = ({data}) => {
     )
 }
 
-Ingridients.propTypes = {
-    data: PropTypes.object.isRequired
-}
+
 
 export default Ingridients;

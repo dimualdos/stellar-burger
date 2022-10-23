@@ -8,6 +8,7 @@ import styles from './template-burgers.module.css';
 const TemlateBurger = ({ onIngridientSelected, data, headlineText, id }) => {
 
     const itemsBurger = data.map((value) => {
+
         return (
             <div className={styles.ingridient}
 
