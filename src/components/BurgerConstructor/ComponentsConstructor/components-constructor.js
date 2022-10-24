@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect } from 'react';
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { BurgerContext } from '../../Services/burger-context';
 import { TotalPriceContext } from '../../Services/burger-context';
@@ -18,10 +18,8 @@ const ComponentsContructor = () => {
   useEffect(
     () => {
       let total = 0;
-
       total += bread[0].price * 2;
       total += ingr.map(item => item.price).reduce((prevous, next) => prevous + next, 0);
-
       setTotalPrice(total);
     },
     [bread, ingr, setTotalPrice]
@@ -39,7 +37,6 @@ const ComponentsContructor = () => {
           text={value.name}
           price={value.price}
           thumbnail={value.image}
-
         />
       </div>
     )

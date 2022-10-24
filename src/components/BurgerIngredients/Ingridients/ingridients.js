@@ -1,4 +1,5 @@
-import {useState, useContext} from 'react';
+import { PropTypes } from "prop-types";
+import { useState, useContext } from 'react';
 import TemlateBurger from '../TemplateBurgers/template-burgers';
 import IngidientDetails from '../../IngredientDetails/ingredient-details';
 import styles from './ingridients.module.css';
@@ -6,33 +7,12 @@ import Modal from '../../Modal/modal';
 import { BurgerContext } from '../../Services/burger-context';
 
 
+const IngredientList = ({ onIngridientSelected, headlineText, id, data }) => {
 
-const BurgerColumn = ({onIngridientSelected, headlineText, id, data }) => {
-    const item = data.data.filter(value => value.type === 'bun');
     return (
-        <>
-            <TemlateBurger onIngridientSelected={ onIngridientSelected} headlineText={headlineText} id={id} data={item} />
-        </>
+        <TemlateBurger onIngridientSelected={onIngridientSelected} headlineText={headlineText} id={id} data={data} />
     )
 }
-const SauceColumn = ({onIngridientSelected, headlineText, id, data }) => {
-    const item = data.data.filter(value => value.type === 'sauce');
-    return (
-        <>
-            <TemlateBurger onIngridientSelected={ onIngridientSelected} headlineText={headlineText} id={id} data={item} />
-        </>
-    )
-}
-
-const FillingColumn = ({onIngridientSelected,  headlineText, id, data }) => {
-    const item = data.data.filter(value => value.type === 'main');
-    return (
-        <>
-            <TemlateBurger onIngridientSelected={ onIngridientSelected} headlineText={headlineText} id={id} data={item} />
-        </>
-    )
-}
-
 
 const Ingridients = () => {
     const [ingridientInModal, setIngridientInModal] = useState(null);
@@ -41,27 +21,36 @@ const Ingridients = () => {
         setIngridientInModal({ id, image, name, proteins, fat, carbohydrates, calories })
     }
     const closeModal = () => {
-      setIngridientInModal(null)
+        setIngridientInModal(null)
     }
 
     const burgerSelect = useContext(BurgerContext);
-   
+    const itemBurger = burgerSelect.data.filter(value => value.type === 'bun');
+    const itemSauce = burgerSelect.data.filter(value => value.type === 'sauce');
+    const itemMain = burgerSelect.data.filter(value => value.type === 'main');
     return (
         <>
-        <section className={styles.ingridients}>
-            <BurgerColumn   onIngridientSelected={ onIngridientSelected} headlineText={'Булки'} id={'bun'} data={burgerSelect} />
-            <SauceColumn  onIngridientSelected={ onIngridientSelected} headlineText={'Соусы'} id={'sauce'} data={burgerSelect} />
-            <FillingColumn  onIngridientSelected={ onIngridientSelected} headlineText={'Начинки'} id={'main'} data={burgerSelect} />
-        </section>
-             {ingridientInModal ?
-                    (<Modal onClose={closeModal} itemBurger={ingridientInModal} title='Детали ингридиента'>
-                        <IngidientDetails itemBurger={ingridientInModal} />
-                    </Modal>) : null
-                }
+            <section className={styles.ingridients}>
+                <IngredientList onIngridientSelected={onIngridientSelected} headlineText={'Булки'} id={'bun'} data={itemBurger} />
+                <IngredientList onIngridientSelected={onIngridientSelected} headlineText={'Соусы'} id={'bun'} data={itemSauce} />
+                <IngredientList onIngridientSelected={onIngridientSelected} headlineText={'Начинки'} id={'bun'} data={itemMain} />
+            </section>
+            {ingridientInModal ?
+                (<Modal onClose={closeModal} itemBurger={ingridientInModal} title='Детали ингридиента'>
+                    <IngidientDetails itemBurger={ingridientInModal} />
+                </Modal>) : null
+            }
         </>
-        
+
     )
 }
+IngredientList.propTypes = {
+    onIngridientSelected: PropTypes.func.isRequired,
+    headlineText: PropTypes.string,
+    id: PropTypes.string,
+    data: PropTypes.array.isRequired
+}
+
 
 
 
