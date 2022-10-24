@@ -8,14 +8,10 @@ import styles from './template-burgers.module.css';
 const TemlateBurger = ({ onIngridientSelected, data, headlineText, id }) => {
 
     const itemsBurger = data.map((value) => {
-
         return (
             <div className={styles.ingridient}
-
                 key={value._id}
-                onClick={() => onIngridientSelected(value._id, value.image, value.name, value.proteins, value.fat, value.carbohydrates, value.calories)}
-
-            >
+                onClick={() => onIngridientSelected(value._id, value.image, value.name, value.proteins, value.fat, value.carbohydrates, value.calories)} >
                 <div className={styles.counterColumn}>
                     <Counter count={1} size="default" />
                 </div>
@@ -47,7 +43,6 @@ const TemlateBurger = ({ onIngridientSelected, data, headlineText, id }) => {
 
         </section>
     )
-
 }
 
 TemlateBurger.propTypes = {

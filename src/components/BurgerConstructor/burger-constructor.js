@@ -50,16 +50,12 @@ const BurgerConstructor = () => {
         [orderNum])
 
     return (
-
         <section className={styles.burgerConstructor}>
-
             <div className={styles.constructorComponents}>
                 <OrderPostContext.Provider value={{ orderNum, setOrderNum }}>
                     <ComponentsContructor />
                 </OrderPostContext.Provider>
-
             </div>
-
             <div className={styles.constructorInfo}>
                 <div className={styles.constructorPrice}>
                     <div className={styles.constructorText}>{totalPrice}</div>

@@ -25,9 +25,7 @@ const ComponentsContructor = () => {
     [bread, ingr, setTotalPrice]
   );
 
-
   const ingrItem = ingr.map(value => {
-
     return (
       <div className={styles.constructorCenterElem} key={value._id}>
         <div className={styles.constructorIcon}>
@@ -42,9 +40,7 @@ const ComponentsContructor = () => {
     )
   });
 
-
   return (
-
     <div className={styles.constructorElement}>
       <div className={styles.constructorElemTopBottom}>
         <ConstructorElement
@@ -55,7 +51,6 @@ const ComponentsContructor = () => {
           thumbnail={bread[0].image}
         />
       </div>
-
 
       <div className={styles.constructorElemScroll}>
         {ingrItem}
