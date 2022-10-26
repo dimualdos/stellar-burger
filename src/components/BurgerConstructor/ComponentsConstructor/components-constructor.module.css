@@ -4,6 +4,7 @@
     align-items: center;
     gap: 16px;
     width: 568px;
+    max-height: 450px;
 }
 
 .constructorElemScroll {
