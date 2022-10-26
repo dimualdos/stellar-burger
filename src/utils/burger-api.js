@@ -3,7 +3,7 @@
 const _BASE_URL = 'https://norma.nomoreparties.space/api';
 
 const request = async (url, option) => {
-    let res = await fetch(url, option);
+    const res = await fetch(url, option);
     if (!res.ok) {
         throw new Error(`Could not fetch ${url}, status: ${res.status}`);
     }

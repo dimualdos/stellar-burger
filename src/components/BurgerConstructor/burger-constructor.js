@@ -1,11 +1,10 @@
-import { useState, useContext, useEffect, useMemo } from 'react';
+import { useState, useContext, useMemo } from 'react';
 import ComponentsContructor from './ComponentsConstructor/components-constructor';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import OrderDetails from '../OrderDetails/order-details';
-import { TotalPriceContext } from '../Services/burger-context';
-import { OrderPostContext } from '../Services/burger-context';
-import { BurgerContext } from '../Services/burger-context';
-import { postOrder } from '../Utils/burger-api';
+import { TotalPriceContext } from '../../services/burger-context';
+import { OrderPostContext, OrderPostId } from '../../services/burger-context';
+import { postOrder } from '../../utils/burger-api';
 import styles from './burger-constructor.module.css';
 import Modal from '../Modal/modal';
 
@@ -13,21 +12,9 @@ import Modal from '../Modal/modal';
 
 const BurgerConstructor = () => {
     const { totalPrice } = useContext(TotalPriceContext);
-    const burger = useContext(BurgerContext);
     const [open, setOpen] = useState(false);
     const [orderNum, setOrderNum] = useState();
     const [dataId, setDataId] = useState([]);
-    const bread = burger.data.filter(item => item.type === "bun");
-    const ingr = burger.data.filter(item => item.type === 'sauce');
-
-    useEffect(() => {
-        let id1 = bread[0]._id;
-        let id = ingr.map(item => item._id)
-        if (bread && ingr) {
-            setDataId([...dataId, id1, ...id])
-        }
-    }, [])
-
     const dataPostId = { ingredients: [...dataId] };
 
     const handleClick = () => {
@@ -35,26 +22,25 @@ const BurgerConstructor = () => {
         postOrder(dataPostId)
             .then(data => setOrderNum(data))
             .catch(error => console.error(error))
-    }
+    };
+
     const closeModal = () => {
         setOpen(null)
-    }
+    };
     const filteredItems = useMemo(
         () => {
-            let number = 0;
-            if (orderNum) {
-                number = orderNum.order.number;
-            }
-            return number
+            return orderNum ? orderNum.order.number : 0
         },
-        [orderNum])
+        [orderNum]);
 
     return (
         <section className={styles.burgerConstructor}>
             <div className={styles.constructorComponents}>
-                <OrderPostContext.Provider value={{ orderNum, setOrderNum }}>
-                    <ComponentsContructor />
-                </OrderPostContext.Provider>
+                <OrderPostId.Provider value={{ dataId, setDataId }}>
+                    <OrderPostContext.Provider value={{ orderNum, setOrderNum }}>
+                        <ComponentsContructor />
+                    </OrderPostContext.Provider>
+                </OrderPostId.Provider>
             </div>
             <div className={styles.constructorInfo}>
                 <div className={styles.constructorPrice}>
@@ -77,7 +63,5 @@ const BurgerConstructor = () => {
         </section>
     )
 }
-
-
 
 export default BurgerConstructor;

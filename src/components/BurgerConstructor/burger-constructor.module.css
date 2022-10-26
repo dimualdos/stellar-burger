@@ -1,20 +1,17 @@
 .burgerConstructor {
     width: 600px;
-    height: 912px;
+    min-height:600px;
     display: flex;
     flex-direction: row;
-    margin-top: 100px;
+    margin-top: 80px;
     flex-wrap: wrap;
 }
-
-
 
 .constructorComponents {
     display: flex;
     flex-direction: column;
     gap: 16px;
     width: 568px;
-    height: 556px;
 }
 
 .constructorInfo {

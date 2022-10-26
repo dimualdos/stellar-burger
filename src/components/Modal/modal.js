@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { PropTypes } from "prop-types";
 import ReactDOM from 'react-dom';
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
@@ -10,8 +10,8 @@ import styles from './modal.module.css';
 const modalItems = document.getElementById('modals');
 
 
-const Modal = ({ title, itemBurger, children, onClose }) => {
-    const [overlay, setOverlay] = useState(true);
+const Modal = ({ title, children, onClose, overlay = true }) => {
+    
    
 
     useEffect(() => {
@@ -27,7 +27,7 @@ const Modal = ({ title, itemBurger, children, onClose }) => {
             modalItems.classList.remove('modalWrapper');
 
         }
-    }, [onClose, itemBurger])
+    }, [onClose])
 
     return ReactDOM.createPortal(
         <>

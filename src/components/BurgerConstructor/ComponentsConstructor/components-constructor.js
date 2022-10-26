@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useMemo } from 'react';
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import { BurgerContext } from '../../Services/burger-context';
-import { TotalPriceContext } from '../../Services/burger-context';
+import { BurgerContext } from '../../../services/burger-context';
+import { TotalPriceContext, OrderPostId } from '../../../services/burger-context';
 import styles from './components-constructor.module.css';
 
 
@@ -10,10 +10,26 @@ import styles from './components-constructor.module.css';
 
 const ComponentsContructor = () => {
   const burger = useContext(BurgerContext);
-  const ingr = burger.data.filter(item => item.type === 'sauce');
-  const bread = burger.data.filter(item => item.type === "bun");
   const { setTotalPrice } = useContext(TotalPriceContext);
+  const { dataId, setDataId } = useContext(OrderPostId);
 
+  const ingr = useMemo(
+    () =>
+      burger.data.filter(item => item.type !== 'bun'),
+    [burger]);
+
+  const bread = useMemo(
+    () =>
+      burger.data.filter(item => item.type === "bun"),
+    [burger]);
+
+  useEffect(() => {
+    let id1 = bread[0]._id;
+    let id = ingr.map(item => item._id)
+    if (bread && ingr) {
+      setDataId([...dataId, id1, ...id])
+    }
+  }, []);
 
   useEffect(
     () => {

@@ -3,10 +3,10 @@ import { useState, useEffect } from 'react';
 import AppHeader from '../AppHeader/header';
 import BurgerIngredients from '../BurgerIngredients/burger-ingridients';
 import BurgerConstructor from '../BurgerConstructor/burger-constructor';
-import { getResourse } from '../Utils/burger-api';
+import { getResourse } from '../../utils/burger-api';
 import Spinner from '../Spinner/Spinner';
-import { BurgerContext } from '../Services/burger-context';
-import { TotalPriceContext } from '../Services/burger-context';
+import { BurgerContext } from '../../services/burger-context';
+import { TotalPriceContext } from '../../services/burger-context';
 import styles from './app.module.css';
 
 function App() {
