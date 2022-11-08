@@ -6,6 +6,21 @@
     flex-wrap: wrap;
 }
 
+
+.constructorElement {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    width: 568px;
+    max-height: 450px;
+}
+
+.constructorElemTopBottom {
+    padding-right: 18px;
+    padding-left: 33px;
+}
+
 .constructorComponents {
     display: flex;
     flex-direction: column;
@@ -73,4 +88,40 @@
     font-size: 16px;
     line-height: 24px;
     color: #F2F2F3;
+}
+.noBuns {
+    width: 100%;
+    height: 60%;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
+    box-shadow: 4px 4px 70px 0px #2c0266;
+}
+
+.constructorElemScroll {
+    overflow-y: scroll;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    padding-right: 10px;
+    align-items: flex-start;
+    max-height: 250px;
+    gap: 16px;
+    z-index: 0;
+
+}
+
+.constructorElemScroll::-webkit-scrollbar {
+    width: 8px;
+    background: #2F2F37;
+}
+
+.constructorElemScroll::-webkit-scrollbar-thumb {
+    left: 0px;
+    right: 0px;
+    top: 0px;
+    bottom: 172px;
+    background: #8585AD;
+    border: 3px solid #8585AD;
 }

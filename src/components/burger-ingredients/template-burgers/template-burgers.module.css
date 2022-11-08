@@ -1,0 +1,145 @@
+.columnBurgeres {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    width: 600px;
+    flex-direction: row;
+}
+
+.burgerItem {
+    display: flex;
+    align-items: flex-start;
+    width: 272px;
+    order: 0;
+    flex-grow: 0;
+}
+
+
+.ingridient {
+    display: flex;
+    flex-direction: row-reverse;
+    width: 272px;
+    height: 208px;
+    order: 0;
+
+}
+
+.counterColumn {
+    width: 32px;
+    height: 32px;
+    background: #131316;
+    position: relative;
+
+}
+
+.content {
+    margin: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0px;
+    gap: 8px;
+    height: 208px;
+    left: 0px;
+    right: 0px;
+    top: 0px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.illustration {
+    width: 240px;
+    height: 120px;
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+.price {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 0px;
+    gap: 8px;
+    width: 92px;
+    height: 24px;
+    background: #131316;
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+}
+
+.textPrice {
+    width: 60px;
+    height: 24px;
+    font-family: 'Iceland', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 28px;
+    line-height: 24px;
+    text-align: center;
+    color: #F2F2F3;
+    order: 0;
+    flex-grow: 0;
+}
+
+.icon {
+    width: 24px;
+    height: 24px;
+    background: #131316;
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+}
+
+.namePrice {
+    height: 48px;
+    left: 0%;
+    right: 0%;
+    bottom: 0px;
+    font-family: 'JetBrains Mono', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    text-align: center;
+    color: #F2F2F3;
+}
+
+.mainBurgerColumn {
+    display: flex;
+    justify-content: center;
+    width: 600px;
+    margin-top: 20px;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.mainColumn {
+    display: flex;
+    justify-content: center;
+    width: 600px;
+    margin-top: 20px;
+    flex-direction: column;
+}
+
+
+.headlineBurger {
+    width: 600px;
+    height: 30px;
+    background: #131316;
+
+}
+
+.headlineText {
+    width: 600px;
+    height: 30px;
+    /* desktop/display small */
+    font-family: 'JetBrains Mono', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    /* text/primary-light (standart text) */
+    color: #F2F2F3;
+}
