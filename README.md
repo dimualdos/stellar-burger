@@ -1,5 +1,9 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 # react-burger  
+=======
+# react-burger 
+>>>>>>> bc128b1e1b98f1d24625ae9dfb0cda5ba7c4943a
 ## npm start
 =======
 <<<<<<< HEAD
