@@ -1,5 +1,7 @@
 <<<<<<< HEAD
-# react-burger 
+<<<<<<< HEAD
+# react-burger
+## json-server db.json  
 ## npm start
 =======
 <<<<<<< HEAD

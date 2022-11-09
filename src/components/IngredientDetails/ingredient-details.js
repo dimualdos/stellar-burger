@@ -3,8 +3,8 @@ import { PropTypes } from 'prop-types';
 import styles from './ingredient-details.module.css';
 
 
-const IngidientDetails = ({ data }) => {
-    const { id, image, name, proteins, fat, carbohydrates, calories } = data;
+const IngidientDetails = ({ itemBurger }) => {
+    const { id, image, name, proteins, fat, carbohydrates, calories } = itemBurger;
 
     return (
         <div className={styles.article} key={id}>
@@ -35,7 +35,7 @@ const IngidientDetails = ({ data }) => {
 }
 
 IngidientDetails.propTypes = {
-    data: PropTypes.object.isRequired
+    itemBurger: PropTypes.object.isRequired
 
 }
 

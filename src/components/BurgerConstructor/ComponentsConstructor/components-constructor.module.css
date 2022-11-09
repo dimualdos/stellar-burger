@@ -4,6 +4,7 @@
     align-items: center;
     gap: 16px;
     width: 568px;
+    max-height: 450px;
 }
 
 .constructorElemScroll {
@@ -13,7 +14,10 @@
     flex-direction: column;
     padding-right: 10px;
     align-items: flex-start;
+    max-height: 464px;
     gap: 16px;
+    z-index: 0;
+
 }
 
 .constructorElemScroll::-webkit-scrollbar {

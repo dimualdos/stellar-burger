@@ -1,19 +1,16 @@
 .burgerConstructor {
     width: 600px;
-    height: 912px;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     margin-top: 100px;
+    flex-wrap: wrap;
 }
-
-
 
 .constructorComponents {
     display: flex;
     flex-direction: column;
     gap: 16px;
     width: 568px;
-    height: 556px;
 }
 
 .constructorInfo {
@@ -24,6 +21,7 @@
     gap: 40px;
     width: 568px;
     height: 64px;
+    margin-top: 20px;
 }
 
 .constructorPrice {
@@ -37,7 +35,7 @@
 }
 
 .constructorText {
-    width: 75px;
+    width: 150px;
     height: 36px;
     font-family: 'Iceland', sans-serif;
     font-style: normal;
@@ -56,11 +54,6 @@
 }
 
 .buttonConstructor {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    padding: 0px;
     width: 215px;
     height: 64px;
     background: linear-gradient(63.18deg, #801AB3 0%, #4C4CFF 100%);

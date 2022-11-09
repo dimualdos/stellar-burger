@@ -8,7 +8,6 @@ import styles from './header.module.css';
 const AppHeader = () => {
 
     return (
-
         <header className={styles.navPanel}>
             <nav className={styles.navContent}>
                 <ol className={styles.navLink}>
@@ -31,8 +30,6 @@ const AppHeader = () => {
                 </div>
             </nav>
         </header>
-
-
     )
 }
 

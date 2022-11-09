@@ -1,9 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { PropTypes } from "prop-types";
 import ReactDOM from 'react-dom';
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import ModalOverlay from '../ModalOverlay/modal-overlay';
-
 
 
 import styles from './modal.module.css';
@@ -11,14 +10,15 @@ import styles from './modal.module.css';
 const modalItems = document.getElementById('modals');
 
 
-const Modal = ({ title, children, onClose }) => {
-    const [overlay, setOverlay] = useState(true);
+const Modal = ({ title, children, onClose, overlay = true }) => {
+    
+   
 
     useEffect(() => {
         const removeModal = (e) => {
             e.key === 'Escape' && onClose();
         }
-
+       
         modalItems.classList.add('modalWrapper');
         document.addEventListener('keydown', removeModal);
 
@@ -40,10 +40,11 @@ const Modal = ({ title, children, onClose }) => {
                         className={styles.icon}
                         onClick={onClose}>
                         <CloseIcon type="primary" />
-
                     </button>
+
                 </div>
                 <div className={styles.content}>{children}</div>
+
             </div>
             {overlay ? (<ModalOverlay onClose={onClose} />) : null}
 

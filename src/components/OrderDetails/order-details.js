@@ -5,7 +5,6 @@ import styles from './order-details.module.css';
 const OrderDetails = ({ numberOrder }) => {
 
     return (
-
         <div className={styles.order}>
             <div className={styles.divOrderNumber}>
                 <p className={styles.orderNumber} >{numberOrder}</p>
@@ -31,7 +30,7 @@ const OrderDetails = ({ numberOrder }) => {
 }
 
 OrderDetails.propTypes = {
-    numberOrder: PropTypes.string.isRequired
+    numberOrder: PropTypes.number.isRequired
 }
 
 export default OrderDetails;
