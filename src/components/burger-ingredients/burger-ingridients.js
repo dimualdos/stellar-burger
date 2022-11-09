@@ -1,6 +1,6 @@
 
 import { useDispatch, useSelector } from 'react-redux';
-import { useState, useMemo, useEffect, useRef, useCallback } from 'react';
+import { useState, useMemo, useEffect} from 'react';
 import { useInView } from 'react-intersection-observer';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import TemlateBurger from './template-burgers/template-burgers';
