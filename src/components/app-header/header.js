@@ -9,7 +9,7 @@ import styles from './header.module.css';
 const AppHeader = () => {
 
     const isConstructor = useRouteMatch({ path: '/', exact: true });
-    const isFeed = useRouteMatch('/feed');
+    const isFeed = useRouteMatch('/profile/orders');
     const isProfile = useRouteMatch('/profile');
     const userName = useSelector(state => state.user.data?.name);
 
@@ -26,7 +26,7 @@ const AppHeader = () => {
                     </NavLink>
 
                     <NavLink
-                        to="/feed"
+                        to="/profile/orders"
                         className={styles.orderNav}>
                         <MenuIcon type={isFeed ? "primary" : "secondary"} />
                         <p className={styles.navText}>Лента заказов</p>

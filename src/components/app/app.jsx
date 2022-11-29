@@ -8,7 +8,7 @@ import IngredientDetails from '../ingredient-details/ingredient-details';
 import Modal from "../modal/modal";
 import AppHeader from '../app-header/header';
 import { ProtectedRoute } from "../protected-route/protected-route";
-import { Profile, LoginPage, ResetPass, Register, ForgotPass, NotFound404, MainPage } from "../../pages";
+import { Profile, LoginPage, ResetPass, Register, ForgotPass, NotFound404, MainPage, Orders } from "../../pages";
 import styles from './app.module.css';
 
 
@@ -37,6 +37,9 @@ function App() {
         <Switch location={background || location}>
           <ProtectedRoute path="/profile" exact={true}>
             <Profile />
+          </ProtectedRoute>
+          <ProtectedRoute path="/profile/orders" exact={true}>
+            <Orders />
           </ProtectedRoute>
           <ProtectedRoute onlyUnAuth={true} path="/login" exact>
             <LoginPage />

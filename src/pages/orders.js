@@ -8,14 +8,8 @@ import styles from './css/profile.module.css';
 
 
 
-export const Profile = () => {
+export const Orders = () => {
     const dispatch = useDispatch();
-    const { data } = useSelector(state => state.user);
-    const [form, setValue] = useState({ email: `${data ? (data.email) : ('')}`, password: `${data ? (data.password) : ('')}`, name: `${data ? (data.name) : ('')}` });
-    const onChange = e => {
-        setValue({ ...form, [e.target.name]: e.target.value });
-    };
-
     let onLogout = (e) => {
         e.preventDefault();
         dispatch(logoutAuth());
@@ -47,34 +41,6 @@ export const Profile = () => {
                         </p>
                     </div>
                 </nav>
-
-                <form className={styles.form}>
-                    <Input
-                        type={'text'}
-                        placeholder={`Имя`}
-                        value={form.name}
-                        name={"name"}
-                        onChange={() => onChange}
-                        icon={'EditIcon'}
-                    />
-                    <Input
-                        type={'text'}
-                        placeholder={`Логин`}
-                        value={form.email}
-                        name={"email"}
-                        onChange={() => onChange}
-                        icon={'EditIcon'}
-                    />
-                    <PasswordInput
-                        type={'password'}
-                        placeholder={"Пароль"}
-                        value={form.password}
-                        name={"password"}
-                        onChange={() => onChange}
-                        icon={'EditIcon'}
-                    />
-                </form>
-
             </div>
         </section>
 
