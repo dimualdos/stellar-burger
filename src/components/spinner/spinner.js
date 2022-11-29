@@ -1,5 +1,5 @@
 import styles from './spinner.module.css'
-const Spinner = () => {
+export  const Spinner = () => {
     return (
         <svg xmlns="http://www.w3.org/2000/svg" className={styles.styleSpinner} width="100px" height="100px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
             <g transform="translate(80,50)">
@@ -63,4 +63,3 @@ const Spinner = () => {
     )
 }
 
-export default Spinner;

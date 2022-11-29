@@ -29,8 +29,8 @@ const OrderDetails = ({ numberOrder }) => {
     )
 }
 
-OrderDetails.propTypes = {
-    numberOrder: PropTypes.number.isRequired
-}
+// OrderDetails.propTypes = {
+//     numberOrder: PropTypes.number.isRequired
+// }
 
 export default OrderDetails;
