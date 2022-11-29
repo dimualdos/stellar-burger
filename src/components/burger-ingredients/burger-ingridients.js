@@ -1,10 +1,10 @@
 
 import { useDispatch, useSelector } from 'react-redux';
-import { useState, useMemo, useEffect} from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import TemlateBurger from './template-burgers/template-burgers';
-import IngidientDetails from '../ingredient-details/ingredient-details';
+import IngredientDetails from '../ingredient-details/ingredient-details';
 import Modal from '../modal/modal';
 import { Spinner } from '../spinner/spinner';
 import { SET_INGREDIENT_MODAL, RESET_INGREDIENT_MODAL } from "../../services/actions/ingredient-detail-modal";
@@ -119,7 +119,7 @@ const NewsItems = () => {
 
                     {modalItem ?
                         (<Modal onClose={closeModal} title='Детали ингридиента'>
-                            <IngidientDetails />
+                            <IngredientDetails />
                         </Modal>) : null
                     }
                 </>)

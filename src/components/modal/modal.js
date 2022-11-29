@@ -3,22 +3,17 @@ import { PropTypes } from "prop-types";
 import ReactDOM from 'react-dom';
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import ModalOverlay from '../modal-overlay/modal-overlay';
-
-
 import styles from './modal.module.css';
 
 const modalItems = document.getElementById('modals');
 
 
 const Modal = ({ title, children, onClose, overlay = true }) => {
-    
-   
-
     useEffect(() => {
         const removeModal = (e) => {
             e.key === 'Escape' && onClose();
         }
-       
+
         modalItems.classList.add('modalWrapper');
         document.addEventListener('keydown', removeModal);
 
@@ -33,7 +28,7 @@ const Modal = ({ title, children, onClose, overlay = true }) => {
         <>
             <div className={styles.modal}>
                 <div className={styles.header}>
-                    <div className={`${styles.title} text text_type_main-large`}>
+                    <div className={styles.title}>
                         {title}
                     </div>
                     <button type='button'

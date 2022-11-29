@@ -26,12 +26,18 @@
 }
 
 .title {
+    font-family: 'JetBrains Mono', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 40px;
     width: 580px;
     height: 64px;
     padding-left: 40px;
     text-align: center;
     padding-top: 20px;
 }
+
 
 .icon {
     background: #1C1C21;
@@ -44,7 +50,6 @@
     width: 520px;
     display: flex;
     flex-direction: column;
-
 }
 
 .order {
@@ -69,7 +74,7 @@
 .divOrderText {
     width: 520px;
     height: 30px;
-    background: #1C1C21;
+
 }
 
 

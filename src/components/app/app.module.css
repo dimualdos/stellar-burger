@@ -1,13 +1,26 @@
-
 .page {
   margin: 0 auto;
-  max-width: 1480px
+  max-width: 1480px;
 }
 
-.mainApp1 {
+.ingredientTitle {
+  width: 640px;
+  font-family: 'JetBrains Mono', sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 40px;
+  align-items: center;
+  text-align: center;
+  color: #F2F2F3;
+}
+
+.ingredientWrapper {
   display: flex;
-  flex-direction: row;
-  width: 1250px;
-  justify-content: space-between;
-  margin: 0 auto;
+  flex-direction: column;
+  align-items: center;
+}
+
+.ingredientItem {
+  background: none;
 }

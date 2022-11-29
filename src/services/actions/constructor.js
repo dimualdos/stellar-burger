@@ -11,7 +11,7 @@ export const CONSTRUCTOR_RESET = 'CONSTRUCTOR/RESET';
 export const addToConstructor = (ingredient) => {
     return {
         type: CONSTRUCTOR_ADD,
-        payload : {
+        payload: {
             ...ingredient,
             id: uuid()
         }

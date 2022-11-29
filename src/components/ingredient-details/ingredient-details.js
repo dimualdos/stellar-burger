@@ -1,14 +1,21 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { Link, useLocation } from "react-router-dom";
+import { useSelector } from 'react-redux';
 import { PropTypes } from 'prop-types';
 import styles from './ingredient-details.module.css';
 
 
-const IngidientDetails = () => {
-    const {_id, image, name, proteins, fat, carbohydrates, calories } = useSelector(state => state.ingredientsModal.ingredientModal);
-    
+const IngredientDetails = () => {
+    const { _id, image, name, proteins, fat, carbohydrates, calories } = useSelector(state => state.ingredientsModal.ingredientModal);
+    const location = useLocation();
 
     return (
-        <div className={styles.article} key={_id}>
+        <Link
+            to={{
+                pathname: `/ingredients/${_id}`,
+            }}
+
+            className={styles.article}
+            key={_id}>
             <img className={styles.img} src={image} alt='Картинка ингредиента' />
             <div className={styles.frame2}>
                 <p className={styles.frame2Text}>{name}</p>
@@ -31,7 +38,7 @@ const IngidientDetails = () => {
                     <p className={styles.value}>{carbohydrates}</p>
                 </div>
             </div>
-        </div>
+        </Link>
     )
 }
 
@@ -40,4 +47,4 @@ const IngidientDetails = () => {
 
 // }
 
-export default IngidientDetails;
+export default IngredientDetails;

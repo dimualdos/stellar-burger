@@ -6,9 +6,16 @@
     left: 2%;
     right: 2%;
     top: 40px;
-    /* interface/modal-bg */
     background: #1C1C21;
     box-shadow: 0px 24px 32px rgba(0, 0, 0, 0.04), 0px 16px 24px rgba(0, 0, 0, 0.04), 0px 4px 8px rgba(0, 0, 0, 0.04), 0px 0px 1px rgba(0, 0, 0, 0.04);
+}
+
+nav a {
+    text-decoration: none;
+}
+
+.activeLink {
+    color: #4C4CFF;
 }
 
 .navContent {
@@ -25,19 +32,16 @@
     width: 289.15px;
     height: 40px;
     top: 5px;
-    /* interface/modal-bg */
     background: #1C1C21;
     position: relative;
-    right: 120px;
+    right: 100px;
 
 }
 
 .navLink {
-    /* Auto layout */
     margin-top: 0px;
     display: flex;
     flex-direction: row;
-
     align-items: center;
     gap: 8px;
     width: 383px;
@@ -45,6 +49,7 @@
     left: 0px;
     top: calc(50% - 56px/2);
     background: #1C1C21;
+    padding-left: 10px;
 }
 
 .mainNav {
@@ -52,7 +57,6 @@
     flex-direction: row;
     align-items: center;
     gap: 8px;
-    /* interface/modal-bg */
     background: #1C1C21;
     border-radius: 40px;
 }
@@ -61,7 +65,6 @@
     composes: mainNav;
     width: 178px;
     height: 56px;
-    /* Inside auto layout */
     flex: none;
     order: 0;
     flex-grow: 0;
@@ -71,8 +74,6 @@
     composes: mainNav;
     width: 197px;
     height: 56px;
-    /* interface/modal-bg */
-    /* Inside auto layout */
     flex: none;
     order: 1;
     flex-grow: 0;
@@ -82,9 +83,10 @@
     composes: mainNav;
     width: 207px;
     height: 56px;
-    /* interface/modal-bg */
     background: #1C1C21;
     border-radius: 40px;
+    justify-content: center;
+
 }
 
 .navText {
@@ -93,8 +95,11 @@
     font-weight: 400;
     font-size: 16px;
     line-height: 24px;
-    /* identical to box height, or 150% */
     display: flex;
     align-items: center;
     color: #8585AD;
+}
+
+.activeLink {
+    background-color: #8585AD;
 }
