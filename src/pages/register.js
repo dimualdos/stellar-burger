@@ -29,7 +29,10 @@ export function Register() {
         <section className={styles.section}>
             <div className={styles.container}>
 
-                <form className={styles.form}>
+                <form
+                    onSubmit={register}
+                    className={styles.form}>
+
                     <h1 className={styles.heading}>Регистрация</h1>
                     <Input
                         type={'text'}
@@ -49,9 +52,11 @@ export function Register() {
                         name="password"
                         onChange={onChange}
                     />
-                    <Button onClick={register} htmlType="button" type="primary" size="medium" >
-                        Зарегистрироваться
-                    </Button>
+                    <button
+                        type='submit'
+                        className={styles.buttonConstructor}>
+                        <p className={styles.buttonText}>Зарегистрироваться</p>
+                    </button>
                 </form>
                 <div className={styles.divPerson}>
                     <p className={styles.textPerson}>Уже зарегистрованы?

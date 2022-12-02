@@ -130,6 +130,7 @@ export const getNewPassword = (data) => {
             });
             recoveryPass(data)
                 .then((res) => {
+                    console.log(res)
                     dispatch({
                         type: GET_NEW_PASSWORD_SUCCESS,
                         payload: res.message,

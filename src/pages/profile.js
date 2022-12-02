@@ -48,7 +48,9 @@ export const Profile = () => {
                     </div>
                 </nav>
 
-                <form className={styles.form}>
+                <form
+
+                    className={styles.form}>
                     <Input
                         type={'text'}
                         placeholder={`Имя`}

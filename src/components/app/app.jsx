@@ -17,7 +17,6 @@ function App() {
   const history = useHistory();
   const location = useLocation();
   const background = location.state && location.state.background;
-
   // const orderNum = useRouteMatch([
   //   '/profile/orders/:number',
   //   '/feed/:number',
@@ -53,12 +52,15 @@ function App() {
           <ProtectedRoute onlyUnAuth={true} path="/reset-password" exact>
             <ResetPass />
           </ProtectedRoute>
-          <Route path="/ingredients/:id" exact>
+
+          <Route path={`/ingredients/:id`} exact>
             <div className={styles.ingredientWrapper}>
               <p className={styles.ingredientTitle}>Детали ингредиента</p>
               <IngredientDetails />
             </div>
           </Route>
+
+
           <Route path="/" exact>
             <MainPage />
           </Route>

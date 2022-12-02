@@ -30,7 +30,9 @@ export function ResetPass() {
         <section className={styles.section}>
             <div className={styles.container}>
                 {passwordData ?
-                    (<form className={styles.form}>
+                    (<form
+                        onSubmit={resetPassword}
+                        className={styles.form}>
                         <h1 className={styles.heading}>Восстановление пароля</h1>
                         <PasswordInput
                             type={'password'}
@@ -46,10 +48,11 @@ export function ResetPass() {
                             value={form.token}
                             name={"token"}
                             onChange={onChange} />
-
-                        <Button onClick={resetPassword} htmlType="button" type="primary" size="medium">
-                            Сохранить
-                        </Button>
+                        <button
+                            type='submit'
+                            className={styles.buttonConstructor}>
+                            <p className={styles.buttonText}>Сохранить</p>
+                        </button>
                     </form>) : (<Link to={{ pathname: `/forgot-password` }}>
                         <Button htmlType="button" type="primary" size="medium">
                             Перейти на страницу сброса пароля

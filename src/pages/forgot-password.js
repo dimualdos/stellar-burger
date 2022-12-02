@@ -35,7 +35,9 @@ export function ForgotPass() {
     return (
         <section className={styles.section}>
             <div className={styles.container}>
-                <form className={styles.form}>
+                <form
+                    onSubmit={resetPassword}
+                    className={styles.form}>
                     <h1 className={styles.heading}>Восстановление пароля</h1>
                     <Input
                         type={'email'}
@@ -43,10 +45,11 @@ export function ForgotPass() {
                         value={form.email}
                         name="email"
                         onChange={onChange} />
-
-                    <Button htmlType="button" onClick={resetPassword} size="medium">
-                        Восстановить
-                    </Button>
+                    <button
+                        type='submit'
+                        className={styles.buttonConstructor}>
+                        <p className={styles.buttonText}>Восстановить</p>
+                    </button>
                 </form>
                 <div className={styles.divPerson}>
                     <p className={styles.textPerson}>Вспомнили пароль?

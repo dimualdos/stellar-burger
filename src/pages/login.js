@@ -2,7 +2,6 @@
 import { useState, useCallback, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Input } from "@ya.praktikum/react-developer-burger-ui-components";
 import { PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
 import { loginUser } from '../services/actions/auth';
@@ -19,19 +18,10 @@ export function LoginPage() {
     const onChange = e => {
         setValue({ ...form, [e.target.name]: e.target.value });
     };
-    useEffect(() => {
-        const login = (e) => {
-            e.key === 'Enter' && handleClick();
-        }
-
-        document.addEventListener('keydown', login);
-        return () => {
-            document.removeEventListener('keydown', login);
-        }
-    });
 
     const handleClick = useCallback(
-        () => {
+        (e) => {
+            e.preventDefault();
             if (loginUserRequest) return;
             dispatch(loginUser(form));
         }, [loginUserRequest, dispatch, form]);
@@ -39,7 +29,9 @@ export function LoginPage() {
     return (
         <section className={styles.section}>
             <div className={styles.container}>
-                <form className={styles.form}>
+                <form
+                    onSubmit={handleClick}
+                    className={styles.form}>
                     <h1 className={styles.heading}>Вход</h1>
                     <Input
                         placeholder="E-mail"
@@ -53,10 +45,13 @@ export function LoginPage() {
                         onChange={onChange}
                         icon='ShowIcon'
                     />
-                    <Button onClick={handleClick} htmlType="button" type="primary" size="medium">
-                        Войти
-                    </Button>
+                    <button
+                        type='submit'
+                        className={styles.buttonConstructor}>
+                        <p className={styles.buttonText}>Войти</p>
+                    </button>
                 </form>
+
                 <div className={styles.containerBottom}>
                     <div className={styles.divPerson}>
                         <p className={styles.textPerson}>Вы - новый пользователь?

@@ -4,10 +4,8 @@ import { useState, useMemo, useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import TemlateBurger from './template-burgers/template-burgers';
-import IngredientDetails from '../ingredient-details/ingredient-details';
-import Modal from '../modal/modal';
 import { Spinner } from '../spinner/spinner';
-import { SET_INGREDIENT_MODAL, RESET_INGREDIENT_MODAL } from "../../services/actions/ingredient-detail-modal";
+import { SET_INGREDIENT_MODAL } from "../../services/actions/ingredient-detail-modal";
 import styles from './burger-ingridients.module.css';
 import { getItems } from '../../services/actions/ingredients';
 
@@ -46,15 +44,14 @@ const NewsItems = () => {
         }
     }, [inViewBuns, inViewMains, inViewSauses]);
 
-    const modalItem = useSelector(state => state.ingredientsModal.ingredientModal);
     const onIngredientClick = (ingredientModal) => {
         dispatch({ type: SET_INGREDIENT_MODAL, payload: ingredientModal })
     }
 
-    const closeModal = () => {
-        dispatch({ type: RESET_INGREDIENT_MODAL }
-        )
-    };
+    // const closeModal = () => {
+    //     dispatch({ type: RESET_INGREDIENT_MODAL }
+    //     )
+    // };
 
     useEffect(() => {
         dispatch(getItems())
@@ -116,12 +113,6 @@ const NewsItems = () => {
                             onIngredientClick={onIngredientClick}
                         />
                     </section>
-
-                    {modalItem ?
-                        (<Modal onClose={closeModal} title='Детали ингридиента'>
-                            <IngredientDetails />
-                        </Modal>) : null
-                    }
                 </>)
         }
 

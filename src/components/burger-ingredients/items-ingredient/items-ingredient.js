@@ -6,7 +6,6 @@ import { PropTypes } from "prop-types";
 
 const ItemsIngredientBurgers = ({ ingredientItem,
     onClick,
-    id,
     count }) => {
     const { image, price, name, _id } = ingredientItem;
 
@@ -19,12 +18,11 @@ const ItemsIngredientBurgers = ({ ingredientItem,
         })
     }));
 
-
     return (
         <Link
             to={{
                 pathname: `/ingredients/${_id}`,
-                state: { background: location },
+                state: { background: location }
             }}
             className={style.ingridient}
             onClick={() => onClick(ingredientItem)}
@@ -49,10 +47,17 @@ const ItemsIngredientBurgers = ({ ingredientItem,
 }
 
 ItemsIngredientBurgers.propTypes = {
-    ingredientItem: PropTypes.object.isRequired,
-    onClick: PropTypes.func,
-    count: PropTypes.number
+    ingredientItem: PropTypes.shape({
+        _id: PropTypes.string.isRequired,
+        name: PropTypes.string.isRequired,
+        price: PropTypes.number.isRequired,
+        image: PropTypes.string.isRequired,
+        count: PropTypes.number,
+
+    }).isRequired,
+    onClick: PropTypes.func.isRequired
 }
+
 
 
 export default ItemsIngredientBurgers;
