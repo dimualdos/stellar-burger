@@ -1,6 +1,5 @@
 
 import {
-    AUTH_CHEKED,
 
     REGISTER_USER_REQUEST,
     REGISTER_USER_SUCCESS,
@@ -10,9 +9,9 @@ import {
     LOGIN_USER_SUCCESS,
     LOGIN_USER_FAILED,
 
-    UPDATE_USER_REQUEST,
-    UPDATE_USER_FAILED,
-    UPDATE_USER_SUCCESS,
+    UPDATE_USER_DATA_REQUEST,
+    UPDATE_USER_DATA_FAILED,
+    UPDATE_USER_DATA_SUCCESS,
 
     RESET_PASSWORD_REQUEST,
     RESET_PASSWORD_SUCCESS,
@@ -22,13 +21,15 @@ import {
     GET_NEW_PASSWORD_SUCCESS,
     GET_NEW_PASSWORD_FAILED,
 
+    REFRESH_TOKEN_REQUEST,
+    REFRESH_TOKEN_SUCCESS,
+    REFRESH_TOKEN_FAILED,
+
     USER_LOGOUT
 
 } from '../actions/auth';
 
 export const initialState = {
-    isAuthCheked: false,
-
     data: null,
 
     registerUserRequest: false,
@@ -44,6 +45,9 @@ export const initialState = {
     resetPasswordFailed: false,
     passwordData: null,
 
+    refreshTokenRequest: false,
+    refreshTokenFailed: false,
+
     newPasswordRequest: false,
     newPasswordFailed: false,
     newPasswordData: null
@@ -52,12 +56,6 @@ export const initialState = {
 
 export const authReducer = (state = initialState, action) => {
     switch (action.type) {
-        case AUTH_CHEKED: {
-            return {
-                ...state,
-                isAuthCheked: true
-            };
-        }
         case USER_LOGOUT: {
             return {
                 ...state,
@@ -113,13 +111,13 @@ export const authReducer = (state = initialState, action) => {
             }
         }
 
-        case UPDATE_USER_REQUEST: {
+        case UPDATE_USER_DATA_REQUEST: {
             return {
                 ...state,
                 userDataRequest: true,
             }
         }
-        case UPDATE_USER_SUCCESS: {
+        case UPDATE_USER_DATA_SUCCESS: {
             return {
                 ...state,
                 userDataRequest: false,
@@ -129,7 +127,7 @@ export const authReducer = (state = initialState, action) => {
                 }
             }
         }
-        case UPDATE_USER_FAILED: {
+        case UPDATE_USER_DATA_FAILED: {
             return {
                 ...state,
                 userDataRequest: false,
@@ -183,6 +181,28 @@ export const authReducer = (state = initialState, action) => {
                 newPasswordRequest: false,
                 newPasswordFailed: true,
                 newPasswordData: null,
+            }
+        }
+
+        case REFRESH_TOKEN_REQUEST: {
+            return {
+                ...state,
+                refreshTokenRequest: true
+            }
+        }
+        case REFRESH_TOKEN_SUCCESS: {
+            return {
+                ...state,
+                data: action.payload,
+                refreshTokenRequest: false,
+                refreshTokenFailed: false
+            }
+        }
+        case REFRESH_TOKEN_FAILED: {
+            return {
+                ...state,
+                refreshTokenRequest: false,
+                refreshTokenFailed: true
             }
         }
 

@@ -1,30 +1,26 @@
 
-import { useState, useCallback, useEffect } from 'react';
+import { useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Input } from "@ya.praktikum/react-developer-burger-ui-components";
 import { PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
+import { useForm } from '../hooks/useForm';
 import { loginUser } from '../services/actions/auth';
 import styles from './css/page.module.css';
 
 
 export function LoginPage() {
     const dispatch = useDispatch();
-    const [form, setValue] = useState({ email: '', password: '' });
-    const { loginUserRequest, data } = useSelector(state => state.user);
-    if (data) {
-        console.log(data)
-    }
-    const onChange = e => {
-        setValue({ ...form, [e.target.name]: e.target.value });
-    };
+    const { values, handleChange } = useForm({ email: '', password: '' });
+
+    const { loginUserRequest } = useSelector(state => state.user);
 
     const handleClick = useCallback(
         (e) => {
             e.preventDefault();
             if (loginUserRequest) return;
-            dispatch(loginUser(form));
-        }, [loginUserRequest, dispatch, form]);
+            dispatch(loginUser(values));
+        }, [loginUserRequest, dispatch, values]);
 
     return (
         <section className={styles.section}>
@@ -35,14 +31,14 @@ export function LoginPage() {
                     <h1 className={styles.heading}>Вход</h1>
                     <Input
                         placeholder="E-mail"
-                        value={form.email}
+                        value={values.email}
                         name="email"
-                        onChange={onChange} />
+                        onChange={(e) => handleChange(e)} />
                     <PasswordInput
                         placeholder="Пароль"
-                        value={form.password}
+                        value={values.password}
                         name="password"
-                        onChange={onChange}
+                        onChange={(e) => handleChange(e)}
                         icon='ShowIcon'
                     />
                     <button

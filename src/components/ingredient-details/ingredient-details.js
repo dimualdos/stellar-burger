@@ -16,7 +16,6 @@ const IngredientDetails = () => {
                 <div
                     className={styles.article}
                     key={ingredient._id}>
-
                     <img className={styles.img} src={ingredient.image} alt='Картинка ингредиента' />
                     <div className={styles.frame2}>
                         <p className={styles.frame2Text}>{ingredient.name}</p>

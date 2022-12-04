@@ -1,15 +1,11 @@
-//import { useAuth } from '../../services/auth';
+import PropTypes from 'prop-types';
 import { Redirect, Route, useLocation } from 'react-router-dom';
-import { Spinner } from '../spinner/spinner';
 import { useSelector } from 'react-redux';
 
+
 export const ProtectedRoute = ({ onlyUnAuth = false, children, ...rest }) => {
-    const isAuthCheked = useSelector(state => state.user.isAuthCheked);
-    const user = useSelector(state => state.user.data);
     const location = useLocation();
-    if (!isAuthCheked) {
-        return (<Spinner />)
-    }
+    const user = useSelector(store => store.user.data);
 
     if (onlyUnAuth && user) {
         const { from } = location.state || { from: { pathname: '/' } };
@@ -34,40 +30,16 @@ export const ProtectedRoute = ({ onlyUnAuth = false, children, ...rest }) => {
             {children}
         </Route>
     )
+}
 
-    // let { getUser, ...auth } = useAuth();
-    // const [isUserLoaded, setUserLoaded] = useState(false);
+const routeTypes = PropTypes.shape({
+    path: PropTypes.object.isRequired,
+    location: PropTypes.object.isRequired,
+    computedMatch: PropTypes.object.isRequired
+})
 
-    // const init = async () => {
-    //     await getUser();
-    //     setUserLoaded(true);
-    // };
-
-    // useEffect(() => {
-    //     init();
-    // }, []);
-
-    // if (!isUserLoaded) {
-    //     return null;
-    // }
-
-
-    // return (
-    //     <Route
-    //         {...rest}
-    //         render={({ location }) =>
-    //             auth.user ? (
-    //                 children
-    //             ) : (
-    //                 <Redirect
-    //                     to={{
-    //                         pathname: '/login',
-    //                         state: { from: location }
-    //                     }}
-    //                 />
-    //             )
-    //         }
-    //     />
-    // );
+ProtectedRoute.propTypes = {
+    children: PropTypes.element.isRequired,
+    rest: routeTypes
 }
 

@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { Switch, Route, useHistory, useLocation } from "react-router-dom";
 //import { useAppSelector, useAppDispatch } from '../../utils/hooks';
 import { getItems } from "../../services/actions/ingredients";
-import { checkUserAuth } from "../../services/actions/auth";
+import { updateToken } from "../../services/actions/auth";
 import IngredientDetails from '../ingredient-details/ingredient-details';
 import Modal from "../modal/modal";
 import AppHeader from '../app-header/header';
@@ -26,7 +26,7 @@ function App() {
 
   useEffect(() => {
     dispatch(getItems());
-    dispatch(checkUserAuth());
+    dispatch(updateToken());
   }, [dispatch])
 
   return (
@@ -73,7 +73,7 @@ function App() {
         <>
           <Route path="/ingredients/:id" exact>
             <div className={styles.ingredientWrapper} >
-              <Modal onClose={handleModalClose} >
+              <Modal onClose={handleModalClose} title={'Детали ингредиента'}>
                 <IngredientDetails className={styles.ingredientItem} />
               </Modal>
             </div>

@@ -34,9 +34,11 @@ const AppHeader = () => {
 
                 </div>
 
-                <div className={styles.navLogo}>
+                <NavLink
+                    to="/"
+                    className={styles.navLogo}>
                     <Logo />
-                </div>
+                </NavLink>
 
                 <NavLink
                     to={{ pathname: `/profile` }} exact

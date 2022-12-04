@@ -37,8 +37,6 @@ const BurgerConstructor = () => {
         }
     }
 
-
-
     const handleClick = () => {
         if (!bun || orderRequest) return;
         if (!user) {
@@ -69,6 +67,8 @@ const BurgerConstructor = () => {
         return ((bun ? bun.price * 2 : 0)
             + ingredients.reduce((a, b) => a + b.price, 0))
     }, [bun, ingredients])
+
+
 
 
     return (

@@ -7,7 +7,7 @@ import TemlateBurger from './template-burgers/template-burgers';
 import { Spinner } from '../spinner/spinner';
 import { SET_INGREDIENT_MODAL } from "../../services/actions/ingredient-detail-modal";
 import styles from './burger-ingridients.module.css';
-import { getItems } from '../../services/actions/ingredients';
+
 
 const NewsItems = () => {
     const { items, itemsRequest, itemsFailed } = useSelector(state => state.ingredients);
@@ -53,9 +53,7 @@ const NewsItems = () => {
     //     )
     // };
 
-    useEffect(() => {
-        dispatch(getItems())
-    }, []);
+
 
     const itemBurger = useMemo(() => items.filter(value => value.type === 'bun'), [items]);
     const itemSauce = useMemo(() => items.filter(value => value.type === 'sauce'), [items]);

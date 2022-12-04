@@ -1,30 +1,34 @@
 
-import { useState, useCallback } from 'react';
+import { useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { getNewPassword } from '../services/actions/auth';
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Input } from "@ya.praktikum/react-developer-burger-ui-components";
 import { PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
+import { useForm } from '../hooks/useForm';
 import styles from './css/page.module.css';
 
 
 export function ResetPass() {
 
     const dispatch = useDispatch();
-    const [form, setValue] = useState({ password: '', token: '' });
+    const { values, handleChange } = useForm({ password: '', token: '' });
+
     const { passwordData } = useSelector(state => state.user);
-    const onChange = e => {
-        setValue({ ...form, [e.target.name]: e.target.value });
-    };
+    //? стандартная отправка формы без пользовательского хука
+    // const [form, setValue] = useState({ password: '', token: '' });
+    // const onChange = e => {
+    //     setValue({ ...form, [e.target.name]: e.target.value });
+    // };
 
     const resetPassword = useCallback(
         (e) => {
             e.preventDefault();
             if (!passwordData) return;
-            dispatch(getNewPassword(form));
+            dispatch(getNewPassword(values));
         },
-        [dispatch, form, passwordData]);
+        [dispatch, passwordData, values]);
 
     return (
         <section className={styles.section}>
@@ -37,17 +41,17 @@ export function ResetPass() {
                         <PasswordInput
                             type={'password'}
                             placeholder="Введите новый пароль"
-                            value={form.password}
+                            value={values.password}
                             name={'password'}
-                            onChange={onChange}
+                            onChange={(e) => handleChange(e)}
                             icon={'ShowIcon'}
                         />
                         <Input
                             type={'text'}
                             placeholder="Введите код из письма"
-                            value={form.token}
+                            value={values.token}
                             name={"token"}
-                            onChange={onChange} />
+                            onChange={(e) => handleChange(e)} />
                         <button
                             type='submit'
                             className={styles.buttonConstructor}>

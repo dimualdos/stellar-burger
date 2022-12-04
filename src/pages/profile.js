@@ -1,9 +1,9 @@
-import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, Link } from 'react-router-dom';
 import { Input } from "@ya.praktikum/react-developer-burger-ui-components";
 import { PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
 import { logoutAuth } from '../services/actions/auth';
+import { useForm } from '../hooks/useForm';
 import styles from './css/profile.module.css';
 
 
@@ -45,10 +45,8 @@ export const LeftSectionInProfile = () => {
 
 export const Profile = () => {
     const { data } = useSelector(state => state.user);
-    const [form, setValue] = useState({ email: `${data ? (data.email) : ('')}`, password: `${data ? (data.password) : ('')}`, name: `${data ? (data.name) : ('')}` });
-    const onChange = e => {
-        setValue({ ...form, [e.target.name]: e.target.value });
-    };
+
+    const { values, handleChange } = useForm({ email: `${data ? (data.email) : ('')}`, password: `${data ? (data.password) : ('')}`, name: `${data ? (data.name) : ('')}` });
 
     return (
         <section className={styles.section}>
@@ -59,25 +57,25 @@ export const Profile = () => {
                     <Input
                         type={'text'}
                         placeholder={`Имя`}
-                        value={form.name}
+                        value={values.name}
                         name={"name"}
-                        onChange={() => onChange}
+                        onChange={(e) => handleChange(e)}
                         icon={'EditIcon'}
                     />
                     <Input
                         type={'text'}
                         placeholder={`Логин`}
-                        value={form.email}
+                        value={values.email}
                         name={"email"}
-                        onChange={() => onChange}
+                        onChange={(e) => handleChange(e)}
                         icon={'EditIcon'}
                     />
                     <PasswordInput
                         type={'password'}
                         placeholder={"Пароль"}
-                        value={form.password}
+                        value={values.password}
                         name={"password"}
-                        onChange={() => onChange}
+                        onChange={(e) => handleChange(e)}
                         icon={'EditIcon'}
                     />
                 </form>

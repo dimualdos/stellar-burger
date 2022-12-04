@@ -30,7 +30,11 @@ const OrderDetails = ({ numberOrder }) => {
 }
 
 OrderDetails.propTypes = {
-    numberOrder: PropTypes.number
+    numberOrder: PropTypes.oneOfType([
+        PropTypes.object,
+        PropTypes.number,
+
+    ])
 }
 
 export default OrderDetails;

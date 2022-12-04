@@ -1,29 +1,26 @@
 
-import { useState, useCallback } from 'react';
+import { useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { registerUser } from '../services/actions/auth';
 import { Input } from "@ya.praktikum/react-developer-burger-ui-components";
 import { PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
-import { Button } from '@ya.praktikum/react-developer-burger-ui-components';
+import { useForm } from '../hooks/useForm';
 import styles from './css/page.module.css';
 
 
 export function Register() {
     const dispatch = useDispatch();
-    const [form, setValue] = useState({ email: '', password: '', name: '' });
     const { user } = useSelector(state => state.user);
-    const onChange = e => {
-        setValue({ ...form, [e.target.name]: e.target.value });
-    };
+    const { values, handleChange } = useForm({ email: '', password: '', name: '' });
 
     const register = useCallback(
         (e) => {
             e.preventDefault();
             if (user) return;
-            dispatch(registerUser(form));
+            dispatch(registerUser(values));
             user.replace({ pathname: '/login' });
-        }, [dispatch, form, user]);
+        }, [dispatch, user, values]);
 
     return (
         <section className={styles.section}>
@@ -37,20 +34,20 @@ export function Register() {
                     <Input
                         type={'text'}
                         placeholder={`Имя`}
-                        value={form.name}
+                        value={values.name}
                         name="name"
-                        onChange={onChange} />
+                        onChange={(e) => handleChange(e)} />
                     <Input
                         type={'email'}
                         placeholder={`E-mail`}
-                        value={form.email}
+                        value={values.email}
                         name="email"
-                        onChange={onChange} />
+                        onChange={(e) => handleChange(e)} />
                     <PasswordInput
                         placeholder="Пароль"
-                        value={form.password}
+                        value={values.password}
                         name="password"
-                        onChange={onChange}
+                        onChange={(e) => handleChange(e)}
                     />
                     <button
                         type='submit'

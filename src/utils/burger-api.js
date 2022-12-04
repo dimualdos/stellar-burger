@@ -54,13 +54,14 @@ export const fetchWithRefresh = async (url, options) => {
 }
 
 export const loginRequest = async (form) => {
-    const res = await request(`${_BASE_URL}/auth/login`, {
+    const res = await fetchWithRefresh(`${_BASE_URL}/auth/login`, {
         method: 'POST',
         mode: 'cors',
         cache: 'no-cache',
         credentials: 'same-origin',
         headers: {
-            'Content-Type': 'application/json;charset=utf-8'
+            'Content-Type': 'application/json;charset=utf-8',
+            Authorization: 'Bearer ' + getCookie('token')
         },
         redirect: 'follow',
         referrerPolicy: 'no-referrer',
@@ -98,21 +99,26 @@ export const getOrderByNumber = async (number) => {
     return await res;
 }
 
-export const getUserRequest = (data) => {
+export const getUserRequest = async () => {
     return fetchWithRefresh(`${_BASE_URL}/auth/user`, {
         method: 'GET',
+        mode: 'cors',
+        cache: 'no-cache',
+        credentials: 'same-origin',
         headers: {
             'Content-Type': 'application/json',
-            authorization: getCookie('accessToken'),
+            authorization: getCookie('accessToken')
         },
-        body: JSON.stringify(data)
+        redirect: 'follow',
+        referrerPolicy: 'no-referrer'
     })
         .then(data => {
-
             if (data?.success) return data;
             return Promise.reject(data)
         });
-};
+
+}
+
 
 export const registerUserRequest = async (form) => {
     const res = await request(`${_BASE_URL}/auth/register`, {
