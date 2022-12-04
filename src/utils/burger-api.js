@@ -54,7 +54,7 @@ export const fetchWithRefresh = async (url, options) => {
 }
 
 export const loginRequest = async (form) => {
-    const res = await fetchWithRefresh(`${_BASE_URL}/auth/login`, {
+    const res = await request(`${_BASE_URL}/auth/login`, {
         method: 'POST',
         mode: 'cors',
         cache: 'no-cache',
