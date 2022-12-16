@@ -1,6 +1,7 @@
 import { useState, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useDrop } from "react-dnd";
+import { useHistory, useLocation } from 'react-router-dom';
 import { ConstructorElement, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import ComponentsContructor from './components-constructor/components-constructor';
 import OrderDetails from '../order-details/order-details';
@@ -9,12 +10,16 @@ import { ORDER_RESET } from '../../services/actions/order';
 import styles from './burger-constructor.module.css';
 import Modal from '../modal/modal';
 import { orderBurder } from '../../services/actions/order';
+import { Spinner } from '../spinner/spinner';
 
 const BurgerConstructor = () => {
     const dispatch = useDispatch();
     const { bun, ingredients } = useSelector(state => state.burgerConstructorItem);
     const { orderRequest, order } = useSelector(state => state.order);
+    const user = useSelector(state => state.user.data);
     const [open, setOpen] = useState(false);
+    const history = useHistory();
+    const location = useLocation();
 
     const [{ isHover }, dropTargerRef] = useDrop({
         accept: 'ingredient',
@@ -34,9 +39,17 @@ const BurgerConstructor = () => {
 
     const handleClick = () => {
         if (!bun || orderRequest) return;
-        dispatch(orderBurder(dataPostId()));
-
-        setOpen({ open: true })
+        if (!user) {
+            history.replace({
+                pathname: '/login',
+                state: { background: location }
+            });
+            history.push('/login');
+        }
+        else {
+            dispatch(orderBurder(dataPostId()));
+            setOpen({ open: true });
+        }
     };
 
     const closeModal = () => {
@@ -46,7 +59,7 @@ const BurgerConstructor = () => {
 
     const orderData = useMemo(
         () => {
-            return order ? order.order.number : 0;
+            return order ? order.order.number : <Spinner />;
         },
         [order]);
 
@@ -54,6 +67,8 @@ const BurgerConstructor = () => {
         return ((bun ? bun.price * 2 : 0)
             + ingredients.reduce((a, b) => a + b.price, 0))
     }, [bun, ingredients])
+
+
 
 
     return (

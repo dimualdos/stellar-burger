@@ -1,3 +1,5 @@
+import { CONSTRUCTOR_REORDER, CONSTRUCTOR_RESET } from './constructor';
+
 import { postOrder } from '../../utils/burger-api';
 
 export const ORDER_REQUEST = 'ORDER/REQUEST';
@@ -10,18 +12,23 @@ export function orderBurder(orderData) {
         dispatch({
             type: ORDER_REQUEST
         })
-               postOrder(orderData).then(res => {
+        postOrder(orderData).then(res => {
             if (res && res.success) {
                 dispatch({
                     type: ORDER_SUCCESS,
                     payload: res
-                })
+                }).then(
+                    dispatch({
+                        type: CONSTRUCTOR_REORDER
+                    })
+
+                )
             } else {
-                 dispatch({
+                dispatch({
                     type: ORDER_FAILED
                 })
             }
-        }).catch( err => {
+        }).catch(err => {
             dispatch({
                 type: ORDER_FAILED
             })

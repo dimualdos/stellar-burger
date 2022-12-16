@@ -1,0 +1,63 @@
+nav {
+    display: flex;
+    flex-direction: column;
+    width: 320px;
+}
+
+.section {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 1250px;
+    margin: 0 auto;
+}
+
+.form {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 24px;
+    width: 480px;
+    align-content: center;
+    flex-wrap: wrap;
+}
+
+.container {
+    display: flex;
+    width: 1250px;
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 60px;
+    margin-top: 120px;
+}
+
+.textProfile {
+    height: 64px;
+    font-family: 'JetBrains Mono', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 30px;
+    display: flex;
+    align-items: center;
+    color: #8585AD;
+}
+
+.textProfile :active {
+    color: #F2F2F3;
+}
+
+.textPersonal {
+    composes: textProfile;
+    width: 320px;
+    height: 48px;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    opacity: 0.4;
+
+}
+
+.styleActiveClass {
+    color: #F2F2F3
+}

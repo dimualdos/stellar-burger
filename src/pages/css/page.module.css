@@ -1,0 +1,107 @@
+.section {
+    width: 100%;
+    margin-top: 100px;
+    display: flex;
+    justify-content: center;
+}
+
+.container {
+    display: flex;
+    width: 1250px;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 60px;
+    align-items: center;
+}
+
+.form {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 24px;
+    width: 480px;
+    align-content: center;
+    flex-wrap: wrap;
+}
+
+
+.heading {
+    width: 480px;
+    height: 30px;
+    font-family: 'JetBrains Mono', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 30px;
+    text-align: center;
+    color: #F2F2F3;
+    margin: 0;
+}
+
+.containerBottom {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 20px;
+}
+
+.divPerson {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 8px;
+    width: 480px;
+    height: 24px;
+    align-self: center;
+    flex-grow: 0;
+}
+
+.textPerson {
+    composes: heading;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    color: #8585AD;
+    opacity: 0.8;
+    margin: 0;
+}
+
+.textLinkPerson {
+    composes: textPerson;
+    height: 24px;
+    text-align: center;
+    color: #4C4CFF;
+    text-decoration: none;
+}
+
+.mainApp1 {
+    display: flex;
+    flex-direction: row;
+    width: 1250px;
+    justify-content: space-between;
+    margin: 0 auto;
+}
+
+.buttonConstructor {
+    width: 215px;
+    height: 64px;
+    background: linear-gradient(63.18deg, #801AB3 0%, #4C4CFF 100%);
+    border-radius: 64px;
+    border: none;
+    box-shadow: 0px 0px 16px 8px rgba(51, 51, 255, 0.25), 0px 0px 8px 8px rgba(51, 51, 255, 0.25);
+    filter: drop-shadow(0px 4px 32px rgba(51, 51, 255, 0.5));
+    cursor: pointer;
+}
+
+
+
+.buttonText {
+    font-family: 'JetBrains Mono', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    color: #F2F2F3;
+}

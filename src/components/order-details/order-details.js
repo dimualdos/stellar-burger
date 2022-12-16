@@ -29,8 +29,12 @@ const OrderDetails = ({ numberOrder }) => {
     )
 }
 
-// OrderDetails.propTypes = {
-//     numberOrder: PropTypes.number.isRequired
-// }
+OrderDetails.propTypes = {
+    numberOrder: PropTypes.oneOfType([
+        PropTypes.object,
+        PropTypes.number,
+
+    ])
+}
 
 export default OrderDetails;

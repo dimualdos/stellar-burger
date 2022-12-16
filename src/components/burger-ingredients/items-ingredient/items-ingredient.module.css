@@ -1,11 +1,10 @@
-
 .ingridient {
     display: flex;
     flex-direction: row-reverse;
     width: 272px;
     height: 208px;
     order: 0;
-
+    cursor: grab;
 }
 
 .counterColumn {

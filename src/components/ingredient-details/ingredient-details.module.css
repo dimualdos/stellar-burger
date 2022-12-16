@@ -2,7 +2,6 @@
     display: flex;
     width: 520px;
     height: 520px;
-    background: #1C1C21;
     flex-wrap: wrap;
     justify-content: center;
 }
@@ -16,8 +15,10 @@
 
 .frame2 {
     width: 520px;
-    background: #1C1C21
+
 }
+
+
 
 .frame2Text {
     font-family: 'JetBrains Mono', sans-serif;
@@ -26,7 +27,7 @@
     font-size: 24px;
     line-height: 30px;
     text-align: center;
-    color: #F2F2F3
+    color: #F2F2F3;
 }
 
 .nutrionValues {
@@ -46,6 +47,10 @@
     width: 120px;
     order: 0;
     flex-grow: 0;
+}
+
+a {
+    text-decoration: none;
 }
 
 .textValue {

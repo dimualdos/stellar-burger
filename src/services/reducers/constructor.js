@@ -16,12 +16,12 @@ export const constructorReducer = (state = initialState, action) => {
         case CONSTRUCTOR_ADD: {
             if (action.payload.type === 'bun') {
                 return { ...state, bun: action.payload };
-            } 
-                return {
-                    ...state,
-                    ingredients: [...state.ingredients, action.payload],
-                };
-           
+            }
+            return {
+                ...state,
+                ingredients: [...state.ingredients, action.payload],
+            };
+
         }
         case CONSTRUCTOR_DELETE: {
             return {

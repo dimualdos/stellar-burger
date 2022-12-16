@@ -38,6 +38,7 @@ const TemlateBurger = React.forwardRef(({
                                 onClick={onIngredientClick}
                                 key={value._id}
                                 count={ingredientCount[value._id]}
+                                id={value._id}
                             />
                         )
                     })}
@@ -56,4 +57,4 @@ TemlateBurger.propTypes = {
 }
 
 
-export default TemlateBurger
+export default TemlateBurger;

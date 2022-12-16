@@ -4,12 +4,15 @@ import { itemsReducer } from './indredients';
 import { orderReducer } from './order';
 import { constructorReducer } from './constructor';
 import { reducerDetailModal } from './ingredient-detail-modal';
+import { authReducer } from './auth';
 
 
 
 export const rootReducer = combineReducers({
-    ingredients: itemsReducer,
-    order: orderReducer,
-    burgerConstructorItem: constructorReducer,
-    ingredientsModal: reducerDetailModal
-  });
+  ingredients: itemsReducer,
+  order: orderReducer,
+  burgerConstructorItem: constructorReducer,
+  ingredientsModal: reducerDetailModal,
+  user: authReducer
+});
+
