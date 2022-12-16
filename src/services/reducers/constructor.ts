@@ -7,10 +7,11 @@ import {
 
 const initialState = {
     bun: null,
-    ingredients: []
+    ingredients: [],
 }
 
-export const constructorReducer = (state = initialState, action) => {
+
+export const constructorReducer = (state = initialState, action: { type: string; payload: any | undefined; }) => {
 
     switch (action.type) {
         case CONSTRUCTOR_ADD: {

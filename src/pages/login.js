@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Input } from "@ya.praktikum/react-developer-burger-ui-components";
 import { PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
-import { useForm } from '../hooks/useForm';
+import { useForm } from '../hooks/hooks';
 import { loginUser } from '../services/actions/auth';
 import styles from './css/page.module.css';
 

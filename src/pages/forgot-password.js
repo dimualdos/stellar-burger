@@ -4,7 +4,7 @@ import { Link, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { restorePassword } from '../services/actions/auth';
 import { Input } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useForm } from '../hooks/useForm';
+import { useForm } from '../hooks/hooks';
 import styles from './css/page.module.css';
 
 export function ForgotPass() {

@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { registerUser } from '../services/actions/auth';
 import { Input } from "@ya.praktikum/react-developer-burger-ui-components";
 import { PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
-import { useForm } from '../hooks/useForm';
+import { useForm } from '../hooks/hooks';
 import styles from './css/page.module.css';
 
 

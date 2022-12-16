@@ -1,8 +1,13 @@
 
-import { PropTypes } from "prop-types";
+
+import { FC } from 'react';
 import styles from './order-details.module.css';
 
-const OrderDetails = ({ numberOrder }) => {
+type TOrderDetails = {
+    numberOrder: number
+}
+
+const OrderDetails: FC<TOrderDetails> = ({ numberOrder }) => {
 
     return (
         <div className={styles.order}>
@@ -27,14 +32,6 @@ const OrderDetails = ({ numberOrder }) => {
             </div>
         </div>
     )
-}
-
-OrderDetails.propTypes = {
-    numberOrder: PropTypes.oneOfType([
-        PropTypes.object,
-        PropTypes.number,
-
-    ])
 }
 
 export default OrderDetails;

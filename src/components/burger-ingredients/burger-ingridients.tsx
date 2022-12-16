@@ -1,22 +1,23 @@
 
 import { useDispatch, useSelector } from 'react-redux';
-import { useState, useMemo, useEffect } from 'react';
+import { useState, useMemo, useEffect, FunctionComponent } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import TemlateBurger from './template-burgers/template-burgers';
 import { Spinner } from '../spinner/spinner';
 import { SET_INGREDIENT_MODAL } from "../../services/actions/ingredient-detail-modal";
+import { TStateReducer } from '../../services/reducers';
 import styles from './burger-ingridients.module.css';
 
 
-const NewsItems = () => {
-    const { items, itemsRequest, itemsFailed } = useSelector(state => state.ingredients);
 
+export const NewsItems: any = () => {
+    const { items, itemsRequest, itemsFailed } = useSelector((state: TStateReducer) => state.ingredients);
     const dispatch = useDispatch();
 
     const [current, setCurrent] = useState('buns');
 
-    const onTabClick = (tab) => {
+    const onTabClick = (tab: string) => {
         setCurrent(tab);
         const elem = document.getElementById(tab);
         if (elem) {
@@ -55,9 +56,9 @@ const NewsItems = () => {
 
 
 
-    const itemBurger = useMemo(() => items.filter(value => value.type === 'bun'), [items]);
-    const itemSauce = useMemo(() => items.filter(value => value.type === 'sauce'), [items]);
-    const itemMain = useMemo(() => items.filter(value => value.type === 'main'), [items]);
+    const itemBurger = useMemo(() => items.filter((value: { type: string; }) => value.type === 'bun'), [items]);
+    const itemSauce = useMemo(() => items.filter((value: { type: string; }) => value.type === 'sauce'), [items]);
+    const itemMain = useMemo(() => items.filter((value: { type: string; }) => value.type === 'main'), [items]);
 
     if (itemsFailed) {
         return <p>Произошла ошибка при получении данных</p>
@@ -65,7 +66,6 @@ const NewsItems = () => {
         return <p><Spinner /></p>
     } else {
         if (items) {
-
             return (
                 <>
                     <div className={styles.burgerMain}>
@@ -113,12 +113,12 @@ const NewsItems = () => {
                     </section>
                 </>)
         }
-
-
     }
 }
 
-const BurgerIngredients = () => {
+
+
+const BurgerIngredients: FunctionComponent = () => {
 
     return (
         <main className={styles.mainBurger}>

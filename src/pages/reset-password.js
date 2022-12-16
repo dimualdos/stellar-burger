@@ -6,7 +6,7 @@ import { getNewPassword } from '../services/actions/auth';
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Input } from "@ya.praktikum/react-developer-burger-ui-components";
 import { PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
-import { useForm } from '../hooks/useForm';
+import { useForm } from '../hooks/hooks';
 import styles from './css/page.module.css';
 
 

@@ -3,7 +3,7 @@ import { NavLink, Link } from 'react-router-dom';
 import { Input } from "@ya.praktikum/react-developer-burger-ui-components";
 import { PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
 import { logoutAuth } from '../services/actions/auth';
-import { useForm } from '../hooks/useForm';
+import { useForm } from '../hooks/hooks';
 import styles from './css/profile.module.css';
 
 

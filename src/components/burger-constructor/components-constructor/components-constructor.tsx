@@ -1,16 +1,23 @@
-import PropTypes from 'prop-types';
+import { FC } from 'react';
 import { useDispatch } from 'react-redux';
 import { useRef } from 'react';
-import { useDrop, useDrag } from "react-dnd";
+import { useDrop, useDrag, XYCoord } from "react-dnd";
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { CONSTRUCTOR_DELETE, CONSTRUCTOR_REORDER } from '../../../services/actions/constructor';
+import { TProductItem } from '../../../utils/types';
 import styles from './components-constructor.module.css';
 
 
-const ComponentsContructor = ({ item, index }) => {
+type TCardProps = {
+  item: TProductItem;
+  index: number;
+}
+
+const ComponentsContructor: FC<TCardProps> = ({ item, index }) => {
 
   const dispatch = useDispatch();
-  const ref = useRef(null);
+  const ref = useRef<HTMLDivElement>(null);
+
   const [{ handlerId }, drop] = useDrop({
     accept: ['sort_ingredient'],
     collect(monitor) {
@@ -19,11 +26,12 @@ const ComponentsContructor = ({ item, index }) => {
       };
     },
 
-    hover(item, monitor) {
+    hover(dragItem: any, monitor) {
       if (!ref.current) {
         return;
       }
-      const dragIndex = item.index;
+      console.log(dragItem)
+      const dragIndex = dragItem.index;
       const hoverIndex = index;
 
       if (dragIndex === hoverIndex) {
@@ -32,8 +40,8 @@ const ComponentsContructor = ({ item, index }) => {
 
       const hoverBoundingRect = ref.current?.getBoundingClientRect();
       const hoverMiddleY = (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
-      const clientOffset = monitor.getClientOffset();
-      const hoverClientY = clientOffset.y - hoverBoundingRect.top;
+      const clientOffset: XYCoord | null = monitor.getClientOffset();
+      const hoverClientY = clientOffset!.y - hoverBoundingRect.top;
 
       if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
         return;
@@ -49,7 +57,7 @@ const ComponentsContructor = ({ item, index }) => {
           to: hoverIndex,
         },
       });
-      item.index = hoverIndex;
+      dragItem.index = hoverIndex;
     },
   });
   const [{ isDragging }, drag] = useDrag({
@@ -61,10 +69,9 @@ const ComponentsContructor = ({ item, index }) => {
   });
   const opacity = isDragging ? 0 : 1;
   if (item.type !== 'bun') drag(drop(ref));
-  const preventDefault = (e) => e.preventDefault();
+  const preventDefault = (e: { preventDefault: () => void; }) => e.preventDefault();
 
   return (
-
     <div className={styles.constructorCenterElem}
       ref={ref}
       data-handler-id={handlerId}
@@ -84,18 +91,9 @@ const ComponentsContructor = ({ item, index }) => {
             payload: index,
           })
         }
-
       />
-
-
     </div>
   )
-
-}
-
-ComponentsContructor.propTypes = {
-  item: PropTypes.object.isRequired,
-  index: PropTypes.number
 }
 
 export default ComponentsContructor;

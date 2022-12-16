@@ -1,10 +1,21 @@
+import { FC } from 'react';
 import { useDrag } from "react-dnd";
 import { Link, useLocation } from "react-router-dom";
 import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-components';
 import style from './items-ingredient.module.css';
-import { PropTypes } from "prop-types";
+import { TProductItem } from "../../../utils/types";
 
-const ItemsIngredientBurgers = ({ ingredientItem,
+type TingredientItem = {
+    count: number | null;
+}
+
+type TItemsIngredient = TingredientItem & {
+    ingredientItem: TProductItem;
+    onClick: (arg0: TProductItem) => void;
+    count: number | undefined;
+}
+
+const ItemsIngredientBurgers: FC<TItemsIngredient> = ({ ingredientItem,
     onClick,
     count }) => {
     const { image, price, name, _id } = ingredientItem;
@@ -45,19 +56,5 @@ const ItemsIngredientBurgers = ({ ingredientItem,
         </Link>
     )
 }
-
-ItemsIngredientBurgers.propTypes = {
-    ingredientItem: PropTypes.shape({
-        _id: PropTypes.string.isRequired,
-        name: PropTypes.string.isRequired,
-        price: PropTypes.number.isRequired,
-        image: PropTypes.string.isRequired,
-        count: PropTypes.number,
-
-    }).isRequired,
-    onClick: PropTypes.func.isRequired
-}
-
-
 
 export default ItemsIngredientBurgers;
