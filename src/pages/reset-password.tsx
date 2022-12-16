@@ -1,21 +1,21 @@
 
-import { useCallback } from 'react';
+import { useCallback, SyntheticEvent } from 'react';
 import { Link } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { getNewPassword } from '../services/actions/auth';
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Input } from "@ya.praktikum/react-developer-burger-ui-components";
-import { PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
-import { useForm } from '../hooks/hooks';
+import { TStateReducer } from '../services/reducers';
+import { useForm, useAppDispatch } from '../hooks/hooks';
 import styles from './css/page.module.css';
 
 
 export function ResetPass() {
 
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
     const { values, handleChange } = useForm({ password: '', token: '' });
 
-    const { passwordData } = useSelector(state => state.user);
+    const { passwordData } = useSelector((state: TStateReducer) => state.user);
     //? стандартная отправка формы без пользовательского хука
     // const [form, setValue] = useState({ password: '', token: '' });
     // const onChange = e => {
@@ -23,7 +23,7 @@ export function ResetPass() {
     // };
 
     const resetPassword = useCallback(
-        (e) => {
+        (e: SyntheticEvent) => {
             e.preventDefault();
             if (!passwordData) return;
             dispatch(getNewPassword(values));
@@ -38,7 +38,7 @@ export function ResetPass() {
                         onSubmit={resetPassword}
                         className={styles.form}>
                         <h1 className={styles.heading}>Восстановление пароля</h1>
-                        <PasswordInput
+                        <Input
                             type={'password'}
                             placeholder="Введите новый пароль"
                             value={values.password}
@@ -62,9 +62,8 @@ export function ResetPass() {
                             Перейти на страницу сброса пароля
                         </Button>
                     </Link>
-                    )
+                    )}
 
-                }
                 <div className={styles.divPerson}>
                     <p className={styles.textPerson}>Вспомнили пароль?
                         <Link to={{ pathname: `/login` }}

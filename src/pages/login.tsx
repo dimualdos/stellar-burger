@@ -1,22 +1,23 @@
 
-import { useCallback } from 'react';
+import { useCallback, SyntheticEvent, FunctionComponent } from 'react';
 import { Link } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Input } from "@ya.praktikum/react-developer-burger-ui-components";
 import { PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
-import { useForm } from '../hooks/hooks';
+import { useForm, useAppDispatch } from '../hooks/hooks';
+import { TStateReducer } from '../services/reducers';
 import { loginUser } from '../services/actions/auth';
 import styles from './css/page.module.css';
 
 
-export function LoginPage() {
-    const dispatch = useDispatch();
+export const LoginPage: FunctionComponent = () => {
+    const dispatch = useAppDispatch();
     const { values, handleChange } = useForm({ email: '', password: '' });
 
-    const { loginUserRequest } = useSelector(state => state.user);
+    const { loginUserRequest } = useSelector((state: TStateReducer) => state.user);
 
     const handleClick = useCallback(
-        (e) => {
+        (e: SyntheticEvent) => {
             e.preventDefault();
             if (loginUserRequest) return;
             dispatch(loginUser(values));

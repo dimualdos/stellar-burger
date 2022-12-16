@@ -3,7 +3,7 @@ import ErrorMessage from '../error-message/error-message';
 
 
 interface IErrorProps {
-    error: boolean;
+    error?: boolean;
     children?: ReactNode;
 }
 
@@ -12,7 +12,7 @@ class ErrorBoundary extends Component<IErrorProps> {
         error: false
     }
 
-    componentDidCatch(error, errorInfo) {
+    componentDidCatch(error: any, errorInfo: any) {
         console.log(error, errorInfo);
         this.setState({
             error: true

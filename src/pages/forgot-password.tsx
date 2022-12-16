@@ -1,21 +1,24 @@
 
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, FunctionComponent, SyntheticEvent } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { restorePassword } from '../services/actions/auth';
 import { Input } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useForm } from '../hooks/hooks';
+import { TStateReducer } from '../services/reducers';
+import { useAppDispatch } from '../hooks/hooks';
 import styles from './css/page.module.css';
 
-export function ForgotPass() {
+
+export const ForgotPass: FunctionComponent = () => {
     const { values, handleChange } = useForm({ email: '' });
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
     const history = useHistory();
-    const { passwordData } = useSelector(state => state.user);
+    const { passwordData } = useSelector((state: TStateReducer) => state.user);
 
 
     const resetPassword = useCallback(
-        (e) => {
+        (e: SyntheticEvent) => {
             e.preventDefault();
             dispatch(restorePassword(values));
         },

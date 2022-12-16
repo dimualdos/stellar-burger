@@ -1,9 +1,10 @@
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import type { RootState, AppDispatch } from '../services/store';
+
 import { useState } from "react";
 
 
-export function useForm(inputValues: { value: string; name: string; }) {
+export const useForm = (inputValues) => {
     const [values, setValues] = useState(inputValues);
 
     const handleChange = (event: { target: { value: string; name: string; }; }) => {

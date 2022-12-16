@@ -1,6 +1,6 @@
 import { CONSTRUCTOR_REORDER, CONSTRUCTOR_RESET } from './constructor';
 
-import { postOrder } from '../../utils/burger-api';
+import { postOrder } from '../../utils/burger-api.ts';
 
 export const ORDER_REQUEST = 'ORDER/REQUEST';
 export const ORDER_SUCCESS = 'ORDER/SUCCESS';

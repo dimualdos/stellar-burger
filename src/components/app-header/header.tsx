@@ -1,4 +1,4 @@
-import { FC, ReactNode } from 'react';
+import { FC } from 'react';
 import { NavLink, useRouteMatch } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { Logo } from '@ya.praktikum/react-developer-burger-ui-components';
@@ -9,11 +9,7 @@ import { TStateReducer } from '../../services/reducers';
 import { IProps } from '../../utils/types';
 import styles from './header.module.css';
 
-
-
-
 const AppHeader: FC<IProps> = () => {
-
     const isConstructor = useRouteMatch({ path: '/', exact: true });
     const isFeed = useRouteMatch('/profile/orders');
     const isProfile = useRouteMatch('/profile');
@@ -56,9 +52,7 @@ const AppHeader: FC<IProps> = () => {
                             {userName ? userName : 'Личный кабинет'}
                         </p>
                     </div>
-
                 </NavLink>
-
             </nav>
         </header>
     )

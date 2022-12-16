@@ -2,18 +2,9 @@ import { ReactNode } from 'react';
 import { Location } from 'history';
 import { Key } from 'react';
 
-
-
 export interface IProps {
     children?: ReactNode;
 }
-
-
-export type THeaderButtonsData = {
-    title: string;
-    logo: string;
-};
-
 
 export type TProductItem = {
     id?: Key | null | undefined | number;
@@ -31,18 +22,13 @@ export type TProductItem = {
     __v: number;
 };
 
-
-export type TDict<T> = {
-    [name: string]: T;
-};
-
-export type TLocation = {
-    hash: string;
-    key?: string;
-    pathname: string;
-    search: string;
-    state: TLocationState;
-};
+// export type TLocation = {
+//     hash: string;
+//     key?: string;
+//     pathname: string;
+//     search: string;
+//     state: TLocationState;
+// };
 export type TLocationState = {
     from?: string;
     background: Location;

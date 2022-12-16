@@ -1,26 +1,27 @@
 
-import { useCallback } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useCallback, FunctionComponent, SyntheticEvent } from 'react';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { registerUser } from '../services/actions/auth';
 import { Input } from "@ya.praktikum/react-developer-burger-ui-components";
 import { PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
-import { useForm } from '../hooks/hooks';
+import { useForm, useAppDispatch } from '../hooks/hooks';
+import { TStateReducer } from '../services/reducers';
 import styles from './css/page.module.css';
 
 
-export function Register() {
-    const dispatch = useDispatch();
-    const { user } = useSelector(state => state.user);
+export const Register: FunctionComponent = () => {
+    const dispatch = useAppDispatch();
+    const { data } = useSelector((state: TStateReducer) => state.user);
     const { values, handleChange } = useForm({ email: '', password: '', name: '' });
 
     const register = useCallback(
-        (e) => {
+        (e: SyntheticEvent) => {
             e.preventDefault();
-            if (user) return;
+            if (data) return;
             dispatch(registerUser(values));
-            user.replace({ pathname: '/login' });
-        }, [dispatch, user, values]);
+            data.replace({ pathname: '/login' });
+        }, [dispatch, data, values]);
 
     return (
         <section className={styles.section}>
