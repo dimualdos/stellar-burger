@@ -11,7 +11,7 @@ const initialState = {
 }
 
 
-export const constructorReducer = (state = initialState, action: { type: string; payload: any | undefined; }) => {
+export const constructorReducer = (state = initialState, action) => {
 
     switch (action.type) {
         case CONSTRUCTOR_ADD: {

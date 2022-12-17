@@ -19,7 +19,7 @@ const TemlateBurger = React.forwardRef<HTMLHeadingElement, TTemplateProps>(({
     const { bun, ingredients } = useSelector((state: any) => state.burgerConstructorItem);
 
     const ingredientCount = useMemo(() => {
-        let countObj = {};
+        let countObj: any = {};
         ingredients.forEach((element: { _id: number; }) => {
             if (!countObj[element._id]) countObj[element._id] = 0;
             countObj[element._id]++;
@@ -27,6 +27,7 @@ const TemlateBurger = React.forwardRef<HTMLHeadingElement, TTemplateProps>(({
         if (bun) countObj[bun._id] = 2;
         return countObj;
     }, [bun, ingredients]);
+
 
     return (
         <section className={styles.mainBurgerColumn} >

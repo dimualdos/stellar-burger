@@ -4,7 +4,7 @@ import ErrorMessage from '../error-message/error-message';
 
 interface IErrorProps {
     error?: boolean;
-    children?: ReactNode;
+    children?: any;
 }
 
 class ErrorBoundary extends Component<IErrorProps> {

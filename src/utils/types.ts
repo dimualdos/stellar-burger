@@ -22,6 +22,7 @@ export type TProductItem = {
     __v: number;
 };
 
+
 // export type TLocation = {
 //     hash: string;
 //     key?: string;

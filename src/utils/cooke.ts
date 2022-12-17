@@ -1,7 +1,7 @@
 
 
 
-export function getCookie(name) {
+export function getCookie(name: any) {
     const matches = document.cookie.match(
         new RegExp('(?:^|; )' + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + '=([^;]*)')
     );
@@ -9,7 +9,7 @@ export function getCookie(name) {
 }
 
 
-export function setCookie(name, value, props) {
+export function setCookie(name?: any, value?: any, props?: any) {
     props = {
         path: '/',
         ...props

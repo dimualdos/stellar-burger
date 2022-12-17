@@ -45,7 +45,7 @@ export const NewsItems: any = () => {
         }
     }, [inViewBuns, inViewMains, inViewSauses]);
 
-    const onIngredientClick = (ingredientModal) => {
+    const onIngredientClick = (ingredientModal: any) => {
         dispatch({ type: SET_INGREDIENT_MODAL, payload: ingredientModal })
     }
 

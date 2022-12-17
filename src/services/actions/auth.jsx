@@ -54,7 +54,7 @@ export const loginUser = (userData) => {
 }
 
 export const updateToken = () => {
-    return async (dispatch: (arg0: { type: string; payload?: any; }) => void) => {
+    return async (dispatch) => {
         try {
             dispatch({
                 type: REFRESH_TOKEN_REQUEST
@@ -142,13 +142,13 @@ export const registerUser = (data) => async (dispatch) => {
 }
 
 export const restorePassword = (form: string) => {
-    return async (dispatch: Dispatch) => {
+    return async (dispatch) => {
         try {
             dispatch({
                 type: RESET_PASSWORD_REQUEST
             });
             resetPass(form)
-                .then((res: { message: string; }) => {
+                .then((res) => {
                     dispatch({
                         type: RESET_PASSWORD_SUCCESS,
                         payload: res.message,
