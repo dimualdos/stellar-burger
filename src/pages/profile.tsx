@@ -1,4 +1,4 @@
-import { FunctionComponent, SyntheticEvent } from 'react';
+import { FunctionComponent, MouseEvent } from 'react';
 import { useSelector } from 'react-redux';
 import { NavLink, Link } from 'react-router-dom';
 import { Input } from "@ya.praktikum/react-developer-burger-ui-components";
@@ -10,7 +10,7 @@ import styles from './css/profile.module.css';
 
 export const LeftSectionInProfile: FunctionComponent = () => {
     const dispatch = useAppDispatch();
-    let onLogout = (e: SyntheticEvent) => {
+    let onLogout = (e: MouseEvent<HTMLAnchorElement>) => {
         e.preventDefault();
         dispatch(logoutAuth());
     }

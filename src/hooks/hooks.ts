@@ -1,15 +1,18 @@
+
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import type { RootState, AppDispatch } from '../services/store';
 
 import { useState } from "react";
-export type TDict<T> = {
-    [name: string]: T;
+export type TDict = {
+    name: string;
+    value: string;
+
 };
 
 export const useForm = (inputValues: { email?: string; password?: string; name?: string; token?: string; }) => {
     const [values, setValues] = useState<any>(inputValues);
 
-    const handleChange = (event: { target: { value: string; name: string; }; }) => {
+    const handleChange = (event: { target: TDict }) => {
         const { value, name } = event.target;
         setValues({ ...values, [name]: value });
     };

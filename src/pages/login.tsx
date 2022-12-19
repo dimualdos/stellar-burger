@@ -1,5 +1,5 @@
 
-import { useCallback, SyntheticEvent, FunctionComponent } from 'react';
+import { useCallback, FunctionComponent, FormEvent } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { Input } from "@ya.praktikum/react-developer-burger-ui-components";
@@ -17,7 +17,7 @@ export const LoginPage: FunctionComponent = () => {
     const { loginUserRequest } = useSelector((state: TStateReducer) => state.user);
 
     const handleClick = useCallback(
-        (e: SyntheticEvent) => {
+        (e: FormEvent<HTMLFormElement>) => {
             e.preventDefault();
             if (loginUserRequest) return;
             dispatch(loginUser(values));

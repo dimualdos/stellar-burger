@@ -1,5 +1,5 @@
 
-import { useCallback, SyntheticEvent } from 'react';
+import { useCallback, FormEvent } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { getNewPassword } from '../services/actions/auth';
@@ -23,7 +23,7 @@ export function ResetPass() {
     // };
 
     const resetPassword = useCallback(
-        (e: SyntheticEvent) => {
+        (e: FormEvent<HTMLFormElement>) => {
             e.preventDefault();
             if (!passwordData) return;
             dispatch(getNewPassword(values));

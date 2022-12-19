@@ -1,5 +1,5 @@
 
-import { useCallback, FunctionComponent, SyntheticEvent } from 'react';
+import { useCallback, FunctionComponent, FormEvent } from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { registerUser } from '../services/actions/auth';
@@ -16,7 +16,7 @@ export const Register: FunctionComponent = () => {
     const { values, handleChange } = useForm({ email: '', password: '', name: '' });
 
     const register = useCallback(
-        (e: SyntheticEvent) => {
+        (e: FormEvent<HTMLFormElement>) => {
             e.preventDefault();
             if (data) return;
             dispatch(registerUser(values));

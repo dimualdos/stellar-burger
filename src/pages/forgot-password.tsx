@@ -1,5 +1,5 @@
 
-import { useCallback, useEffect, FunctionComponent, SyntheticEvent } from 'react';
+import { useCallback, useEffect, FunctionComponent, FormEvent } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { restorePassword } from '../services/actions/auth';
@@ -18,7 +18,7 @@ export const ForgotPass: FunctionComponent = () => {
 
 
     const resetPassword = useCallback(
-        (e: SyntheticEvent) => {
+        (e: FormEvent<HTMLFormElement>) => {
             e.preventDefault();
             dispatch(restorePassword(values));
         },

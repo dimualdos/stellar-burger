@@ -16,7 +16,7 @@ type TModal = {
 
 const Modal: FC<TModal> = ({ title, children, onClose, overlay = true }) => {
     useEffect(() => {
-        const removeModal = (e: { key: string; }) => {
+        const removeModal = (e: KeyboardEvent) => {
             e.key === 'Escape' && onClose();
         }
 
