@@ -1,7 +1,7 @@
 import { getCookie, setCookie } from './cooke';
 
-export const _BASE_URL = 'https://norma.nomoreparties.space/api';
-const request = async (url, option) => {
+export const _BASE_URL: string = 'https://norma.nomoreparties.space/api';
+const request = async (url: RequestInfo | URL, option?: RequestInit | undefined) => {
     const res = await fetch(url, option);
     if (!res.ok) {
         throw new Error(`Could not fetch ${url}, status: ${res.status}`);
@@ -9,7 +9,7 @@ const request = async (url, option) => {
     return await res.json();
 }
 
-const checkResponse = (res) => {
+const checkResponse = (res: Response) => {
     return res.ok ? res.json() : res.json().then((err) => Promise.reject(err));
 }
 
@@ -32,11 +32,11 @@ export const refreshToken = async () => {
     return await res;
 };
 
-export const fetchWithRefresh = async (url, options) => {
+export const fetchWithRefresh = async (url: RequestInfo | URL, options?: any) => {
     try {
         const res = await fetch(url, options);
         return await checkResponse(res);
-    } catch (err) {
+    } catch (err: any) {
         if (err.message === 'jwt expired') {
             const refreshData = await refreshToken();
             if (!refreshData.success) {
@@ -53,7 +53,7 @@ export const fetchWithRefresh = async (url, options) => {
     }
 }
 
-export const loginRequest = async (form) => {
+export const loginRequest = async (form: string) => {
     const res = await request(`${_BASE_URL}/auth/login`, {
         method: 'POST',
         mode: 'cors',
@@ -73,7 +73,7 @@ export const loginRequest = async (form) => {
     //    
 };
 
-export const postOrder = (data) => {
+export const postOrder = (data: string) => {
     return fetchWithRefresh(`${_BASE_URL}/orders`, {
         method: "POST",
         headers: {
@@ -89,7 +89,7 @@ export const postOrder = (data) => {
         });
 }
 
-export const getOrderByNumber = async (number) => {
+export const getOrderByNumber = async (number: number) => {
     const res = await request(`${_BASE_URL}/orders/${number}`, {
         method: 'GET',
         headers: {
@@ -120,7 +120,7 @@ export const getUserRequest = async () => {
 }
 
 
-export const registerUserRequest = async (form) => {
+export const registerUserRequest = async (form: string) => {
     const res = await request(`${_BASE_URL}/auth/register`, {
         method: 'POST',
         headers: {
@@ -150,7 +150,7 @@ export const logoutRequest = async () => {
     return await res;
 }
 
-export const resetPass = async (data) => {
+export const resetPass = async (data: string) => {
     const res = await request(`${_BASE_URL}/password-reset`, {
         method: "POST",
         headers: {
@@ -161,7 +161,7 @@ export const resetPass = async (data) => {
     return await res
 }
 
-export const recoveryPass = async (data) => {
+export const recoveryPass = async (data: string) => {
     const res = await request(`${_BASE_URL}/password-reset/reset`, {
         method: "POST",
         headers: {

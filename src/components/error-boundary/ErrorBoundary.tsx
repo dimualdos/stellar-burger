@@ -1,13 +1,18 @@
-import { Component } from 'react';
+import { Component, ReactNode } from 'react';
 import ErrorMessage from '../error-message/error-message';
 
 
-class ErrorBoundary extends Component {
+interface IErrorProps {
+    error?: boolean;
+    children?: any;
+}
+
+class ErrorBoundary extends Component<IErrorProps> {
     state = {
         error: false
     }
 
-    componentDidCatch(error, errorInfo) {
+    componentDidCatch(error: any, errorInfo: any) {
         console.log(error, errorInfo);
         this.setState({
             error: true
@@ -20,8 +25,6 @@ class ErrorBoundary extends Component {
         }
         return this.props.children;
     }
-
-
 }
 
 export default ErrorBoundary;

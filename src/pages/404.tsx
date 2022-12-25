@@ -1,10 +1,10 @@
-
+import { FunctionComponent } from 'react';
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Link } from 'react-router-dom';
 import styles from './css/page.module.css';
 
 
-export const NotFound404 = () => {
+export const NotFound404: FunctionComponent = () => {
 
     return (
         <section className={styles.section}>

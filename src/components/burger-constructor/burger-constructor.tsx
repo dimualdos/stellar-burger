@@ -1,38 +1,47 @@
-import { useState, useMemo } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useState, useMemo, FunctionComponent } from 'react';
+import { useSelector } from 'react-redux';
 import { useDrop } from "react-dnd";
 import { useHistory, useLocation } from 'react-router-dom';
 import { ConstructorElement, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import ComponentsContructor from './components-constructor/components-constructor';
 import OrderDetails from '../order-details/order-details';
 import { addToConstructor } from '../../services/actions/constructor';
-import { ORDER_RESET } from '../../services/actions/order';
 import styles from './burger-constructor.module.css';
 import Modal from '../modal/modal';
-import { orderBurder } from '../../services/actions/order';
+import { orderBurder, ORDER_RESET } from '../../services/actions/order';
 import { Spinner } from '../spinner/spinner';
+import { TStateReducer } from '../../services/reducers';
+import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
+import { TProductItem } from '../../utils/types';
 
-const BurgerConstructor = () => {
-    const dispatch = useDispatch();
-    const { bun, ingredients } = useSelector(state => state.burgerConstructorItem);
-    const { orderRequest, order } = useSelector(state => state.order);
-    const user = useSelector(state => state.user.data);
-    const [open, setOpen] = useState(false);
+type TburgerConstructor = {
+    state: TProductItem;
+    burgerConstructorItem: any;
+}
+
+
+const BurgerConstructor: FunctionComponent = () => {
+    const dispatch = useAppDispatch();
+    const { bun, ingredients } = useSelector((state: TburgerConstructor) => state.burgerConstructorItem);
+    const { orderRequest, order } = useAppSelector((state: TStateReducer) => state.order);
+    const user = useAppSelector((state: TStateReducer) => state.user.data);
+    const [open, setOpen] = useState<any>(false);
     const history = useHistory();
     const location = useLocation();
+
 
     const [{ isHover }, dropTargerRef] = useDrop({
         accept: 'ingredient',
         collect: monitor => ({
             isHover: monitor.isOver(),
         }),
-        drop(item) {
-            dispatch(addToConstructor(item));
+        drop(dragItem: unknown) {
+            dispatch(addToConstructor(dragItem));
         }
     });
     function dataPostId() {
         if (bun && ingredients) {
-            const data = { ingredients: [bun, ...ingredients.map(item => item)].map(value => value._id) };
+            const data = { ingredients: [bun, ...ingredients.map((item: TProductItem) => item)].map((value) => value._id) };
             return data;
         }
     }
@@ -65,7 +74,7 @@ const BurgerConstructor = () => {
 
     const totalPrice = useMemo(() => {
         return ((bun ? bun.price * 2 : 0)
-            + ingredients.reduce((a, b) => a + b.price, 0))
+            + ingredients.reduce((a: number, b: { price: number; }) => a + b.price, 0))
     }, [bun, ingredients])
 
 
@@ -87,7 +96,7 @@ const BurgerConstructor = () => {
 
                     <div className={styles.constructorComponents} >
                         <div className={styles.constructorElemScroll}>
-                            {ingredients.map((itemIngredient, index) =>
+                            {ingredients.map((itemIngredient: TProductItem, index: number) =>
                                 <ComponentsContructor
                                     item={itemIngredient}
                                     key={itemIngredient.id}
@@ -126,7 +135,7 @@ const BurgerConstructor = () => {
                 </button>
             </div>
             {open ?
-                (<Modal onClose={closeModal} title='Детали заказа'>
+                (<Modal onClose={closeModal} title='Детали заказа' overlay={false}>
                     <OrderDetails numberOrder={orderData} />
                 </Modal>) : null
             }

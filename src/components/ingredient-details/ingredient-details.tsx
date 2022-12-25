@@ -1,13 +1,15 @@
+import { FunctionComponent } from 'react';
 import { useParams } from "react-router-dom";
 import { useSelector } from 'react-redux';
-//import { PropTypes } from 'prop-types';
+import { TStateReducer } from '../../services/reducers';
 import styles from './ingredient-details.module.css';
 
 
-const IngredientDetails = () => {
-    const ingredients = useSelector(store => store.ingredients.items);
-    const { id } = useParams();
-    const ingredient = ingredients.find(item =>
+
+const IngredientDetails: FunctionComponent = () => {
+    const ingredients = useSelector((store: TStateReducer) => store.ingredients.items);
+    const { id } = useParams<{ id: string }>();
+    const ingredient = ingredients.find((item: { _id: string; }) =>
         item._id === id);
 
     return (
@@ -44,15 +46,5 @@ const IngredientDetails = () => {
 
     )
 }
-
-// IngredientDetails.propTypes = {
-//     _id: PropTypes.string.isRequired,
-//     name: PropTypes.string.isRequired,
-//     image: PropTypes.string.isRequired,
-//     proteins: PropTypes.number.isRequired,
-//     fat: PropTypes.number.isRequired,
-//     carbohydrates: PropTypes.number.isRequired,
-//     calories: PropTypes.number.isRequired
-// }
 
 export default IngredientDetails;

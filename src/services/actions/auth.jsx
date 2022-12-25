@@ -1,6 +1,7 @@
 import { registerUserRequest, loginRequest, getUserRequest, logoutRequest, resetPass, recoveryPass, fetchWithRefresh } from '../../utils/burger-api';
 import { _BASE_URL } from '../../utils/burger-api';
 import { deleteCookie, setCookie, getCookie } from '../../utils/cooke';
+import { Dispatch } from 'redux';
 
 export const REGISTER_USER_REQUEST = 'REGISTER/USER/REQUEST';
 export const REGISTER_USER_SUCCESS = 'REGISTER/USER/SUCCESS';
@@ -13,8 +14,6 @@ export const LOGIN_USER_FAILED = 'LOGIN_USER_FAILED';
 export const UPDATE_USER_DATA_REQUEST = 'UPDATE/USER/DATA/REQUEST';
 export const UPDATE_USER_DATA_FAILED = 'UPDATE/USER/DATA/FAILED';
 export const UPDATE_USER_DATA_SUCCESS = 'UPDATE/USER/DATA/SUCCESS';
-
-
 
 export const RESET_PASSWORD_REQUEST = 'RESET/PASSWORD/REQUEST';
 export const RESET_PASSWORD_SUCCESS = 'RESET/PASSWORD/SUCCESS';
@@ -29,8 +28,6 @@ export const REFRESH_TOKEN_SUCCESS = 'REFRESH/TOKEN/SUCCESS';
 export const REFRESH_TOKEN_FAILED = 'REFRESH/TOKEN/FAILED';
 
 export const USER_LOGOUT = 'USER/LOGOUT';
-
-
 
 export const loginUser = (userData) => {
     return async (dispatch) => {
@@ -79,7 +76,6 @@ export const updateToken = () => {
     }
 }
 
-
 export const getUserData = (methodType, userData) => {
     return async (dispatch) => {
         const accessToken = getCookie('accessToken');
@@ -113,7 +109,6 @@ export const getUserData = (methodType, userData) => {
     }
 }
 
-
 export const logoutAuth = () => {
     return async (dispatch) => {
         try {
@@ -146,9 +141,7 @@ export const registerUser = (data) => async (dispatch) => {
     }
 }
 
-
-
-export const restorePassword = (form) => {
+export const restorePassword = (form: string) => {
     return async (dispatch) => {
         try {
             dispatch({

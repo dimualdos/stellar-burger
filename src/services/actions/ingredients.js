@@ -1,6 +1,6 @@
 
 
-import { getResourse } from '../../utils/burger-api';
+import { getResourse } from '../../utils/burger-api.ts';
 
 
 

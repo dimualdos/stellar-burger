@@ -1,14 +1,25 @@
-import PropTypes from 'prop-types';
+
+import { FC } from 'react';
 import { Redirect, Route, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { TStateReducer } from '../../services/reducers';
 
 
-export const ProtectedRoute = ({ onlyUnAuth = false, children, ...rest }) => {
+type TProtectedRoute = {
+    onlyUnAuth?: boolean;
+    children: any;
+    rest?: string;
+    path: string;
+    exact?: boolean;
+}
+
+
+export const ProtectedRoute: FC<TProtectedRoute> = ({ onlyUnAuth = false, children, ...rest }) => {
     const location = useLocation();
-    const user = useSelector(store => store.user.data);
+    const user = useSelector((store: TStateReducer) => store.user.data);
 
     if (onlyUnAuth && user) {
-        const { from } = location.state || { from: { pathname: '/' } };
+        const { from }: any = location.state || { from: { pathname: '/' } };
         return (
             <Route {...rest}>
                 <Redirect to={from} />
@@ -30,16 +41,5 @@ export const ProtectedRoute = ({ onlyUnAuth = false, children, ...rest }) => {
             {children}
         </Route>
     )
-}
-
-const routeTypes = PropTypes.shape({
-    path: PropTypes.object.isRequired,
-    location: PropTypes.object.isRequired,
-    computedMatch: PropTypes.object.isRequired
-})
-
-ProtectedRoute.propTypes = {
-    children: PropTypes.element.isRequired,
-    rest: routeTypes
 }
 

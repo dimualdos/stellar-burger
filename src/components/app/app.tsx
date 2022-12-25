@@ -1,7 +1,6 @@
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useEffect, FunctionComponent } from "react";
 import { Switch, Route, useHistory, useLocation } from "react-router-dom";
-//import { useAppSelector, useAppDispatch } from '../../utils/hooks';
+import { useAppDispatch } from '../../hooks/hooks';
 import { getItems } from "../../services/actions/ingredients";
 import { updateToken } from "../../services/actions/auth";
 import IngredientDetails from '../ingredient-details/ingredient-details';
@@ -10,13 +9,17 @@ import AppHeader from '../app-header/header';
 import { ProtectedRoute } from "../protected-route/protected-route";
 import { Profile, LoginPage, ResetPass, Register, ForgotPass, NotFound404, MainPage, Orders } from "../../pages";
 import styles from './app.module.css';
+import { TLocationState } from '../../utils/types'
 
 
-function App() {
-  const dispatch = useDispatch();
+
+
+
+const App: FunctionComponent = () => {
+  const dispatch = useAppDispatch();
   const history = useHistory();
-  const location = useLocation();
-  const background = location.state && location.state.background;
+  const location = useLocation<TLocationState>();
+  const backgroundApp = location.state && location.state.background;
   // const orderNum = useRouteMatch([
   //   '/profile/orders/:number',
   //   '/feed/:number',
@@ -33,7 +36,7 @@ function App() {
     <>
       <div className={styles.page}>
         <AppHeader />
-        <Switch location={background || location}>
+        <Switch location={backgroundApp || location}>
           <ProtectedRoute path="/profile" exact={true}>
             <Profile />
           </ProtectedRoute>
@@ -69,12 +72,12 @@ function App() {
           </Route>
         </Switch>
       </div>
-      {background && (
+      {backgroundApp && (
         <>
           <Route path="/ingredients/:id" exact>
             <div className={styles.ingredientWrapper} >
-              <Modal onClose={handleModalClose} title={'Детали ингредиента'}>
-                <IngredientDetails className={styles.ingredientItem} />
+              <Modal onClose={handleModalClose} title={'Детали ингредиента'} overlay={true}>
+                <IngredientDetails />
               </Modal>
             </div>
           </Route>

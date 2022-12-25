@@ -16,3 +16,4 @@ export const rootReducer = combineReducers({
   user: authReducer
 });
 
+export type TStateReducer = ReturnType<typeof rootReducer>

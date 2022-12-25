@@ -1,21 +1,21 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { FunctionComponent, MouseEvent } from 'react';
+import { useSelector } from 'react-redux';
 import { NavLink, Link } from 'react-router-dom';
 import { Input } from "@ya.praktikum/react-developer-burger-ui-components";
-import { PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
 import { logoutAuth } from '../services/actions/auth';
-import { useForm } from '../hooks/useForm';
+import { useForm, useAppDispatch } from '../hooks/hooks';
+import { TStateReducer } from '../services/reducers';
 import styles from './css/profile.module.css';
 
 
-export const LeftSectionInProfile = () => {
-    const dispatch = useDispatch();
-    let onLogout = (e) => {
+export const LeftSectionInProfile: FunctionComponent = () => {
+    const dispatch = useAppDispatch();
+    let onLogout = (e: MouseEvent<HTMLAnchorElement>) => {
         e.preventDefault();
         dispatch(logoutAuth());
     }
 
     return (
-
         <nav>
             <div>
                 <NavLink
@@ -44,7 +44,7 @@ export const LeftSectionInProfile = () => {
 
 
 export const Profile = () => {
-    const { data } = useSelector(state => state.user);
+    const { data } = useSelector((state: TStateReducer) => state.user);
 
     const { values, handleChange } = useForm({ email: `${data ? (data.email) : ('')}`, password: `${data ? (data.password) : ('')}`, name: `${data ? (data.name) : ('')}` });
 
@@ -70,7 +70,7 @@ export const Profile = () => {
                         onChange={(e) => handleChange(e)}
                         icon={'EditIcon'}
                     />
-                    <PasswordInput
+                    <Input
                         type={'password'}
                         placeholder={"Пароль"}
                         value={values.password}

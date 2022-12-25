@@ -1,17 +1,19 @@
+import { FC } from 'react';
 import { NavLink, useRouteMatch } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { Logo } from '@ya.praktikum/react-developer-burger-ui-components';
 import { BurgerIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { MenuIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { ProfileIcon } from '@ya.praktikum/react-developer-burger-ui-components';
+import { TStateReducer } from '../../services/reducers';
+import { IProps } from '../../utils/types';
 import styles from './header.module.css';
 
-const AppHeader = () => {
-
+const AppHeader: FC<IProps> = () => {
     const isConstructor = useRouteMatch({ path: '/', exact: true });
     const isFeed = useRouteMatch('/profile/orders');
     const isProfile = useRouteMatch('/profile');
-    const userName = useSelector(state => state.user.data?.name);
+    const userName = useSelector((state: TStateReducer) => state.user.data?.name);
 
     return (
         <header className={styles.navPanel}>
@@ -50,9 +52,7 @@ const AppHeader = () => {
                             {userName ? userName : 'Личный кабинет'}
                         </p>
                     </div>
-
                 </NavLink>
-
             </nav>
         </header>
     )
