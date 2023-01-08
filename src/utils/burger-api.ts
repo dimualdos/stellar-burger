@@ -1,6 +1,9 @@
 import { getCookie, setCookie } from './cooke';
 
 export const _BASE_URL: string = 'https://norma.nomoreparties.space/api';
+export const WS_ORDERS_FEED: string = 'wss://norma.nomoreparties.space/orders/all';
+export const WS_ORDERS_USER: string = 'wss://norma.nomoreparties.space/orders';
+
 const request = async (url: RequestInfo | URL, option?: RequestInit | undefined) => {
     const res = await fetch(url, option);
     if (!res.ok) {

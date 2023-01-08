@@ -28,7 +28,7 @@ const AppHeader: FC<IProps> = () => {
                     </NavLink>
 
                     <NavLink
-                        to="/profile/orders"
+                        to="/feed"
                         className={styles.orderNav}>
                         <MenuIcon type={isFeed ? "primary" : "secondary"} />
                         <p className={styles.navText}>Лента заказов</p>

@@ -1,0 +1,148 @@
+.containerRibbon {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: stretch;
+    margin-bottom: 20px;
+}
+
+
+
+.cardOrdersContainer {
+    display: flex;
+    flex-direction: column;
+    width: 584px;
+    min-height: 214px;
+    background: #1C1C21;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.04), 0px 0px 2px rgba(0, 0, 0, 0.06), 0px 0px 1px rgba(0, 0, 0, 0.04);
+    border-radius: 40px;
+    margin: 0;
+    justify-content: space-between;
+
+}
+
+.cardOrderIDDiv {
+    margin: 24px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 536px;
+    height: 24px;
+    order: 0;
+}
+
+.idDiv {
+    max-width: 20vh;
+    height: 24px;
+    font-family: 'Iceland', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 28px;
+    line-height: 24px;
+    align-items: center;
+    color: #F2F2F3;
+}
+
+.timeDiv {
+    max-width: 80vh;
+    height: 24px;
+    font-family: 'JetBrains Mono', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    text-align: right;
+    color: #8585AD;
+}
+
+.burgerName {
+    padding: 0px 0px 0px 24px;
+    width: 536px;
+    min-height: 30px;
+    font-family: 'JetBrains Mono', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 30px;
+    align-items: center;
+    color: #F2F2F3;
+    margin: 0;
+}
+
+.componentsBurger {
+    margin: 24px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px;
+    width: 536px;
+    height: 64px;
+}
+
+.ingredientsRow {
+    max-width: 436px;
+    height: 64px;
+    background: #1C1C21;
+    display: flex;
+    flex-direction: row;
+}
+
+.ingredientsPreview {
+    box-sizing: border-box;
+    width: 64px;
+    height: 64px;
+    background: #131316;
+    border: #782bdc solid;
+    border-radius: 100px;
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+
+.priceContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 0px;
+    gap: 8px;
+    max-width: 25vw;
+    height: 64px;
+}
+
+.textPrice {
+    height: 24px;
+    font-family: 'Iceland', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 28px;
+    line-height: 24px;
+    align-items: center;
+    text-align: left;
+    color: #F2F2F3;
+}
+
+li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.imgCard {
+    position: relative;
+
+}
+
+.spanOrders {
+    position: absolute;
+    top: 30%;
+    left: 40%;
+    font-family: 'JetBrains Mono', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    color: #F2F2F3;
+}

@@ -1,20 +1,28 @@
-
-
+import { TApplicationActions } from '../types';
+import { TProductItem } from '../../utils/types';
 
 import {
   GET_ITEMS_REQUEST,
   GET_ITEMS_FAILED,
   GET_ITEMS_SUCCESS
-} from '../actions/ingredients';
+} from '../constants/ingredients';
 
-export const initialState = {
+
+
+export type TInitialStateIngredients = {
+  itemsRequest: boolean,
+  itemsFailed: boolean,
+  items: TProductItem[];
+}
+
+export const initialState: TInitialStateIngredients = {
   itemsRequest: false,
   itemsFailed: false,
   items: []
 }
 
 
-export const itemsReducer = (state = initialState, action) => {
+export const itemsReducer = (state = initialState, action: TApplicationActions): TInitialStateIngredients => {
   switch (action.type) {
     case GET_ITEMS_REQUEST: {
       return {

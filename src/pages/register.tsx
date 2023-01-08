@@ -11,7 +11,7 @@ import styles from './css/page.module.css';
 
 
 export const Register: FunctionComponent = () => {
-    const dispatch = useAppDispatch();
+    const dispatch: any = useAppDispatch();
     const { data } = useSelector((state: TStateReducer) => state.user);
     const { values, handleChange } = useForm({ email: '', password: '', name: '' });
 

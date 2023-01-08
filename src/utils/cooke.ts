@@ -8,6 +8,7 @@ export function getCookie(name: any) {
     return matches ? decodeURIComponent(matches[1]) : undefined;
 }
 
+export const cookieWithoutBearer = getCookie('accessToken')?.replace('Bearer ', '');
 
 export function setCookie(name?: any, value?: any, props?: any) {
     props = {

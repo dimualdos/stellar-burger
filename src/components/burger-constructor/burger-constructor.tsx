@@ -8,7 +8,8 @@ import OrderDetails from '../order-details/order-details';
 import { addToConstructor } from '../../services/actions/constructor';
 import styles from './burger-constructor.module.css';
 import Modal from '../modal/modal';
-import { orderBurder, ORDER_RESET } from '../../services/actions/order';
+import { orderBurder } from '../../services/actions/order';
+import { ORDER_RESET } from '../../services/constants/orders'
 import { Spinner } from '../spinner/spinner';
 import { TStateReducer } from '../../services/reducers';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
@@ -21,9 +22,9 @@ type TburgerConstructor = {
 
 
 const BurgerConstructor: FunctionComponent = () => {
-    const dispatch = useAppDispatch();
+    const dispatch: any = useAppDispatch();
     const { bun, ingredients } = useSelector((state: TburgerConstructor) => state.burgerConstructorItem);
-    const { orderRequest, order } = useAppSelector((state: TStateReducer) => state.order);
+    const { orderRequest, order } = useAppSelector((state: TStateReducer) => state.order)
     const user = useAppSelector((state: TStateReducer) => state.user.data);
     const [open, setOpen] = useState<any>(false);
     const history = useHistory();
@@ -71,6 +72,7 @@ const BurgerConstructor: FunctionComponent = () => {
             return order ? order.order.number : <Spinner />;
         },
         [order]);
+
 
     const totalPrice = useMemo(() => {
         return ((bun ? bun.price * 2 : 0)

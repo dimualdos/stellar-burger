@@ -7,16 +7,12 @@ import IngredientDetails from '../ingredient-details/ingredient-details';
 import Modal from "../modal/modal";
 import AppHeader from '../app-header/header';
 import { ProtectedRoute } from "../protected-route/protected-route";
-import { Profile, LoginPage, ResetPass, Register, ForgotPass, NotFound404, MainPage, Orders } from "../../pages";
+import { Profile, LoginPage, ResetPass, Register, ForgotPass, NotFound404, MainPage, OrdersProfile, FeedPage } from "../../pages";
 import styles from './app.module.css';
-import { TLocationState } from '../../utils/types'
-
-
-
-
+import { TLocationState } from '../../utils/types';
 
 const App: FunctionComponent = () => {
-  const dispatch = useAppDispatch();
+  const dispatch: any = useAppDispatch();
   const history = useHistory();
   const location = useLocation<TLocationState>();
   const backgroundApp = location.state && location.state.background;
@@ -41,7 +37,7 @@ const App: FunctionComponent = () => {
             <Profile />
           </ProtectedRoute>
           <ProtectedRoute path="/profile/orders" exact={true}>
-            <Orders />
+            <OrdersProfile />
           </ProtectedRoute>
           <ProtectedRoute onlyUnAuth={true} path="/login" exact>
             <LoginPage />
@@ -62,7 +58,9 @@ const App: FunctionComponent = () => {
               <IngredientDetails />
             </div>
           </Route>
-
+          <Route path="/feed" exact>
+            <FeedPage />
+          </Route>
 
           <Route path="/" exact>
             <MainPage />
@@ -81,18 +79,16 @@ const App: FunctionComponent = () => {
               </Modal>
             </div>
           </Route>
-          {/* <ProtectedRoute
-              path='/profile/orders/:orderNumber'
-              exact >
+          {/* <ProtectedRoute  path='/profile/orders/:id' exact >
               <Modal onClose={handleModalClose}>
-                <OrderInfo />
+                <OrderID />
               </Modal>
             </ProtectedRoute>
             <Route
-              path='/feed/number'
+              path='/feed/:id'
               exact >
               <Modal onClose={handleModalClose}>
-                <OrderInfo />
+                <OrderID />
               </Modal>
             </Route> */}
         </>

@@ -6,20 +6,53 @@ export interface IProps {
     children?: ReactNode;
 }
 
+export type TItem = {
+    item: TItemConstructor;
+}
+
+export type TItemConstructor = {
+    name?: string;
+    price?: number;
+    image?: string;
+}
+
+export type TWSOrder = {
+    createdAt?: string;
+    ingredients?: string[];
+    name?: string;
+    number?: number;
+    status?: string;
+    updatedAt?: string;
+    _id?: string;
+};
+
+export type TwsOrdersList = {
+    success?: boolean;
+    orders?: Array<TWSOrder>;
+    total?: number;
+    totalToday?: number;
+}
+
+
 export type TProductItem = {
-    id?: Key | null | undefined | number;
-    _id: any;
-    calories: number;
-    fat: number;
-    carbohydrates: number;
-    image: string;
-    image_large: string;
-    image_mobile: string;
-    name: string;
-    price: number;
-    proteins: number;
-    type: string;
-    __v: number;
+    // map(arg0?: (item: any) => void): ReactNode;
+    // length?: number;
+    // slice(arg0?: number, arg1?: number): unknown;
+    // reduce(arg0?: any, arg1?: any): unknown;
+    // push(ingredient?: TProductItem): unknown;
+    id?: Key | null | number;
+    _id?: any;
+    calories?: number;
+    fat?: number;
+    carbohydrates?: number;
+    image?: string;
+    image_large?: string;
+    image_mobile?: string;
+    name?: string;
+    price?: number;
+    proteins?: number;
+    type?: string;
+    __v?: number;
 };
 
 

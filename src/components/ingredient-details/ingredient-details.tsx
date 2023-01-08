@@ -7,10 +7,14 @@ import styles from './ingredient-details.module.css';
 
 
 const IngredientDetails: FunctionComponent = () => {
-    const ingredients = useSelector((store: TStateReducer) => store.ingredients.items);
+    const ingredients: any = useSelector((store: TStateReducer) => store.ingredients.items);
+
     const { id } = useParams<{ id: string }>();
+
     const ingredient = ingredients.find((item: { _id: string; }) =>
         item._id === id);
+
+    console.log(ingredient)
 
     return (
         <>

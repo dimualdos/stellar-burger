@@ -1,19 +1,26 @@
+import { TApplicationActions } from '../types';
 
 import {
     ORDER_REQUEST,
     ORDER_SUCCESS,
     ORDER_FAILED,
     ORDER_RESET
-} from '../actions/order';
+} from '../constants/orders';
 
-export const initialState = {
+export type TInitinalStateOrder = {
+    orderRequest?: boolean;
+    orderFailed?: boolean;
+    order?: any
+}
+
+export const initialState: TInitinalStateOrder = {
     orderRequest: false,
     orderFailed: false,
     order: null
 }
 
 
-export const orderReducer = (state = initialState, action) => {
+export const orderReducer = (state = initialState, action: TApplicationActions): TInitinalStateOrder => {
     switch (action.type) {
         case ORDER_REQUEST: {
             return {
