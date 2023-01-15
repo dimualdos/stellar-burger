@@ -6,7 +6,8 @@ import { TConstructorActions } from '../actions/constructor';
 import { TIngredientDetailModalActions } from '../actions/ingredient-detail-modal';
 import { TIngredientsActions } from '../actions/ingredients';
 import { TOrderActions } from '../actions/order';
-import { TWSConnectActions } from '../actions/ws-actions';
+import { TDataOrderActions } from '../actions/order-card-number';
+import { TWSConnectActions, TWSConnectActionsProfileOrders } from '../actions/ws-actions';
 
 
 
@@ -16,7 +17,9 @@ export type TApplicationActions = TUserActions
     | TIngredientDetailModalActions
     | TIngredientsActions
     | TOrderActions
-    | TWSConnectActions;
+    | TDataOrderActions
+    | TWSConnectActions
+    | TWSConnectActionsProfileOrders;
 // Infer the `RootState` and `AppDispatch` types from the store itself
 export type RootState = ReturnType<typeof store.getState>
 // Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}

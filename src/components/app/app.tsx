@@ -1,6 +1,6 @@
 import { useEffect, FunctionComponent } from "react";
 import { Switch, Route, useHistory, useLocation } from "react-router-dom";
-import { useAppDispatch } from '../../hooks/hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { getItems } from "../../services/actions/ingredients";
 import { updateToken } from "../../services/actions/auth";
 import IngredientDetails from '../ingredient-details/ingredient-details';
@@ -10,16 +10,16 @@ import { ProtectedRoute } from "../protected-route/protected-route";
 import { Profile, LoginPage, ResetPass, Register, ForgotPass, NotFound404, MainPage, OrdersProfile, FeedPage } from "../../pages";
 import styles from './app.module.css';
 import { TLocationState } from '../../utils/types';
+import { OrderID } from "../../pages/order-id";
+import { TStateReducer } from "../../services/reducers";
 
 const App: FunctionComponent = () => {
   const dispatch: any = useAppDispatch();
+  const { dataOrderNumber }: any = useAppSelector((store: TStateReducer) => store.dataNumberCard);
   const history = useHistory();
   const location = useLocation<TLocationState>();
   const backgroundApp = location.state && location.state.background;
-  // const orderNum = useRouteMatch([
-  //   '/profile/orders/:number',
-  //   '/feed/:number',
-  // ])?.params?.number;
+
 
   const handleModalClose = () => history.goBack();
 
@@ -39,6 +39,14 @@ const App: FunctionComponent = () => {
           <ProtectedRoute path="/profile/orders" exact={true}>
             <OrdersProfile />
           </ProtectedRoute>
+          <ProtectedRoute path='/profile/orders/:number' exact  >
+            <div className={styles.ingredientWrapper}>
+              <div className={styles.orderID}>
+                #{dataOrderNumber.number}
+              </div>
+              <OrderID />
+            </div>
+          </ProtectedRoute>
           <ProtectedRoute onlyUnAuth={true} path="/login" exact>
             <LoginPage />
           </ProtectedRoute>
@@ -51,6 +59,13 @@ const App: FunctionComponent = () => {
           <ProtectedRoute onlyUnAuth={true} path="/reset-password" exact>
             <ResetPass />
           </ProtectedRoute>
+          <Route path={'/feed/:number'}
+            exact render={() => <div className={styles.ingredientWrapper}>
+              <div className={styles.orderID}>
+                #{dataOrderNumber.number}
+              </div>
+              <OrderID />
+            </div>} />
 
           <Route path={`/ingredients/:id`} exact>
             <div className={styles.ingredientWrapper}>
@@ -58,6 +73,7 @@ const App: FunctionComponent = () => {
               <IngredientDetails />
             </div>
           </Route>
+
           <Route path="/feed" exact>
             <FeedPage />
           </Route>
@@ -79,18 +95,24 @@ const App: FunctionComponent = () => {
               </Modal>
             </div>
           </Route>
-          {/* <ProtectedRoute  path='/profile/orders/:id' exact >
-              <Modal onClose={handleModalClose}>
+          <ProtectedRoute path='/profile/orders/:number' exact >
+            {dataOrderNumber && (
+              <Modal onClose={handleModalClose} title={dataOrderNumber.number} overlay={true}>
                 <OrderID />
               </Modal>
-            </ProtectedRoute>
-            <Route
-              path='/feed/:id'
-              exact >
-              <Modal onClose={handleModalClose}>
+            )}
+
+          </ProtectedRoute>
+          <Route path='/feed/:number' exact >
+            {dataOrderNumber && (
+              <Modal onClose={handleModalClose} title={dataOrderNumber.number} overlay={true}>
                 <OrderID />
               </Modal>
-            </Route> */}
+            )
+
+            }
+
+          </Route>
         </>
       )
       }

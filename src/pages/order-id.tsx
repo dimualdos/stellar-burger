@@ -1,24 +1,28 @@
-import { FunctionComponent } from "react";
-import { ScrollCopmponent } from "../components/scroll-component/scroll-component";
-import styles from './css/order-id.module.css';
+import { FunctionComponent, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../hooks/hooks";
+import { TStateReducer } from "../services/reducers";
+import { OrderNumber } from "../components/order-number/order-number";
+import { getDataOrderCard } from "../services/actions/order-card-number";
+
 
 export const OrderID: FunctionComponent = () => {
+    const dispatch: any = useAppDispatch();
+    const { dataOrderNumber }: any = useAppSelector((store: TStateReducer) => store.dataNumberCard);
+
+    let { number }: { number: string } = useParams();
+    useEffect(() => {
+        if (number) dispatch(getDataOrderCard(number));
+    }, [dispatch]);
+
 
     return (
-        <section>
-            <header>
-                <div className={styles.orderID}></div>
-                <div className={styles.orderTitle}></div>
-                <div className={styles.orderStatus}></div>
-            </header>
-            <main>
-                <div className={styles.headerMain}>
-                    Состав:
-                </div>
-                <ScrollCopmponent >
-
-                </ScrollCopmponent>
-            </main>
-        </section>
+        <div>
+            {dataOrderNumber && dataOrderNumber.ingredients && (
+                <OrderNumber />
+            )}
+        </div>
     )
 }
+
+

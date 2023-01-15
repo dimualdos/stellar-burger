@@ -8,7 +8,7 @@ type TModalOverlay = {
 
 const ModalOverlay: FC<TModalOverlay> = ({ onClose }) => {
     return (
-        <div className={styles.modalOverLay} onClick={onClose}></div>
+        <div className={styles.modalOverLay} onClick={onClose} ></div>
     )
 }
 

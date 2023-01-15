@@ -3,7 +3,7 @@
 }
 
 .orderID {
-    width: 640px;
+    max-width: 640px;
     height: 24px;
     font-family: 'Iceland', sans-serif;
     font-style: normal;
@@ -17,22 +17,19 @@
 }
 
 .orderTitle {
-    width: 640px;
+    max-width: 640px;
     min-height: 30px;
-    left: 0px;
-    top: 0px;
     font-family: 'JetBrains Mono', sans-serif;
     font-style: normal;
     font-weight: 700;
     font-size: 24px;
     line-height: 30px;
-    align-items: center;
     color: #F2F2F3;
     margin-bottom: 12px;
 }
 
 .orderStatus {
-    width: 640px;
+    max-width: 640px;
     height: 24px;
     font-family: 'JetBrains Mono', sans-serif;
     font-style: normal;
@@ -42,6 +39,11 @@
     display: flex;
     align-items: center;
     color: #00CCCC;
+}
+
+.orderStatus1 {
+    composes: orderStatus;
+    color: #c1232b;
 }
 
 
@@ -109,8 +111,8 @@ li {
 }
 
 .scrollDiv {
-    width: 640px;
-    max-height: 40vh;
+    max-width: 640px;
+    max-height: 25vh;
     overflow-y: scroll;
     border-radius: 0px;
     overflow-x: hidden;
@@ -135,9 +137,8 @@ li {
     align-items: center;
     padding: 0px;
     gap: 8px;
-    width: 640px;
+    max-width: 640px;
     height: 24px;
-    background: #131316;
 }
 
 .timesStamp {

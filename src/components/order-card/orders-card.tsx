@@ -1,18 +1,25 @@
-
 import { FunctionComponent, useMemo } from 'react';
 import subtract from '../../images/subtract.png';
 import { TWSOrder } from '../../utils/types';
-import { useAppSelector } from '../../hooks/hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { TStateReducer } from '../../services/reducers';
-import styles from './order-card.module.css';
+import { formatRelative } from 'date-fns';
+import { ru } from 'date-fns/locale';
 import { Link, useLocation } from 'react-router-dom';
+import { SET_INGREDIENT_MODAL } from '../../services/actions/ingredient-detail-modal';
+import styles from './order-card.module.css';
+
+
 
 export const OrderCard: FunctionComponent = (value) => {
-    const { name, number, updatedAt, ingredients }: TWSOrder = value;
-    // const { messages }: { messages: TWSOrder[] } = useAppSelector((store: any) => store.webSocet);
+    const { name, number, updatedAt, ingredients, status }: TWSOrder = value;
+    // console.log(ingredients)
     const { items }: any = useAppSelector((store: TStateReducer) => store.ingredients);
     const maxIngredients = 6;
     const location = useLocation();
+    const dispatch = useAppDispatch();
+
+    const result = formatRelative(new Date(`${updatedAt}`), new Date(), { locale: ru });
 
     const orderInfo = useMemo(() => {
         if (!items.length) return null;
@@ -20,9 +27,10 @@ export const OrderCard: FunctionComponent = (value) => {
         const ingredientsInfo = ingredients!.reduce((acc: any[], item: any): any => {
             const ingredient = items.find((ingr: { _id: number; }) => ingr._id === item);
             if (ingredient) acc.push(ingredient);
+            // console.log(acc)
             return acc;
         }, []);
-        console.log(ingredientsInfo)
+        // console.log(ingredientsInfo)
         const totalPriceCard = ingredientsInfo.reduce((acc: any, item: any) => {
             return acc + item.price;
         }, 0);
@@ -39,11 +47,26 @@ export const OrderCard: FunctionComponent = (value) => {
     }, [ingredients, items, value])
 
     if (!orderInfo) return null;
+    //console.log(orderInfo)
+
+    const onIngredientClick = (value: any) => {
+        dispatch({ type: SET_INGREDIENT_MODAL, payload: orderInfo })
+
+    }
+
+    const engToRusStatus: any = {
+        done: 'Выполнен',
+        pending: 'Готовится',
+        created: 'Создан'
+    }
 
     return (
         <Link to={{
-            pathname: `${location.pathname}/${number}`
-        }}>
+            pathname: `${location.pathname}/${number}`,
+            state: { background: location }
+        }}
+            onClick={() => onIngredientClick(value)}>
+
             <div className={styles.containerRibbon}>
                 <div className={styles.cardOrdersContainer}>
                     <div className={styles.cardOrderIDDiv}>
@@ -51,12 +74,13 @@ export const OrderCard: FunctionComponent = (value) => {
                             #{number}
                         </div>
                         <div className={styles.timeDiv}>
-                            {updatedAt}
+                            {result}
                         </div>
                     </div>
                     <p className={styles.burgerName}>
                         {name}
                     </p>
+                    {status === 'done' ? (<p className={styles.orderStatus}>{engToRusStatus.done}</p>) : <p className={styles.orderStatus1}>{engToRusStatus.pending}</p>}
                     <div className={styles.componentsBurger}>
                         <div className={styles.ingredientsRow}>
                             {orderInfo && orderInfo.ingredientsShow.map((item: any, i: number) => {

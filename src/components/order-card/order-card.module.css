@@ -70,6 +70,26 @@
     margin: 0;
 }
 
+.orderStatus {
+    padding: 10px 0px 0px 24px;
+    width: 300px;
+    min-height: 24px;
+    font-family: 'JetBrains Mono', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    display: flex;
+    align-items: center;
+    color: #00CCCC;
+}
+
+.orderStatus1 {
+    composes: orderStatus;
+    color: #F2F2F3;
+}
+
+
 .componentsBurger {
     margin: 24px;
     display: flex;
@@ -93,8 +113,9 @@
     box-sizing: border-box;
     width: 64px;
     height: 64px;
-    background: #131316;
-    border: #782bdc solid;
+    background: linear-gradient(#131316, #131316) padding-box,
+        linear-gradient(to right, #801ab2, #4c4cff) border-box;
+    border: 2px solid transparent;
     border-radius: 100px;
     display: flex;
     justify-content: center;

@@ -14,21 +14,15 @@ import { Spinner } from '../components/spinner/spinner';
 
 export const OrdersProfile: FunctionComponent = () => {
     const dispatch = useAppDispatch();
-    const { messages }: any = useAppSelector((store: TStateReducer) => store.webSocet);
-
-    // const isTokenExist = document.cookie.match(/(accessToken=)(.+)/);
-
+    const { messages1 }: any = useAppSelector((store: TStateReducer) => store.webSocetProfile);
 
     useEffect(() => {
-        let wsUrlToken = '';
-        if (cookieWithoutBearer) wsUrlToken = `${WS_ORDERS_USER}?token=${cookieWithoutBearer}`;
-        dispatch({
-            type: 'WS_CONNECT',
-            // payload: location.pathname === `/feed/${params.id}` ? wsUrl : wsUrlToken,
-            payload: wsUrlToken,
+        if (cookieWithoutBearer) dispatch({
+            type: 'WS_CONNECT_PROFILE',
+            payload: WS_ORDERS_USER,
         });
         return () => {
-            dispatch({ type: 'WS_CONNECTION_CLOSED', payload: undefined });
+            dispatch({ type: 'WS_CONNECTION_CLOSED_PROFILE', payload: undefined });
         }
     }, [dispatch]);
 
@@ -40,10 +34,10 @@ export const OrdersProfile: FunctionComponent = () => {
             </div>
             <section className={styles.rightContainer}>
                 <ScrollCopmponent>
-                    {messages && messages.orders ? (messages.orders.map((value: any) => < OrderCard {...value} key={value._id
-                    } />).reverse()) : (<div className={styles.divSpinner}>
-                        <Spinner />
-                    </div>)}
+                    {messages1.orders ? (messages1.orders.map((value: any) => < OrderCard {...value} key={value._id} />).reverse())
+                        : (<div className={styles.divSpinner}>
+                            <Spinner />
+                        </div>)}
                 </ScrollCopmponent>
             </section>
         </section>

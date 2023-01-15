@@ -1,6 +1,6 @@
 .scrollDiv {
-    width: 610px;
-    height: 70vh;
+    width: 640px;
+    max-height: 70vh;
     overflow-y: scroll;
     border-radius: 0px;
     overflow-x: hidden;

@@ -3,39 +3,19 @@ import { ScrollCopmponent } from "../components/scroll-component/scroll-componen
 import { OrderCard } from "../components/order-card/orders-card";
 import { WS_ORDERS_FEED } from "../utils/burger-api";
 import { useAppDispatch, useAppSelector } from "../hooks/hooks";
-import { cookieWithoutBearer } from "../utils/cooke";
 import { TStateReducer } from "../services/reducers";
 import { Spinner } from "../components/spinner/spinner";
 import styles from './css/feed.module.css';
 
 
-
-// interface MatchParams {
-//     id: string;
-// }
-
-// type TStatusOrder = {
-//     [key: string]: string;
-// };
-
-// type TMap = {
-//     [key: string]: number;
-// };
-
-// type TIngredient = {
-//     ingredientId: string;
-//     numbers: number;
-// };
-
 export const FeedPage: FunctionComponent = () => {
     const dispatch = useAppDispatch();
-    const { messages }: any = useAppSelector((store: TStateReducer) => store.webSocet);
+    const { messages }: any = useAppSelector((store: TStateReducer) => store.webSocetFeed);
 
     useEffect(() => {
         dispatch({
             type: 'WS_CONNECT',
-            // payload: location.pathname === `/feed/${params.id}` ? wsUrl : wsUrlToken,
-            payload: WS_ORDERS_FEED,
+            payload: WS_ORDERS_FEED
         });
         return () => {
             dispatch({ type: 'WS_CONNECTION_CLOSED', payload: undefined });
@@ -49,10 +29,10 @@ export const FeedPage: FunctionComponent = () => {
                     Лента заказов
                 </h1>
                 <ScrollCopmponent>
-                    {messages.orders ? (messages.orders.map((value: any) => < OrderCard {...value} key={value._id
-                    } />)) : (<div className={styles.divSpinner}>
-                        <Spinner />
-                    </div>)}
+                    {messages.orders ? (messages.orders.map((value: any) => < OrderCard {...value} key={value._id} />))
+                        : (<div className={styles.divSpinner}>
+                            <Spinner />
+                        </div>)}
                 </ScrollCopmponent>
             </section>
             <section className={styles.rightConainer}>
@@ -61,7 +41,9 @@ export const FeedPage: FunctionComponent = () => {
                         <p className={styles.headerDone}>Готовы:</p>
                         <ul className={styles.doneBoardUL}>
                             {messages.orders && (messages.orders.map((value: any, i: number) => {
-                                return <li key={i} className={styles.listDone}>{value.number}</li>
+                                return (
+                                    value.status === 'done' ? <li key={i} className={styles.listDone}>{value.number}</li> : null
+                                )
                             }
                             ))}
                         </ul>

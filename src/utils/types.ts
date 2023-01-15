@@ -22,7 +22,7 @@ export type TWSOrder = {
     name?: string;
     number?: number;
     status?: string;
-    updatedAt?: string;
+    updatedAt?: string | number;
     _id?: string;
 };
 

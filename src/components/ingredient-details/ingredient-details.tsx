@@ -14,7 +14,7 @@ const IngredientDetails: FunctionComponent = () => {
     const ingredient = ingredients.find((item: { _id: string; }) =>
         item._id === id);
 
-    console.log(ingredient)
+    //console.log(ingredient)
 
     return (
         <>

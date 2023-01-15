@@ -1,12 +1,16 @@
 
-
 import { createReducer } from "@reduxjs/toolkit";
 import {
     wsError,
     wsClose,
     wsMessage,
     wsConnect,
-    wsOpen
+    wsOpen,
+    wsErrorProfile,
+    wsCloseProfile,
+    wsMessageProfile,
+    wsConnectProfile,
+    wsOpenProfile
 } from '../actions/ws-actions';
 
 export enum WebsocketStatus {
@@ -14,20 +18,26 @@ export enum WebsocketStatus {
     ONLINE = 'ONLINE',
     OFFLINE = 'OFFLINE'
 }
-
-export type LiveTableStore = {
-    status: WebsocketStatus;
-    connectionError: string;
-    messages: Array<{}>;
+export enum WebsocketStatus1 {
+    CONNECTING = 'CONNECTING...',
+    ONLINE = 'ONLINE',
+    OFFLINE = 'OFFLINE'
 }
 
-export const initialState1: LiveTableStore = {
+export type TLiveSocketStore = {
+    status: WebsocketStatus | WebsocketStatus1;
+    connectionError: string;
+    messages?: Array<{}> | undefined;
+    messages1?: Array<{}> | undefined;
+}
+
+export const initialState: TLiveSocketStore = {
     status: WebsocketStatus.OFFLINE,
     connectionError: '',
     messages: [],
 }
 
-export const rootSocetReducer = createReducer(initialState1, (builder) => {
+export const rootSocetReducerFeed = createReducer(initialState, (builder) => {
     builder
         .addCase(wsConnect, (state) => {
             state.status = WebsocketStatus.CONNECTING
@@ -35,7 +45,7 @@ export const rootSocetReducer = createReducer(initialState1, (builder) => {
         .addCase(wsOpen, (state) => {
             state.status = WebsocketStatus.ONLINE
         })
-        .addCase(wsClose, (state) => {
+        .addCase(wsClose, (state, action) => {
             state.status = WebsocketStatus.OFFLINE
         })
         .addCase(wsError, (state, action) => {
@@ -44,9 +54,37 @@ export const rootSocetReducer = createReducer(initialState1, (builder) => {
         .addCase(wsMessage, (state, action) => {
             state.messages = (state.messages, action.payload)
         })
-})
+});
+
+export const initialState1: TLiveSocketStore = {
+    status: WebsocketStatus1.OFFLINE,
+    connectionError: '',
+    messages1: [],
+}
+
+export const rootSocetReducerProfileOrders = createReducer(initialState1, (builder) => {
+    builder
+        .addCase(wsConnectProfile, (state) => {
+            state.status = WebsocketStatus1.CONNECTING
+        })
+        .addCase(wsOpenProfile, (state) => {
+            state.status = WebsocketStatus1.ONLINE
+        })
+        .addCase(wsCloseProfile, (state, action) => {
+            state.status = WebsocketStatus1.OFFLINE
+        })
+        .addCase(wsErrorProfile, (state, action) => {
+            state.connectionError = action.payload
+        })
+        .addCase(wsMessageProfile, (state, action) => {
+            state.messages1 = (state.messages, action.payload)
+        })
+});
 
 
+
+
+//!! Redux Code
 // type TWSState = {
 //     wsConnected: boolean;
 //     messages: Array<{}>;
