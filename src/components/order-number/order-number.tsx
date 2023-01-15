@@ -6,10 +6,6 @@ import { TStateReducer } from "../../services/reducers";
 import subtract from '../../images/subtract.png';
 import styles from './order-number.module.css';
 
-type TDict = {
-    [key: string]: string;
-};
-
 type TIngredient = {
     price: number;
     image_mobile: string | undefined;
@@ -22,63 +18,65 @@ export const OrderNumber: FunctionComponent = () => {
     const maxIngredients = 6;
     const result = formatRelative(new Date(`${dataOrderNumber.updatedAt}`), new Date(), { locale: ru });
     // let { number }: { number: string } = useParams();
-    //console.log(number)
+
     const orderInfo = useMemo(() => {
         if (!items.length && !dataOrderNumber) return null;
-
+        const count: any = new Map();
         const ingredientsInfo = dataOrderNumber.ingredients!.reduce((acc: any[], item: any): any => {
             const ingredient = items.find((ingr: { _id: number; }) => ingr._id === item);
             if (ingredient) acc.push(ingredient);
-            console.log(acc)
+            if (ingredient && count.has(ingredient)) {
+                let num = 1;
+                num = count.get(ingredient);
+                num += +1;
+                count.delete(ingredient);
+                count.set(ingredient, num);
+            } else if (ingredient) count.set(ingredient, 1);
             return acc;
         }, []);
-        // console.log(ingredientsInfo)
+        const ingredientArray = [];
+        for (let entry of count) {
+            ingredientArray.push(entry);
+        }
         const totalPriceCard = ingredientsInfo.reduce((acc: any, item: any) => {
             return acc + item.price;
         }, 0);
         const ingredientsShow = ingredientsInfo.slice(0, maxIngredients);
-        const scrapIngr = ingredientsInfo.length > maxIngredients
-            ? ingredientsInfo.length - maxIngredients : ingredientsInfo;
         return {
             ...dataOrderNumber,
+            ingredientArray,
             ingredientsInfo,
             ingredientsShow,
-            scrapIngr,
             totalPriceCard
         }
     }, [items, dataOrderNumber])
 
-
     return (
-
         <section >
             <header className={styles.orderHeader}>
                 <div className={styles.orderTitle}>{dataOrderNumber.name}</div>
                 {dataOrderNumber.status === 'done' ? (<p className={styles.orderStatus}>Выполнен</p>) : ((<p className={styles.orderStatus1}>Отменен</p>))}
-
             </header>
             <main>
                 <div className={styles.orderTitle}>
                     Состав:
                 </div>
                 <section className={styles.scrollDiv} >
-                    {orderInfo && orderInfo.ingredientsInfo.map((item: TIngredient, i: number) => {
+                    {orderInfo && orderInfo.ingredientArray.map((item: TIngredient[], i: number) => {
                         return (
                             <li
                                 className={styles.ingredientsRow}
                                 key={i}>
                                 <div className={styles.priceAndImg}>
-                                    <img src={item.image_mobile}
-                                        alt={item.name}
+                                    <img src={item[0].image_mobile}
+                                        alt={item[0].name}
                                         className={styles.ingredientsPreview} />
-                                    <div className={styles.nameIngredient}>{item.name}</div>
+                                    <div className={styles.nameIngredient}>{item[0].name}</div>
                                 </div>
-
                                 <div className={styles.priceAndImg}>
-                                    <p className={styles.textPrice}>{item.price}</p>
+                                    <p className={styles.textPrice}>{`${item[1]} × ${item[0].price}`}</p>
                                     <img className={styles.imgCard} src={subtract} alt="money" />
                                 </div>
-
                             </li>
                         )
                     })}

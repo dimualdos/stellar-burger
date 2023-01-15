@@ -12,6 +12,7 @@ import styles from './app.module.css';
 import { TLocationState } from '../../utils/types';
 import { OrderID } from "../../pages/order-id";
 import { TStateReducer } from "../../services/reducers";
+import { Spinner } from "../spinner/spinner";
 
 const App: FunctionComponent = () => {
   const dispatch: any = useAppDispatch();
@@ -20,7 +21,7 @@ const App: FunctionComponent = () => {
   const location = useLocation<TLocationState>();
   const backgroundApp = location.state && location.state.background;
 
-
+  console.log(dataOrderNumber)
   const handleModalClose = () => history.goBack();
 
   useEffect(() => {
@@ -40,12 +41,13 @@ const App: FunctionComponent = () => {
             <OrdersProfile />
           </ProtectedRoute>
           <ProtectedRoute path='/profile/orders/:number' exact  >
-            <div className={styles.ingredientWrapper}>
-              <div className={styles.orderID}>
-                #{dataOrderNumber.number}
-              </div>
-              <OrderID />
-            </div>
+            {dataOrderNumber ? (
+              <div className={styles.ingredientWrapper}>
+                <div className={styles.orderID}>
+                  {`#${dataOrderNumber.number}`}
+                </div>
+                <OrderID />
+              </div>) : (<div className={styles.spinner}><Spinner /></div>)}
           </ProtectedRoute>
           <ProtectedRoute onlyUnAuth={true} path="/login" exact>
             <LoginPage />
@@ -59,14 +61,17 @@ const App: FunctionComponent = () => {
           <ProtectedRoute onlyUnAuth={true} path="/reset-password" exact>
             <ResetPass />
           </ProtectedRoute>
-          <Route path={'/feed/:number'}
-            exact render={() => <div className={styles.ingredientWrapper}>
-              <div className={styles.orderID}>
-                #{dataOrderNumber.number}
+          <Route path={'/feed/:number'} exact>
+            {dataOrderNumber ? (
+              <div className={styles.ingredientWrapper}>
+                <div className={styles.orderID}>
+                  {`#${dataOrderNumber.number}`}
+                </div>
+                <OrderID />
               </div>
-              <OrderID />
-            </div>} />
+            ) : <Spinner />}
 
+          </Route>
           <Route path={`/ingredients/:id`} exact>
             <div className={styles.ingredientWrapper}>
               <p className={styles.ingredientTitle}>Детали ингредиента</p>

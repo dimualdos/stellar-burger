@@ -30,7 +30,6 @@ const BurgerConstructor: FunctionComponent = () => {
     const history = useHistory();
     const location = useLocation();
 
-
     const [{ isHover }, dropTargerRef] = useDrop({
         accept: 'ingredient',
         collect: monitor => ({

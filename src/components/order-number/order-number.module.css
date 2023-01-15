@@ -160,7 +160,7 @@ li {
 
 .textPrice {
     height: 24px;
-    max-width: 100px;
+    width: 100px;
     font-family: 'Iceland', sans-serif;
     font-style: normal;
     font-weight: 400;
