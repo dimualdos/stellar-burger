@@ -13,8 +13,8 @@ type TIngredient = {
 }
 
 export const OrderNumber: FunctionComponent = () => {
-    const { dataOrderNumber }: any = useAppSelector((store: TStateReducer) => store.dataNumberCard);
-    const { items }: any = useAppSelector((store: TStateReducer) => store.ingredients);
+    const dataOrderNumber: any = useAppSelector((store: TStateReducer) => store.dataNumberCard);
+    const items: any = useAppSelector((store: TStateReducer) => store.ingredients);
     const maxIngredients = 6;
     const result = formatRelative(new Date(`${dataOrderNumber.updatedAt}`), new Date(), { locale: ru });
     // let { number }: { number: string } = useParams();

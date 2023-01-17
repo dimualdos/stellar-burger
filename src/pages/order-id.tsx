@@ -8,9 +8,9 @@ import { getDataOrderCard } from "../services/actions/order-card-number";
 
 export const OrderID: FunctionComponent = () => {
     const dispatch: any = useAppDispatch();
-    const { dataOrderNumber }: any = useAppSelector((store: TStateReducer) => store.dataNumberCard);
+    const dataOrderNumber: any = useAppSelector((store: TStateReducer) => store.dataNumberCard);
 
-    let { number }: { number: string } = useParams();
+    let number: string = useParams();
     useEffect(() => {
         if (number) dispatch(getDataOrderCard(number));
     }, [dispatch]);

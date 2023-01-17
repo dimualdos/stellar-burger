@@ -29,7 +29,6 @@ const ComponentsContructor: FC<TCardProps> = ({ item, index }) => {
       if (!ref.current) {
         return;
       }
-      console.log(dragItem)
       const dragIndex = dragItem.index;
       const hoverIndex = index;
 

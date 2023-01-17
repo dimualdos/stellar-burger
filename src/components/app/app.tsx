@@ -16,12 +16,11 @@ import { Spinner } from "../spinner/spinner";
 
 const App: FunctionComponent = () => {
   const dispatch: any = useAppDispatch();
-  const { dataOrderNumber }: any = useAppSelector((store: TStateReducer) => store.dataNumberCard);
+  const dataOrderNumber: any = useAppSelector((store: TStateReducer) => store.dataNumberCard);
   const history = useHistory();
   const location = useLocation<TLocationState>();
   const backgroundApp = location.state && location.state.background;
 
-  console.log(dataOrderNumber)
   const handleModalClose = () => history.goBack();
 
   useEffect(() => {

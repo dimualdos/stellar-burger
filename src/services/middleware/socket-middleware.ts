@@ -102,7 +102,6 @@ export const createSocketMiddleware = (wsActions: TwsActionTypes): Middleware<{}
             } = wsActions
 
             if (connect.match(action)) {
-                console.log('Websocket connect')
                 url = action.payload
                 socket = new WebSocket(url)
                 isConnected = true
@@ -127,7 +126,6 @@ export const createSocketMiddleware = (wsActions: TwsActionTypes): Middleware<{}
 
                 socket.onclose = (event) => {
                     if (event.code !== 1000) {
-                        console.log('error')
                         dispatch(wsError(event.code.toString()))
                     }
 
@@ -137,11 +135,9 @@ export const createSocketMiddleware = (wsActions: TwsActionTypes): Middleware<{}
                             dispatch(connect(url))
                         }, 3000)
                     }
-                    // console.log('socket close')
                 }
 
                 if (disconnect.match(action)) {
-                    console.log('Websocket disconnect')
                     window.clearTimeout(reconnectTimer)
                     isConnected = false
                     reconnectTimer = 0
@@ -170,7 +166,6 @@ export const createSocketMiddlewareProfileOrders = (wsActions: TwsActionTypes): 
             } = wsActions
 
             if (connect.match(action)) {
-                console.log('Websocket connect')
                 url = action.payload
                 socket = new WebSocket(url)
                 isConnected = true
@@ -195,7 +190,6 @@ export const createSocketMiddlewareProfileOrders = (wsActions: TwsActionTypes): 
 
                 socket.onclose = (event) => {
                     if (event.code !== 1000) {
-                        console.log('error')
                         dispatch(wsError(event.code.toString()))
                     }
 
@@ -205,11 +199,9 @@ export const createSocketMiddlewareProfileOrders = (wsActions: TwsActionTypes): 
                             dispatch(connect(url))
                         }, 3000)
                     }
-                    // console.log('socket close')
                 }
 
                 if (disconnect.match(action)) {
-                    console.log('Websocket disconnect')
                     window.clearTimeout(reconnectTimer)
                     isConnected = false
                     reconnectTimer = 0

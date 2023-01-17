@@ -35,11 +35,6 @@ export type TwsOrdersList = {
 
 
 export type TProductItem = {
-    // map(arg0?: (item: any) => void): ReactNode;
-    // length?: number;
-    // slice(arg0?: number, arg1?: number): unknown;
-    // reduce(arg0?: any, arg1?: any): unknown;
-    // push(ingredient?: TProductItem): unknown;
     id?: Key | null | number;
     _id?: any;
     calories?: number;
@@ -55,14 +50,6 @@ export type TProductItem = {
     __v?: number;
 };
 
-
-// export type TLocation = {
-//     hash: string;
-//     key?: string;
-//     pathname: string;
-//     search: string;
-//     state: TLocationState;
-// };
 export type TLocationState = {
     from?: string;
     background: Location;

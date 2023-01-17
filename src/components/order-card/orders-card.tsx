@@ -13,7 +13,6 @@ import styles from './order-card.module.css';
 
 export const OrderCard: FunctionComponent = (value) => {
     const { name, number, updatedAt, ingredients, status }: TWSOrder = value;
-    // console.log(ingredients)
     const { items }: any = useAppSelector((store: TStateReducer) => store.ingredients);
     const maxIngredients = 6;
     const location = useLocation();
@@ -27,10 +26,8 @@ export const OrderCard: FunctionComponent = (value) => {
         const ingredientsInfo = ingredients!.reduce((acc: any[], item: any): any => {
             const ingredient = items.find((ingr: { _id: number; }) => ingr._id === item);
             if (ingredient) acc.push(ingredient);
-            // console.log(acc)
             return acc;
         }, []);
-        // console.log(ingredientsInfo)
         const totalPriceCard = ingredientsInfo.reduce((acc: any, item: any) => {
             return acc + item.price;
         }, 0);
@@ -47,7 +44,6 @@ export const OrderCard: FunctionComponent = (value) => {
     }, [ingredients, items, value])
 
     if (!orderInfo) return null;
-    //console.log(orderInfo)
 
     const onIngredientClick = (value: any) => {
         dispatch({ type: SET_INGREDIENT_MODAL, payload: orderInfo })

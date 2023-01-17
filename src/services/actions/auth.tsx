@@ -260,7 +260,6 @@ export const getNewPassword = (data: string) => {
             });
             recoveryPass(data)
                 .then((res) => {
-                    console.log(res)
                     dispatch({
                         type: GET_NEW_PASSWORD_SUCCESS,
                         payload: res.message,
