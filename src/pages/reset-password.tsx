@@ -1,5 +1,5 @@
 
-import { useCallback, FormEvent } from 'react';
+import { useCallback, FormEvent, FunctionComponent } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { getNewPassword } from '../services/actions/auth';
@@ -10,9 +10,9 @@ import { useForm, useAppDispatch } from '../hooks/hooks';
 import styles from './css/page.module.css';
 
 
-export function ResetPass() {
+export const ResetPass: FunctionComponent = () => {
 
-    const dispatch = useAppDispatch();
+    const dispatch: any = useAppDispatch();
     const { values, handleChange } = useForm({ password: '', token: '' });
 
     const { passwordData } = useSelector((state: TStateReducer) => state.user);

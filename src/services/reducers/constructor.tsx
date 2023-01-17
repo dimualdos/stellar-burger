@@ -1,17 +1,23 @@
+import { TApplicationActions } from '../types';
 import {
     CONSTRUCTOR_ADD,
     CONSTRUCTOR_DELETE,
     CONSTRUCTOR_REORDER,
     CONSTRUCTOR_RESET
-} from '../actions/constructor';
+} from '../constants/constructor-constant';
 
-const initialState = {
+export type TInitialStateConstructor = {
+    bun: null | Object;
+    ingredients: Object[];
+}
+
+const initialState: TInitialStateConstructor = {
     bun: null,
     ingredients: [],
 }
 
 
-export const constructorReducer = (state = initialState, action) => {
+export const constructorReducer = (state = initialState, action: TApplicationActions) => {
 
     switch (action.type) {
         case CONSTRUCTOR_ADD: {

@@ -1,0 +1,152 @@
+.mainContainer {
+    display: flex;
+    flex-direction: row;
+    max-width: 1250px;
+    justify-content: space-between;
+    margin: 0 auto;
+}
+
+.leftContainer {
+    max-width: 600px;
+    height: 80vh;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.rightConainer {
+    composes: leftContainer;
+    margin-left: 60px;
+    gap: 24px;
+    align-self: stretch;
+}
+
+.header {
+    font-family: 'JetBrains Mono', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 40px;
+    color: #F2F2F3;
+}
+
+.orderBoard {
+    margin-top: 40px;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 0px;
+    max-width: 580px;
+    max-height: 206px;
+}
+
+.doneBoard {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+    width: 272px;
+    height: 206px;
+}
+
+.headerDone {
+    max-width: 280px;
+    height: 30px;
+    font-family: 'JetBrains Mono', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 30px;
+    display: flex;
+    align-items: center;
+    color: #F2F2F3;
+}
+
+.headerOrdersBoard {
+    composes: headerDone;
+    max-width: 584px;
+}
+
+.doneBoardUL {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 8px;
+    max-width: 272px;
+    max-height: 152px;
+    align-self: stretch;
+    margin-bottom: 0;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    border-radius: 0px;
+    margin-right: 30px;
+}
+
+/* .doneBoardUL::-webkit-scrollbar {
+    width: 8px;
+    background: #2F2F37;
+}
+
+.doneBoardUL::-webkit-scrollbar-thumb {
+    left: 0px;
+    right: 0px;
+    top: 0px;
+    bottom: 2px;
+    background: #8585AD;
+    border: 3px solid #8585AD;
+} */
+
+
+li,
+p {
+    margin: 0;
+    padding: 0;
+}
+
+.listDone {
+    max-width: 272px;
+    height: 24px;
+    font-family: 'Iceland', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 28px;
+    line-height: 24px;
+    display: flex;
+    align-items: center;
+    color: #00CCCC;
+    align-self: stretch;
+}
+
+.listWork {
+    composes: listDone;
+    color: #F2F2F3;
+}
+
+.comletedRow {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+    width: 580px;
+    height: 150px;
+}
+
+
+
+.textComletedRow {
+    font-family: 'Iceland', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 144px;
+    line-height: 120px;
+    align-items: center;
+    color: #F2F2F3;
+    text-shadow: 0px 0px 16px rgba(51, 51, 255, 0.25), 0px 0px 8px rgba(51, 51, 255, 0.25), 0px 4px 32px rgba(51, 51, 255, 0.5);
+    align-self: stretch;
+}
+
+.divSpinner {
+    display: flex;
+}

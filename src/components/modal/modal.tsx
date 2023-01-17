@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import ModalOverlay from '../modal-overlay/modal-overlay';
 import styles from './modal.module.css';
+import { useRouteMatch } from 'react-router-dom';
 
 const modalItems: HTMLElement | null = document.getElementById('modals');
 
@@ -28,11 +29,32 @@ const Modal: FC<TModal> = ({ title, children, onClose, overlay = true }) => {
             modalItems!.classList.remove('modalWrapper');
 
         }
-    }, [onClose])
+    }, [onClose]);
+    const routeMach = useRouteMatch();
 
     return ReactDOM.createPortal(
-        <>
-            <div className={styles.modal}>
+        <> {routeMach.path === `/feed/:number` || routeMach.path === `/profile/orders/:number` ? (
+            <section className={styles.modalNumber}>
+                <div className={styles.headerRow}>
+                    <div className={styles.headerNumber}>
+                        <div className={styles.orderID}>
+                            #{title}
+                        </div>
+                    </div>
+                    <button type='button'
+                        className={styles.icon1}
+                        onClick={onClose}>
+                        <CloseIcon type="primary" />
+                    </button>
+
+                </div>
+
+                <div className={styles.content}>{children}</div>
+
+            </section>
+
+        ) : (
+            <section className={styles.modal}>
                 <div className={styles.header}>
                     <div className={styles.title}>
                         {title}
@@ -46,7 +68,10 @@ const Modal: FC<TModal> = ({ title, children, onClose, overlay = true }) => {
                 </div>
                 <div className={styles.content}>{children}</div>
 
-            </div>
+            </section>
+
+        )}
+
             {overlay ? (<ModalOverlay onClose={onClose} />) : null}
 
         </>, modalItems!

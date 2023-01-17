@@ -3,13 +3,12 @@ import { useDispatch } from 'react-redux';
 import { useRef } from 'react';
 import { useDrop, useDrag, XYCoord } from "react-dnd";
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import { CONSTRUCTOR_DELETE, CONSTRUCTOR_REORDER } from '../../../services/actions/constructor';
-import { TProductItem } from '../../../utils/types';
+import { CONSTRUCTOR_DELETE, CONSTRUCTOR_REORDER } from '../../../services/constants/constructor-constant';
 import styles from './components-constructor.module.css';
 
 
 type TCardProps = {
-  item: TProductItem;
+  item: any;
   index: number;
 }
 
@@ -30,7 +29,6 @@ const ComponentsContructor: FC<TCardProps> = ({ item, index }) => {
       if (!ref.current) {
         return;
       }
-      console.log(dragItem)
       const dragIndex = dragItem.index;
       const hoverIndex = index;
 

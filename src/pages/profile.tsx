@@ -9,7 +9,7 @@ import styles from './css/profile.module.css';
 
 
 export const LeftSectionInProfile: FunctionComponent = () => {
-    const dispatch = useAppDispatch();
+    const dispatch: any = useAppDispatch();
     let onLogout = (e: MouseEvent<HTMLAnchorElement>) => {
         e.preventDefault();
         dispatch(logoutAuth());
@@ -43,14 +43,14 @@ export const LeftSectionInProfile: FunctionComponent = () => {
 }
 
 
-export const Profile = () => {
+export const Profile: FunctionComponent = () => {
     const { data } = useSelector((state: TStateReducer) => state.user);
 
     const { values, handleChange } = useForm({ email: `${data ? (data.email) : ('')}`, password: `${data ? (data.password) : ('')}`, name: `${data ? (data.name) : ('')}` });
 
     return (
         <section className={styles.section}>
-            <div className={styles.container}>
+            <div className={styles.leftContainer}>
                 <LeftSectionInProfile />
                 <form
                     className={styles.form}>

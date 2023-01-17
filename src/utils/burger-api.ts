@@ -1,6 +1,9 @@
-import { getCookie, setCookie } from './cooke';
+import { cookieWithoutBearer, getCookie, setCookie } from './cooke';
 
 export const _BASE_URL: string = 'https://norma.nomoreparties.space/api';
+export const WS_ORDERS_FEED: string = 'wss://norma.nomoreparties.space/orders/all';
+export const WS_ORDERS_USER: string = `wss://norma.nomoreparties.space/orders?token=${cookieWithoutBearer}`;
+
 const request = async (url: RequestInfo | URL, option?: RequestInit | undefined) => {
     const res = await fetch(url, option);
     if (!res.ok) {
@@ -18,6 +21,7 @@ export const getResourse = async () => {
     const res = await request(`${_BASE_URL}/ingredients`);
     return await res;
 }
+
 
 export const refreshToken = async () => {
     const res = await request(`${_BASE_URL}/auth/token`, {
@@ -73,8 +77,8 @@ export const loginRequest = async (form: string) => {
     //    
 };
 
-export const postOrder = (data: string) => {
-    return fetchWithRefresh(`${_BASE_URL}/orders`, {
+export const postOrder = async (data: string) => {
+    const data_1 = await fetchWithRefresh(`${_BASE_URL}/orders`, {
         method: "POST",
         headers: {
             'Content-Type': 'application/json;charset=utf-8',
@@ -82,19 +86,19 @@ export const postOrder = (data: string) => {
         },
 
         body: JSON.stringify(data)
-    })
-        .then(data => {
-            if (data?.success) return data;
-            return Promise.reject(data)
-        });
+    });
+    if (data_1?.success)
+        return data_1;
+    return Promise.reject(data_1);
 }
 
-export const getOrderByNumber = async (number: number) => {
+export const getOrderByNumber = async (number: string) => {
     const res = await request(`${_BASE_URL}/orders/${number}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
         },
+
     });
     return await res;
 }

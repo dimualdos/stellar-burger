@@ -1,17 +1,63 @@
-import thunk from 'redux-thunk';
+//import thunk from 'redux-thunk';
 import { configureStore } from '@reduxjs/toolkit';
 import { rootReducer } from './reducers/index';
+import { createSocketMiddleware, createSocketMiddlewareProfileOrders } from './middleware/socket-middleware';
+
+import {
+  wsConnect as WSConnect,
+  wsConnecting as WSConnecting,
+  wsOpen as WSOpen,
+  wsClose as WSClose,
+  wsMessage as WSMessage,
+  wsDisconnect as WSDisconnect,
+  wsError as WSError,
+  wsConnectProfile as WSConnectProfile,
+  wsConnectingProfile as WSConnectingProfile,
+  wsOpenProfile as WSOpenProfile,
+  wsCloseProfile as WSCloseProfile,
+  wsMessageProfile as WSMessageProfile,
+  wsDisconnectProfile as WSDisconnectProfile,
+  wsErrorProfile as WSErrorProfile
+} from "./actions/ws-actions";
 
 
-const store = configureStore({
+
+const wsActions = {
+  connect: WSConnect,
+  wsConnecting: WSConnecting,
+  wsOpen: WSOpen,
+  wsMessage: WSMessage,
+  wsClose: WSClose,
+  disconnect: WSDisconnect,
+  wsError: WSError,
+};
+
+const wsActionsProfile = {
+  connect: WSConnectProfile,
+  wsConnecting: WSConnectingProfile,
+  wsOpen: WSOpenProfile,
+  wsMessage: WSMessageProfile,
+  wsClose: WSCloseProfile,
+  disconnect: WSDisconnectProfile,
+  wsError: WSErrorProfile,
+};
+
+const websocketMiddleware: any = createSocketMiddleware(wsActions);
+const websocketMiddleware1: any = createSocketMiddlewareProfileOrders(wsActionsProfile);
+
+
+export const store = configureStore({
   reducer: rootReducer,
-  middleware: [thunk],
-  devTools: true,
-});
+  middleware: (getDefaultMiddleware) => {
+    return getDefaultMiddleware().concat(
+      websocketMiddleware,
+      websocketMiddleware1
+    )
+  },
+  devTools: true
+})
+
+
 export default store;
 
 
-// Infer the `RootState` and `AppDispatch` types from the store itself
-export type RootState = ReturnType<typeof store.getState>
-// Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
-export type AppDispatch = typeof store.dispatch

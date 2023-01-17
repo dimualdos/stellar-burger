@@ -1,29 +1,25 @@
 import { useEffect, FunctionComponent } from "react";
 import { Switch, Route, useHistory, useLocation } from "react-router-dom";
-import { useAppDispatch } from '../../hooks/hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { getItems } from "../../services/actions/ingredients";
 import { updateToken } from "../../services/actions/auth";
 import IngredientDetails from '../ingredient-details/ingredient-details';
 import Modal from "../modal/modal";
 import AppHeader from '../app-header/header';
 import { ProtectedRoute } from "../protected-route/protected-route";
-import { Profile, LoginPage, ResetPass, Register, ForgotPass, NotFound404, MainPage, Orders } from "../../pages";
+import { Profile, LoginPage, ResetPass, Register, ForgotPass, NotFound404, MainPage, OrdersProfile, FeedPage } from "../../pages";
 import styles from './app.module.css';
-import { TLocationState } from '../../utils/types'
-
-
-
-
+import { TLocationState } from '../../utils/types';
+import { OrderID } from "../../pages/order-id";
+import { TStateReducer } from "../../services/reducers";
+import { Spinner } from "../spinner/spinner";
 
 const App: FunctionComponent = () => {
-  const dispatch = useAppDispatch();
+  const dispatch: any = useAppDispatch();
+  const dataOrderNumber: any = useAppSelector((store: TStateReducer) => store.dataNumberCard);
   const history = useHistory();
   const location = useLocation<TLocationState>();
   const backgroundApp = location.state && location.state.background;
-  // const orderNum = useRouteMatch([
-  //   '/profile/orders/:number',
-  //   '/feed/:number',
-  // ])?.params?.number;
 
   const handleModalClose = () => history.goBack();
 
@@ -41,7 +37,16 @@ const App: FunctionComponent = () => {
             <Profile />
           </ProtectedRoute>
           <ProtectedRoute path="/profile/orders" exact={true}>
-            <Orders />
+            <OrdersProfile />
+          </ProtectedRoute>
+          <ProtectedRoute path='/profile/orders/:number' exact  >
+            {dataOrderNumber ? (
+              <div className={styles.ingredientWrapper}>
+                <div className={styles.orderID}>
+                  {`#${dataOrderNumber.number}`}
+                </div>
+                <OrderID />
+              </div>) : (<div className={styles.spinner}><Spinner /></div>)}
           </ProtectedRoute>
           <ProtectedRoute onlyUnAuth={true} path="/login" exact>
             <LoginPage />
@@ -55,7 +60,17 @@ const App: FunctionComponent = () => {
           <ProtectedRoute onlyUnAuth={true} path="/reset-password" exact>
             <ResetPass />
           </ProtectedRoute>
+          <Route path={'/feed/:number'} exact>
+            {dataOrderNumber ? (
+              <div className={styles.ingredientWrapper}>
+                <div className={styles.orderID}>
+                  {`#${dataOrderNumber.number}`}
+                </div>
+                <OrderID />
+              </div>
+            ) : <Spinner />}
 
+          </Route>
           <Route path={`/ingredients/:id`} exact>
             <div className={styles.ingredientWrapper}>
               <p className={styles.ingredientTitle}>Детали ингредиента</p>
@@ -63,6 +78,9 @@ const App: FunctionComponent = () => {
             </div>
           </Route>
 
+          <Route path="/feed" exact>
+            <FeedPage />
+          </Route>
 
           <Route path="/" exact>
             <MainPage />
@@ -81,20 +99,24 @@ const App: FunctionComponent = () => {
               </Modal>
             </div>
           </Route>
-          {/* <ProtectedRoute
-              path='/profile/orders/:orderNumber'
-              exact >
-              <Modal onClose={handleModalClose}>
-                <OrderInfo />
+          <ProtectedRoute path='/profile/orders/:number' exact >
+            {dataOrderNumber && (
+              <Modal onClose={handleModalClose} title={dataOrderNumber.number} overlay={true}>
+                <OrderID />
               </Modal>
-            </ProtectedRoute>
-            <Route
-              path='/feed/number'
-              exact >
-              <Modal onClose={handleModalClose}>
-                <OrderInfo />
+            )}
+
+          </ProtectedRoute>
+          <Route path='/feed/:number' exact >
+            {dataOrderNumber && (
+              <Modal onClose={handleModalClose} title={dataOrderNumber.number} overlay={true}>
+                <OrderID />
               </Modal>
-            </Route> */}
+            )
+
+            }
+
+          </Route>
         </>
       )
       }

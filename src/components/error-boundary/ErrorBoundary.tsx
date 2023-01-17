@@ -13,7 +13,6 @@ class ErrorBoundary extends Component<IErrorProps> {
     }
 
     componentDidCatch(error: any, errorInfo: any) {
-        console.log(error, errorInfo);
         this.setState({
             error: true
         })

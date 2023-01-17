@@ -46,7 +46,6 @@ const TemlateBurger = React.forwardRef<HTMLHeadingElement, TTemplateProps>(({
                                 onClick={onIngredientClick}
                                 key={value._id}
                                 count={ingredientCount[value._id]}
-                            // id={value._id}
                             />
                         )
                     })}

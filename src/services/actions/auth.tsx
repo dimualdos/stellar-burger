@@ -1,36 +1,125 @@
 import { registerUserRequest, loginRequest, getUserRequest, logoutRequest, resetPass, recoveryPass, fetchWithRefresh } from '../../utils/burger-api';
 import { _BASE_URL } from '../../utils/burger-api';
 import { deleteCookie, setCookie, getCookie } from '../../utils/cooke';
-import { Dispatch } from 'redux';
 
-export const REGISTER_USER_REQUEST = 'REGISTER/USER/REQUEST';
-export const REGISTER_USER_SUCCESS = 'REGISTER/USER/SUCCESS';
-export const REGISTER_USER_FAILED = 'REGISTER/USER/FAILED';
+import {
+    REGISTER_USER_REQUEST,
+    REGISTER_USER_SUCCESS,
+    REGISTER_USER_FAILED,
+    LOGIN_USER_REQUEST,
+    LOGIN_USER_SUCCESS,
+    LOGIN_USER_FAILED,
+    UPDATE_USER_DATA_REQUEST,
+    UPDATE_USER_DATA_SUCCESS,
+    UPDATE_USER_DATA_FAILED,
+    RESET_PASSWORD_REQUEST,
+    RESET_PASSWORD_SUCCESS,
+    RESET_PASSWORD_FAILED,
+    GET_NEW_PASSWORD_REQUEST,
+    GET_NEW_PASSWORD_SUCCESS,
+    GET_NEW_PASSWORD_FAILED,
+    REFRESH_TOKEN_REQUEST,
+    REFRESH_TOKEN_SUCCESS,
+    REFRESH_TOKEN_FAILED,
+    USER_LOGOUT
+} from '../constants/auth'
 
-export const LOGIN_USER_REQUEST = 'LOGIN_USER_REQUEST';
-export const LOGIN_USER_SUCCESS = 'LOGIN_USER__SUCCESS';
-export const LOGIN_USER_FAILED = 'LOGIN_USER_FAILED';
+// Типизация экшенов
+export interface IRegisterUserRequestAction {
+    readonly type: typeof REGISTER_USER_REQUEST;
+}
+export interface IRegisterUserSuccessAction {
+    readonly type: typeof REGISTER_USER_SUCCESS;
+}
+export interface IRegisterUserFailedAction {
+    readonly type: typeof REGISTER_USER_FAILED;
+}
 
-export const UPDATE_USER_DATA_REQUEST = 'UPDATE/USER/DATA/REQUEST';
-export const UPDATE_USER_DATA_FAILED = 'UPDATE/USER/DATA/FAILED';
-export const UPDATE_USER_DATA_SUCCESS = 'UPDATE/USER/DATA/SUCCESS';
+export interface ILoginUserRequestAction {
+    readonly type: typeof LOGIN_USER_REQUEST;
+}
+export interface ILoginUserSuccessAction {
+    readonly type: typeof LOGIN_USER_SUCCESS;
+    readonly payload: string;
+}
+export interface ILoginUserFailedAction {
+    readonly type: typeof LOGIN_USER_FAILED;
+}
 
-export const RESET_PASSWORD_REQUEST = 'RESET/PASSWORD/REQUEST';
-export const RESET_PASSWORD_SUCCESS = 'RESET/PASSWORD/SUCCESS';
-export const RESET_PASSWORD_FAILED = 'RESET/PASSWORD/FAILED';
+export interface IUdateUserRequestAction {
+    readonly type: typeof UPDATE_USER_DATA_REQUEST;
+}
+export interface IUdateUserSuccessAction {
+    readonly type: typeof UPDATE_USER_DATA_SUCCESS;
+    readonly user: Object;
+}
+export interface IUdateUserFailedAction {
+    readonly type: typeof UPDATE_USER_DATA_FAILED;
+}
 
-export const GET_NEW_PASSWORD_REQUEST = 'GET_NEW/PASSWORD/REQUEST';
-export const GET_NEW_PASSWORD_SUCCESS = 'GET_NEW/PASSWORD/SUCCESS';
-export const GET_NEW_PASSWORD_FAILED = 'GET/NEW/PASSWORD/FAILED';
+export interface IResetPasswordRequestAction {
+    readonly type: typeof RESET_PASSWORD_REQUEST;
+}
+export interface IResetPasswordSuccessAction {
+    readonly payload: string;
+    readonly type: typeof RESET_PASSWORD_SUCCESS;
+}
+export interface IResetPasswordFailedAction {
+    readonly type: typeof RESET_PASSWORD_FAILED;
+}
 
-export const REFRESH_TOKEN_REQUEST = 'REFRESH/TOKEN/REQUEST';
-export const REFRESH_TOKEN_SUCCESS = 'REFRESH/TOKEN/SUCCESS';
-export const REFRESH_TOKEN_FAILED = 'REFRESH/TOKEN/FAILED';
+export interface IGetNewPasswordRequestAction {
+    readonly type: typeof GET_NEW_PASSWORD_REQUEST;
+}
+export interface IGetNewPasswordSuccessAction {
+    readonly payload: string;
+    readonly type: typeof GET_NEW_PASSWORD_SUCCESS;
+}
+export interface IGetNewPasswordFailedAction {
+    readonly type: typeof GET_NEW_PASSWORD_FAILED;
+}
 
-export const USER_LOGOUT = 'USER/LOGOUT';
+export interface IRefreshTokenRequestAction {
+    readonly type: typeof REFRESH_TOKEN_REQUEST;
+}
+export interface IRefreshTokenSuccessAction {
+    payload: any;
+    readonly type: typeof REFRESH_TOKEN_SUCCESS;
+}
+export interface IRefreshTokenFailedAction {
+    readonly type: typeof REFRESH_TOKEN_FAILED;
+}
 
-export const loginUser = (userData) => {
-    return async (dispatch) => {
+export interface IUserLogout {
+    readonly type: typeof USER_LOGOUT;
+}
+
+export type TUserActions =
+    | IRegisterUserRequestAction
+    | IRegisterUserSuccessAction
+    | IRegisterUserFailedAction
+    | ILoginUserRequestAction
+    | ILoginUserSuccessAction
+    | ILoginUserFailedAction
+    | IUdateUserRequestAction
+    | IUdateUserSuccessAction
+    | IUdateUserFailedAction
+    | IResetPasswordRequestAction
+    | IResetPasswordSuccessAction
+    | IResetPasswordFailedAction
+    | IGetNewPasswordRequestAction
+    | IGetNewPasswordSuccessAction
+    | IGetNewPasswordFailedAction
+    | IRefreshTokenRequestAction
+    | IGetNewPasswordSuccessAction
+    | IGetNewPasswordFailedAction
+    | IRefreshTokenRequestAction
+    | IRefreshTokenSuccessAction
+    | IRefreshTokenFailedAction
+    | IUserLogout;
+
+export const loginUser = (userData: string) => {
+    return async (dispatch: (arg0: TUserActions) => void) => {
         dispatch({
             type: LOGIN_USER_REQUEST
         });
@@ -54,7 +143,7 @@ export const loginUser = (userData) => {
 }
 
 export const updateToken = () => {
-    return async (dispatch) => {
+    return async (dispatch: (arg0: TUserActions) => void) => {
         try {
             dispatch({
                 type: REFRESH_TOKEN_REQUEST
@@ -76,8 +165,8 @@ export const updateToken = () => {
     }
 }
 
-export const getUserData = (methodType, userData) => {
-    return async (dispatch) => {
+export const getUserData = (methodType: string, userData: Object) => {
+    return async (dispatch: (arg0: TUserActions) => void) => {
         const accessToken = getCookie('accessToken');
 
         try {
@@ -110,7 +199,7 @@ export const getUserData = (methodType, userData) => {
 }
 
 export const logoutAuth = () => {
-    return async (dispatch) => {
+    return async (dispatch: (arg0: TUserActions) => void) => {
         try {
             await logoutRequest();
             localStorage.clear();
@@ -122,7 +211,7 @@ export const logoutAuth = () => {
     }
 }
 
-export const registerUser = (data) => async (dispatch) => {
+export const registerUser = (data: string) => async (dispatch: (arg0: TUserActions) => void) => {
     try {
         dispatch({
             type: REGISTER_USER_REQUEST,
@@ -142,7 +231,7 @@ export const registerUser = (data) => async (dispatch) => {
 }
 
 export const restorePassword = (form: string) => {
-    return async (dispatch) => {
+    return async (dispatch: (arg0: TUserActions) => void) => {
         try {
             dispatch({
                 type: RESET_PASSWORD_REQUEST
@@ -163,15 +252,14 @@ export const restorePassword = (form: string) => {
     }
 }
 
-export const getNewPassword = (data) => {
-    return async (dispatch) => {
+export const getNewPassword = (data: string) => {
+    return async (dispatch: (arg0: TUserActions) => void) => {
         try {
             dispatch({
                 type: GET_NEW_PASSWORD_REQUEST
             });
             recoveryPass(data)
                 .then((res) => {
-                    console.log(res)
                     dispatch({
                         type: GET_NEW_PASSWORD_SUCCESS,
                         payload: res.message,

@@ -19,4 +19,23 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 40px;
+}
+
+.orderID {
+  max-width: 640px;
+  height: 24px;
+  font-family: 'Iceland', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 28px;
+  line-height: 24px;
+  align-items: center;
+  text-align: center;
+  color: #F2F2F3;
+  margin-bottom: 40px;
+}
+
+.spinner {
+  display: flex;
 }

@@ -1,5 +1,5 @@
 
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useState, useMemo, useEffect, FunctionComponent } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
@@ -8,12 +8,13 @@ import { Spinner } from '../spinner/spinner';
 import { SET_INGREDIENT_MODAL } from "../../services/actions/ingredient-detail-modal";
 import { TStateReducer } from '../../services/reducers';
 import styles from './burger-ingridients.module.css';
+import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 
 
 
 export const NewsItems: any = () => {
-    const { items, itemsRequest, itemsFailed } = useSelector((state: TStateReducer) => state.ingredients);
-    const dispatch = useDispatch();
+    const { items, itemsRequest, itemsFailed }: any = useAppSelector((state: TStateReducer) => state.ingredients);
+    const dispatch = useAppDispatch();
 
     const [current, setCurrent] = useState('buns');
 

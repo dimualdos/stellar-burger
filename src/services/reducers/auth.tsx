@@ -1,60 +1,101 @@
 
-import {
+import { TUserActions } from '../actions/auth';
 
+import {
     REGISTER_USER_REQUEST,
     REGISTER_USER_SUCCESS,
     REGISTER_USER_FAILED,
-
     LOGIN_USER_REQUEST,
     LOGIN_USER_SUCCESS,
     LOGIN_USER_FAILED,
-
     UPDATE_USER_DATA_REQUEST,
     UPDATE_USER_DATA_FAILED,
     UPDATE_USER_DATA_SUCCESS,
-
     RESET_PASSWORD_REQUEST,
     RESET_PASSWORD_SUCCESS,
     RESET_PASSWORD_FAILED,
-
     GET_NEW_PASSWORD_REQUEST,
     GET_NEW_PASSWORD_SUCCESS,
     GET_NEW_PASSWORD_FAILED,
-
     REFRESH_TOKEN_REQUEST,
     REFRESH_TOKEN_SUCCESS,
     REFRESH_TOKEN_FAILED,
-
     USER_LOGOUT
+} from '../constants/auth';
 
-} from '../actions/auth';
+type TUserData = {
+    name: string;
+    email: string;
+    login: string;
+    password: string;
+    newPassword: string;
+}
 
-export const initialState = {
+export type TInitialStateAuth = {
+    data: any,
+
+    registerUserRequest: boolean,
+    registerUserError: boolean | string,
+
+    loginUserRequest: boolean,
+    loginUserError: boolean | string,
+    loginUserFailed: boolean,
+
+    updateUserRequest: boolean,
+    updateUserError: boolean | string,
+
+    resetPasswordRequest: boolean,
+    resetPasswordFailed: boolean,
+    passwordData: boolean | string,
+
+    refreshTokenRequest: boolean,
+    refreshTokenFailed: boolean,
+
+    newPasswordRequest: boolean,
+    newPasswordFailed: boolean,
+    newPasswordData: boolean | string,
+    registerUserFailed: boolean,
+    userDataRequest: boolean,
+    userDataFailed: boolean
+}
+
+export const initialState: TInitialStateAuth = {
+    // data: {
+    //     name: '',
+    //     email: '',
+    //     login: '',
+    //     password: '',
+    //     newPassword: '',
+    // },
     data: null,
 
     registerUserRequest: false,
-    registerUserError: null,
+    registerUserError: false,
 
     loginUserRequest: false,
-    loginUserError: null,
+    loginUserError: false,
+    loginUserFailed: false,
 
     updateUserRequest: false,
-    updateUserError: null,
+    updateUserError: false,
 
     resetPasswordRequest: false,
     resetPasswordFailed: false,
-    passwordData: null,
+    passwordData: false,
 
     refreshTokenRequest: false,
     refreshTokenFailed: false,
 
     newPasswordRequest: false,
     newPasswordFailed: false,
-    newPasswordData: null
+    newPasswordData: false,
+    registerUserFailed: false,
+    userDataRequest: false,
+    userDataFailed: false
 }
 
 
-export const authReducer = (state = initialState, action) => {
+export const authReducer = (state = initialState, action: TUserActions): TInitialStateAuth => {
     switch (action.type) {
         case USER_LOGOUT: {
             return {
@@ -66,7 +107,7 @@ export const authReducer = (state = initialState, action) => {
             return {
                 ...state,
                 registerUserRequest: true,
-                registerUserError: null,
+                registerUserError: false,
             };
         }
         case REGISTER_USER_SUCCESS: {
@@ -155,7 +196,7 @@ export const authReducer = (state = initialState, action) => {
                 ...state,
                 resetPasswordRequest: false,
                 resetPasswordFailed: true,
-                passwordData: null,
+                passwordData: false,
             }
         }
 
@@ -180,7 +221,7 @@ export const authReducer = (state = initialState, action) => {
                 ...state,
                 newPasswordRequest: false,
                 newPasswordFailed: true,
-                newPasswordData: null,
+                newPasswordData: false,
             }
         }
 

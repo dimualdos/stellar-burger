@@ -12,7 +12,7 @@ import styles from './css/page.module.css';
 
 export const ForgotPass: FunctionComponent = () => {
     const { values, handleChange } = useForm({ email: '' });
-    const dispatch = useAppDispatch();
+    const dispatch: any = useAppDispatch();
     const history = useHistory();
     const { passwordData } = useSelector((state: TStateReducer) => state.user);
 

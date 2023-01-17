@@ -11,7 +11,7 @@ import styles from './css/page.module.css';
 
 
 export const LoginPage: FunctionComponent = () => {
-    const dispatch = useAppDispatch();
+    const dispatch: any = useAppDispatch();
     const { values, handleChange } = useForm({ email: '', password: '' });
 
     const { loginUserRequest } = useSelector((state: TStateReducer) => state.user);
