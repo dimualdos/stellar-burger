@@ -1,5 +1,5 @@
 import { TApplicationActions } from '../types';
-import { TProductItem } from '../../utils/types';
+import { TProductItem, TWSOrder } from '../../utils/types';
 
 import {
     ORDER_NUMBER_REQUEST,
@@ -12,13 +12,13 @@ import {
 export type TInitialStateIngredients = {
     itemsRequest: boolean,
     itemsFailed: boolean,
-    dataOrderNumber: TProductItem[];
+    dataOrderNumber: TWSOrder[];
 }
 
 export const initialState: TInitialStateIngredients = {
     itemsRequest: false,
     itemsFailed: false,
-    dataOrderNumber: []
+    dataOrderNumber: [{}]
 }
 
 

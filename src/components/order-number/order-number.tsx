@@ -16,14 +16,14 @@ export const OrderNumber: FunctionComponent = () => {
     const dataOrderNumber: any = useAppSelector((store: TStateReducer) => store.dataNumberCard);
     const items: any = useAppSelector((store: TStateReducer) => store.ingredients);
     const maxIngredients = 6;
-    const result = formatRelative(new Date(`${dataOrderNumber.updatedAt}`), new Date(), { locale: ru });
-    // let { number }: { number: string } = useParams();
+    const result = formatRelative(new Date(`${dataOrderNumber.dataOrderNumber.updatedAt}`), new Date(), { locale: ru });
+
 
     const orderInfo = useMemo(() => {
-        if (!items.length && !dataOrderNumber) return null;
+        if (!items.length && !dataOrderNumber.dataOrderNumber) return null;
         const count: any = new Map();
-        const ingredientsInfo = dataOrderNumber.ingredients!.reduce((acc: any[], item: any): any => {
-            const ingredient = items.find((ingr: { _id: number; }) => ingr._id === item);
+        const ingredientsInfo = dataOrderNumber.dataOrderNumber!.ingredients!.reduce((acc: any[], item: any): any => {
+            const ingredient = items.items.find((ingr: { _id: number; }) => ingr._id === item);
             if (ingredient) acc.push(ingredient);
             if (ingredient && count.has(ingredient)) {
                 let num = 1;
@@ -54,8 +54,8 @@ export const OrderNumber: FunctionComponent = () => {
     return (
         <section >
             <header className={styles.orderHeader}>
-                <div className={styles.orderTitle}>{dataOrderNumber.name}</div>
-                {dataOrderNumber.status === 'done' ? (<p className={styles.orderStatus}>Выполнен</p>) : ((<p className={styles.orderStatus1}>Отменен</p>))}
+                <div className={styles.orderTitle}>{dataOrderNumber.dataOrderNumber.name}</div>
+                {dataOrderNumber.dataOrderNumber.status === 'done' ? (<p className={styles.orderStatus}>Выполнен</p>) : ((<p className={styles.orderStatus1}>Отменен</p>))}
             </header>
             <main>
                 <div className={styles.orderTitle}>

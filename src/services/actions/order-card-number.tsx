@@ -31,9 +31,10 @@ export const getDataOrderCard = (number: string) => {
         })
         getOrderByNumber(number).then(res => {
             if (res && res.success) {
+                // console.log(res.orders[0])
                 dispatch({
                     type: ORDER_NUMBER_SUCCESS,
-                    payload: res.orders[0]
+                    payload: res.orders[0],
                 })
             }
         }).catch(err => {

@@ -10,15 +10,16 @@ export const OrderID: FunctionComponent = () => {
     const dispatch: any = useAppDispatch();
     const dataOrderNumber: any = useAppSelector((store: TStateReducer) => store.dataNumberCard);
 
-    let number: string = useParams();
+    let number: { number: string } = useParams();
     useEffect(() => {
-        if (number) dispatch(getDataOrderCard(number));
+        if (number) dispatch(getDataOrderCard(number.number));
     }, [dispatch]);
+
 
 
     return (
         <div>
-            {dataOrderNumber && dataOrderNumber.ingredients && (
+            {dataOrderNumber.dataOrderNumber !== null && dataOrderNumber.dataOrderNumber.ingredients && (
                 <OrderNumber />
             )}
         </div>

@@ -23,6 +23,7 @@ const App: FunctionComponent = () => {
 
   const handleModalClose = () => history.goBack();
 
+
   useEffect(() => {
     dispatch(getItems());
     dispatch(updateToken());
@@ -43,7 +44,7 @@ const App: FunctionComponent = () => {
             {dataOrderNumber ? (
               <div className={styles.ingredientWrapper}>
                 <div className={styles.orderID}>
-                  {`#${dataOrderNumber.number}`}
+                  {dataOrderNumber.dataOrderNumber.number ? (`#${dataOrderNumber.dataOrderNumber.number}`) : (<Spinner />)}
                 </div>
                 <OrderID />
               </div>) : (<div className={styles.spinner}><Spinner /></div>)}
@@ -64,7 +65,7 @@ const App: FunctionComponent = () => {
             {dataOrderNumber ? (
               <div className={styles.ingredientWrapper}>
                 <div className={styles.orderID}>
-                  {`#${dataOrderNumber.number}`}
+                  {dataOrderNumber.dataOrderNumber.number ? (`#${dataOrderNumber.dataOrderNumber!.number!}`) : (<Spinner />)}
                 </div>
                 <OrderID />
               </div>
@@ -101,7 +102,7 @@ const App: FunctionComponent = () => {
           </Route>
           <ProtectedRoute path='/profile/orders/:number' exact >
             {dataOrderNumber && (
-              <Modal onClose={handleModalClose} title={dataOrderNumber.number} overlay={true}>
+              <Modal onClose={handleModalClose} title={dataOrderNumber.dataOrderNumber.number} overlay={true}>
                 <OrderID />
               </Modal>
             )}
@@ -109,7 +110,7 @@ const App: FunctionComponent = () => {
           </ProtectedRoute>
           <Route path='/feed/:number' exact >
             {dataOrderNumber && (
-              <Modal onClose={handleModalClose} title={dataOrderNumber.number} overlay={true}>
+              <Modal onClose={handleModalClose} title={dataOrderNumber.dataOrderNumber.number} overlay={true}>
                 <OrderID />
               </Modal>
             )
