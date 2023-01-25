@@ -1,4 +1,5 @@
 
+import { TResetPassMessage } from '../../utils/types';
 import { TUserActions } from '../actions/auth';
 
 import {
@@ -46,27 +47,20 @@ export type TInitialStateAuth = {
 
     resetPasswordRequest: boolean,
     resetPasswordFailed: boolean,
-    passwordData: boolean | string,
+    passwordData: null | string,
 
     refreshTokenRequest: boolean,
     refreshTokenFailed: boolean,
 
     newPasswordRequest: boolean,
     newPasswordFailed: boolean,
-    newPasswordData: boolean | string,
+    newPasswordData: null | string,
     registerUserFailed: boolean,
     userDataRequest: boolean,
     userDataFailed: boolean
 }
 
 export const initialState: TInitialStateAuth = {
-    // data: {
-    //     name: '',
-    //     email: '',
-    //     login: '',
-    //     password: '',
-    //     newPassword: '',
-    // },
     data: null,
 
     registerUserRequest: false,
@@ -81,14 +75,15 @@ export const initialState: TInitialStateAuth = {
 
     resetPasswordRequest: false,
     resetPasswordFailed: false,
-    passwordData: false,
+    passwordData: null,
 
     refreshTokenRequest: false,
     refreshTokenFailed: false,
 
+
     newPasswordRequest: false,
     newPasswordFailed: false,
-    newPasswordData: false,
+    newPasswordData: null,
     registerUserFailed: false,
     userDataRequest: false,
     userDataFailed: false
@@ -139,7 +134,12 @@ export const authReducer = (state = initialState, action: TUserActions): TInitia
         case LOGIN_USER_SUCCESS: {
             return {
                 ...state,
-                data: action.payload,
+                data: {
+                    ...state.data,
+                    name: action.data.name,
+                    email: action.data.email,
+                    password: ''
+                },
                 loginUserRequest: false,
                 loginUserFailed: false,
             }
@@ -165,6 +165,9 @@ export const authReducer = (state = initialState, action: TUserActions): TInitia
                 userDataFailed: false,
                 data: {
                     ...state.data,
+                    name: action.data.name,
+                    email: action.data.email,
+                    password: ''
                 }
             }
         }
@@ -196,7 +199,7 @@ export const authReducer = (state = initialState, action: TUserActions): TInitia
                 ...state,
                 resetPasswordRequest: false,
                 resetPasswordFailed: true,
-                passwordData: false,
+                passwordData: null,
             }
         }
 
@@ -221,7 +224,7 @@ export const authReducer = (state = initialState, action: TUserActions): TInitia
                 ...state,
                 newPasswordRequest: false,
                 newPasswordFailed: true,
-                newPasswordData: false,
+                newPasswordData: null,
             }
         }
 

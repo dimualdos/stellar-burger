@@ -18,7 +18,6 @@ export const OrderNumber: FunctionComponent = () => {
     const maxIngredients = 6;
     const result = formatRelative(new Date(`${dataOrderNumber.dataOrderNumber.updatedAt}`), new Date(), { locale: ru });
 
-
     const orderInfo = useMemo(() => {
         if (!items.length && !dataOrderNumber.dataOrderNumber) return null;
         const count: any = new Map();

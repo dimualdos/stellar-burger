@@ -45,7 +45,6 @@ const wsActionsProfile = {
 const websocketMiddleware: any = createSocketMiddleware(wsActions);
 const websocketMiddleware1: any = createSocketMiddlewareProfileOrders(wsActionsProfile);
 
-
 export const store = configureStore({
   reducer: rootReducer,
   middleware: (getDefaultMiddleware) => {

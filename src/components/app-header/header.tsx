@@ -11,7 +11,7 @@ import styles from './header.module.css';
 
 const AppHeader: FC<IProps> = () => {
     const isConstructor = useRouteMatch({ path: '/', exact: true });
-    const isFeed = useRouteMatch('/profile/orders');
+    const isFeed = useRouteMatch('/feed');
     const isProfile = useRouteMatch('/profile');
     const userName = useSelector((state: TStateReducer) => state.user.data?.name);
 

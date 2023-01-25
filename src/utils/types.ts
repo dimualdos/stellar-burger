@@ -24,6 +24,8 @@ export type TWSOrder = {
     status?: string;
     updatedAt?: string | number;
     _id?: string;
+    __v?: number;
+
 };
 
 export type TwsOrdersList = {
@@ -32,6 +34,16 @@ export type TwsOrdersList = {
     total?: number;
     totalToday?: number;
 }
+
+
+
+
+export type TDataOrderNumberObject = {
+    itemsFailed: boolean;
+    itemsRequest: boolean;
+    dataOrderNumber: TWSOrder;
+}
+
 
 
 export type TProductItem = {
@@ -53,4 +65,23 @@ export type TProductItem = {
 export type TLocationState = {
     from?: string;
     background: Location;
+}
+
+export type TUserData = {
+    name: string;
+    email: string;
+    message: string
+    login: string;
+    password: string;
+    newPassword: string;
+}
+
+export type TLoginData = {
+    name: string;
+    email: string;
+
+}
+
+export type TResetPassMessage = {
+    message: string
 }

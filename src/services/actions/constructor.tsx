@@ -16,6 +16,7 @@ export interface IConstructorResetAction {
 }
 export interface IConstructorReorderAction {
     [x: string]: any;
+    readonly payload?: any;
     readonly type: typeof CONSTRUCTOR_REORDER;
 
 }
@@ -38,5 +39,6 @@ export const addToConstructor = (ingredient: any): TConstructorActions => {
             ...ingredient,
             id: uuid()
         }
+
     }
 }

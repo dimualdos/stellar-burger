@@ -33,12 +33,20 @@ export const OrdersProfile: FunctionComponent = () => {
                 <LeftSectionInProfile />
             </div>
             <section className={styles.rightContainer}>
-                <ScrollCopmponent>
-                    {messages1.orders ? (messages1.orders.map((value: any) => < OrderCard {...value} key={value._id} />).reverse())
-                        : (<div className={styles.divSpinner}>
-                            <Spinner />
-                        </div>)}
-                </ScrollCopmponent>
+                {messages1.success && messages1.orders.length ? (
+                    <ScrollCopmponent>
+                        {messages1.orders ? (messages1.orders.map((value: any) => < OrderCard {...value} key={value._id} />).reverse())
+                            : (<div className={styles.divSpinner}>
+                                <Spinner />
+                            </div>)}
+                    </ScrollCopmponent>
+                ) : (
+                    <div className={styles.divSpinner}>
+                        <p className={styles.textProfileWhite}>Заказов пока нет</p>
+                    </div>
+                )
+                }
+
             </section>
         </section>
 

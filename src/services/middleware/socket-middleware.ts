@@ -13,9 +13,6 @@ export type TwsActionTypes = {
     wsError: ActionCreatorWithPayload<string>,
 }
 
-
-
-// export const createSocketMiddleware = (wsUrl: string): Middleware => {
 //     return ((store: MiddlewareAPI<AppDispatch, RootState>) => {
 //         let socket: WebSocket | null = null;
 //         let isConnected = false

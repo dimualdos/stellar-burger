@@ -2,7 +2,12 @@
 
 import { CONSTRUCTOR_REORDER } from '../constants/constructor-constant';
 import { TApplicationActions } from '../types';
-import { ORDER_REQUEST, ORDER_SUCCESS, ORDER_FAILED, ORDER_RESET } from '../constants/orders';
+import {
+    ORDER_REQUEST,
+    ORDER_SUCCESS,
+    ORDER_FAILED,
+    ORDER_RESET
+} from '../constants/orders';
 import { postOrder } from '../../utils/burger-api';
 
 export interface IOrderRequestAction {
@@ -10,7 +15,7 @@ export interface IOrderRequestAction {
 }
 export interface IOrderSuccessAction {
     readonly type: typeof ORDER_SUCCESS;
-    readonly payload: string;
+    readonly payload: {};
 }
 export interface IOrderFailedAction {
     readonly type: typeof ORDER_FAILED;
@@ -33,6 +38,7 @@ export const orderBurder = (orderData?: any) => {
             type: ORDER_REQUEST
         })
         postOrder(orderData).then(async res => {
+            console.log(res)
             if (res && res.success) {
                 dispatch({
                     type: ORDER_SUCCESS,

@@ -47,6 +47,11 @@ nav {
     color: #8585AD;
 }
 
+.textProfileWhite {
+    composes: textProfile;
+    color: #F2F2F3;
+}
+
 .textProfile :active {
     color: #F2F2F3;
 }

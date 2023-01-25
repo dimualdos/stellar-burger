@@ -1,6 +1,7 @@
 import { registerUserRequest, loginRequest, getUserRequest, logoutRequest, resetPass, recoveryPass, fetchWithRefresh } from '../../utils/burger-api';
 import { _BASE_URL } from '../../utils/burger-api';
 import { deleteCookie, setCookie, getCookie } from '../../utils/cooke';
+import { TUserData, TResetPassMessage, TLoginData } from '../../utils/types';
 
 import {
     REGISTER_USER_REQUEST,
@@ -40,7 +41,7 @@ export interface ILoginUserRequestAction {
 }
 export interface ILoginUserSuccessAction {
     readonly type: typeof LOGIN_USER_SUCCESS;
-    readonly payload: string;
+    readonly data: TLoginData;
 }
 export interface ILoginUserFailedAction {
     readonly type: typeof LOGIN_USER_FAILED;
@@ -51,7 +52,7 @@ export interface IUdateUserRequestAction {
 }
 export interface IUdateUserSuccessAction {
     readonly type: typeof UPDATE_USER_DATA_SUCCESS;
-    readonly user: Object;
+    readonly data: TLoginData;
 }
 export interface IUdateUserFailedAction {
     readonly type: typeof UPDATE_USER_DATA_FAILED;
@@ -83,7 +84,7 @@ export interface IRefreshTokenRequestAction {
     readonly type: typeof REFRESH_TOKEN_REQUEST;
 }
 export interface IRefreshTokenSuccessAction {
-    payload: any;
+    payload: TLoginData;
     readonly type: typeof REFRESH_TOKEN_SUCCESS;
 }
 export interface IRefreshTokenFailedAction {
@@ -93,6 +94,11 @@ export interface IRefreshTokenFailedAction {
 export interface IUserLogout {
     readonly type: typeof USER_LOGOUT;
 }
+
+export interface IDefaultAction {
+    readonly type: null;
+}
+
 
 export type TUserActions =
     | IRegisterUserRequestAction
@@ -116,7 +122,8 @@ export type TUserActions =
     | IRefreshTokenRequestAction
     | IRefreshTokenSuccessAction
     | IRefreshTokenFailedAction
-    | IUserLogout;
+    | IUserLogout
+    | IDefaultAction;
 
 export const loginUser = (userData: string) => {
     return async (dispatch: (arg0: TUserActions) => void) => {
@@ -129,7 +136,7 @@ export const loginUser = (userData: string) => {
                 setCookie('accessToken', res.accessToken);
                 dispatch({
                     type: LOGIN_USER_SUCCESS,
-                    payload: res.user,
+                    data: res.user,
                 });
             })
             .catch((err) => {
@@ -187,7 +194,7 @@ export const getUserData = (methodType: string, userData: Object) => {
 
             dispatch({
                 type: UPDATE_USER_DATA_SUCCESS,
-                user: data.user
+                data: data.user
             });
         }
         catch (err) {

@@ -15,6 +15,9 @@ export const Register: FunctionComponent = () => {
     const { data } = useSelector((state: TStateReducer) => state.user);
     const { values, handleChange } = useForm({ email: '', password: '', name: '' });
 
+    if (data) console.log(data)
+
+
     const register = useCallback(
         (e: FormEvent<HTMLFormElement>) => {
             e.preventDefault();

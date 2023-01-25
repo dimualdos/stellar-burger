@@ -1,4 +1,5 @@
 import { getResourse } from '../../utils/burger-api';
+import { TProductItem } from '../../utils/types';
 
 import { GET_ITEMS_REQUEST, GET_ITEMS_SUCCESS, GET_ITEMS_FAILED } from '../constants/ingredients';
 import { TApplicationActions } from '../types';
@@ -8,7 +9,7 @@ export interface IGetItemsRequestAction {
 }
 export interface IGetItemsSuccessAction {
   readonly type: typeof GET_ITEMS_SUCCESS;
-  readonly payload?: any;
+  readonly payload: TProductItem[];
 }
 export interface IGetItemsFailedAction {
   readonly type: typeof GET_ITEMS_FAILED;

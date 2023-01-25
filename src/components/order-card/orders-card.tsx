@@ -117,7 +117,6 @@ export const OrderCard: FunctionComponent = (value) => {
                 </div>
             </div>
         </Link>
-
     )
 }
 

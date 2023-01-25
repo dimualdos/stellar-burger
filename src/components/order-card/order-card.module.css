@@ -8,6 +8,7 @@
 
 
 
+
 .cardOrdersContainer {
     display: flex;
     flex-direction: column;
@@ -166,4 +167,8 @@ li {
     font-size: 16px;
     line-height: 24px;
     color: #F2F2F3;
+}
+
+.divCardCenter {
+    display: flex;
 }

@@ -78,7 +78,7 @@ export const loginRequest = async (form: string) => {
 };
 
 export const postOrder = async (data: string) => {
-    const data_1 = await fetchWithRefresh(`${_BASE_URL}/orders`, {
+    const dataFetch = await fetchWithRefresh(`${_BASE_URL}/orders`, {
         method: "POST",
         headers: {
             'Content-Type': 'application/json;charset=utf-8',
@@ -87,9 +87,9 @@ export const postOrder = async (data: string) => {
 
         body: JSON.stringify(data)
     });
-    if (data_1?.success)
-        return data_1;
-    return Promise.reject(data_1);
+    if (dataFetch?.success)
+        return dataFetch;
+    return Promise.reject(dataFetch);
 }
 
 export const getOrderByNumber = async (number: string) => {

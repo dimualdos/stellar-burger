@@ -29,7 +29,7 @@ export const LeftSectionInProfile: FunctionComponent = () => {
                     activeClassName={styles.styleActiveClass}>
                     <p>История заказов</p>
                 </NavLink>
-                <Link to={{ pathname: `/` }} onClick={onLogout}>
+                <Link to={{ pathname: `/` }} onClick={onLogout} >
                     <li className={styles.textProfile} > <p>Выход</p> </li>
                 </Link>
             </div>
@@ -45,7 +45,6 @@ export const LeftSectionInProfile: FunctionComponent = () => {
 
 export const Profile: FunctionComponent = () => {
     const { data } = useSelector((state: TStateReducer) => state.user);
-
     const { values, handleChange } = useForm({ email: `${data ? (data.email) : ('')}`, password: `${data ? (data.password) : ('')}`, name: `${data ? (data.name) : ('')}` });
 
     return (

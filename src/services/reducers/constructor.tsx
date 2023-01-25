@@ -43,7 +43,7 @@ export const constructorReducer = (state = initialState, action: TApplicationAct
 
         case CONSTRUCTOR_REORDER: {
             const ingredients = [...state.ingredients];
-            ingredients.splice(action.payload.to, 0, ingredients.splice(action.payload.from, 1)[0]);
+            ingredients.splice(action.payload?.to, 0, ingredients.splice(action.payload?.from, 1)[0]);
 
             return {
                 ...state,

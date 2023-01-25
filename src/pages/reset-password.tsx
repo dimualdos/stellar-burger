@@ -21,6 +21,8 @@ export const ResetPass: FunctionComponent = () => {
     // const onChange = e => {
     //     setValue({ ...form, [e.target.name]: e.target.value });
     // };
+    if (passwordData) console.log(passwordData)
+
 
     const resetPassword = useCallback(
         (e: FormEvent<HTMLFormElement>) => {

@@ -15,7 +15,7 @@ export const ForgotPass: FunctionComponent = () => {
     const dispatch: any = useAppDispatch();
     const history = useHistory();
     const { passwordData } = useSelector((state: TStateReducer) => state.user);
-
+    if (passwordData) console.log(passwordData)
 
     const resetPassword = useCallback(
         (e: FormEvent<HTMLFormElement>) => {
