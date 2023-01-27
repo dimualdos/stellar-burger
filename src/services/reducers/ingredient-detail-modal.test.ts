@@ -1,11 +1,11 @@
 import { expect, test } from '@jest/globals';
-import { initialState, reducerDetailModal } from '../services/reducers/ingredient-detail-modal';
+import { initialState, reducerDetailModal } from './ingredient-detail-modal';
 
 
 import {
     SET_INGREDIENT_MODAL,
     RESET_INGREDIENT_MODAL
-} from '../services/actions/ingredient-detail-modal';
+} from '../actions/ingredient-detail-modal';
 
 describe('Redux constructor', () => {
 

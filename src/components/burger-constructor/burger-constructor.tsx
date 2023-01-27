@@ -86,7 +86,9 @@ const BurgerConstructor: FunctionComponent = () => {
         <section className={styles.burgerConstructor} ref={dropTargerRef}>
             {bun ? (
                 <div className={styles.constructorElement} >
-                    <div className={styles.constructorElemTopBottom}>
+                    <div className={styles.constructorElemTopBottom}
+                        data-testid="constructor">
+
                         <ConstructorElement
                             type="top"
                             isLocked={true}
@@ -107,7 +109,8 @@ const BurgerConstructor: FunctionComponent = () => {
                         </div>
                     </div>
 
-                    <div className={styles.constructorElemTopBottom}>
+                    <div className={styles.constructorElemTopBottom}
+                        data-testid="constructor">
                         <ConstructorElement
                             type="bottom"
                             isLocked={true}

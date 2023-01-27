@@ -43,6 +43,7 @@ const Modal: FC<TModal> = ({ title, children, onClose, overlay = true }) => {
                     </div>
                     <button type='button'
                         className={styles.icon1}
+                        data-testid='close-modal'
                         onClick={onClose}>
                         <CloseIcon type="primary" />
                     </button>
@@ -61,6 +62,7 @@ const Modal: FC<TModal> = ({ title, children, onClose, overlay = true }) => {
                     </div>
                     <button type='button'
                         className={styles.icon}
+                        data-testid='close-modal'
                         onClick={onClose}>
                         <CloseIcon type="primary" />
                     </button>

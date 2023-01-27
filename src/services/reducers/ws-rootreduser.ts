@@ -27,8 +27,14 @@ export enum WebsocketStatus1 {
 export type TLiveSocketStore = {
     status: WebsocketStatus | WebsocketStatus1;
     connectionError: string;
-    messages?: Array<{}> | undefined;
-    messages1?: Array<{}> | undefined;
+    messages: Array<{}>;
+
+}
+
+export type TLiveSocketStoreProfile = {
+    status: WebsocketStatus | WebsocketStatus1;
+    connectionError: string;
+    messages1: Array<{}>;
 }
 
 export const initialState: TLiveSocketStore = {
@@ -56,7 +62,7 @@ export const rootSocetReducerFeed = createReducer(initialState, (builder) => {
         })
 });
 
-export const initialState1: TLiveSocketStore = {
+export const initialState1: TLiveSocketStoreProfile = {
     status: WebsocketStatus1.OFFLINE,
     connectionError: '',
     messages1: [],
@@ -77,7 +83,7 @@ export const rootSocetReducerProfileOrders = createReducer(initialState1, (build
             state.connectionError = action.payload
         })
         .addCase(wsMessageProfile, (state, action) => {
-            state.messages1 = (state.messages, action.payload)
+            state.messages1 = (state.messages1, action.payload)
         })
 });
 

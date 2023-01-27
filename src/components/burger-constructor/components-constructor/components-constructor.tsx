@@ -71,6 +71,7 @@ const ComponentsContructor: FC<TCardProps> = ({ item, index }) => {
 
   return (
     <div className={styles.constructorCenterElem}
+      data-testid="constructor-main"
       ref={ref}
       data-handler-id={handlerId}
       style={{ opacity }}
@@ -80,6 +81,7 @@ const ComponentsContructor: FC<TCardProps> = ({ item, index }) => {
         <DragIcon type="primary" />
       </div>
       <ConstructorElement
+        data-testid="constructor-item"
         text={item.name}
         price={item.price}
         thumbnail={item.image}

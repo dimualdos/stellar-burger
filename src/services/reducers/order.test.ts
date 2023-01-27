@@ -1,9 +1,9 @@
 import { expect, test } from '@jest/globals';
-import { initialState, orderReducer } from '../services/reducers/order';
+import { initialState, orderReducer } from './order';
 
 import {
     ORDER_REQUEST, ORDER_SUCCESS, ORDER_FAILED, ORDER_RESET
-} from '../services/constants/orders';
+} from '../constants/orders';
 
 
 

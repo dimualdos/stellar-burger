@@ -39,6 +39,7 @@ const ItemsIngredientBurgers: FC<TItemsIngredient> = ({ ingredientItem,
             onClick={() => onClick(ingredientItem)}
             style={{ opacity }}
             ref={dragRef}
+            data-testid='link-ingredient'
         >
             <div className={style.counterColumn}>
                 <Counter count={count} size="default" />

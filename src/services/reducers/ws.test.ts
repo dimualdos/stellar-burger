@@ -6,7 +6,7 @@ import {
     WebsocketStatus1,
     initialState,
     initialState1
-} from '../services/reducers/ws-rootreduser';
+} from './ws-rootreduser';
 
 import {
     wsError,
@@ -19,7 +19,7 @@ import {
     wsMessageProfile,
     wsConnectProfile,
     wsOpenProfile
-} from '../services/actions/ws-actions';
+} from '../actions/ws-actions';
 
 
 

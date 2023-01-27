@@ -10,7 +10,8 @@ type TOrderDetails = {
 const OrderDetails: FC<TOrderDetails> = ({ numberOrder }) => {
 
     return (
-        <div className={styles.order}>
+        <div className={styles.order}
+            data-testid="order-details-container">
             <div className={styles.divOrderNumber}>
                 <p className={styles.orderNumber} >{numberOrder}</p>
             </div>

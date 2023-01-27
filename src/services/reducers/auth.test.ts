@@ -1,7 +1,7 @@
 
 import { expect, test } from '@jest/globals';
-import { TInitialStateAuth } from "../services/reducers/auth";
-import { authReducer } from "../services/reducers/auth";
+import { TInitialStateAuth } from "./auth";
+import { authReducer } from "./auth";
 
 import {
     REGISTER_USER_REQUEST,
@@ -23,7 +23,7 @@ import {
     REFRESH_TOKEN_SUCCESS,
     REFRESH_TOKEN_FAILED,
     USER_LOGOUT
-} from '../services/constants/auth';
+} from '../constants/auth';
 
 export const initialState: TInitialStateAuth = {
     data: null,

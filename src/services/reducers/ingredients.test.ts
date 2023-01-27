@@ -1,11 +1,11 @@
 import { expect, test } from '@jest/globals';
 
-import { initialState, itemsReducer } from '../services/reducers/indredients';
+import { initialState, itemsReducer } from './indredients';
 import {
     GET_ITEMS_REQUEST,
     GET_ITEMS_FAILED,
     GET_ITEMS_SUCCESS
-} from '../services/constants/ingredients';
+} from '../constants/ingredients';
 
 
 

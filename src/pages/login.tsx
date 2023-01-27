@@ -31,11 +31,13 @@ export const LoginPage: FunctionComponent = () => {
                     className={styles.form}>
                     <h1 className={styles.heading}>Вход</h1>
                     <Input
+                        data-testid='email'
                         placeholder="E-mail"
                         value={values.email}
                         name="email"
                         onChange={(e) => handleChange(e)} />
                     <PasswordInput
+                        data-testid='Пароль'
                         placeholder="Пароль"
                         value={values.password}
                         name="password"
@@ -43,6 +45,7 @@ export const LoginPage: FunctionComponent = () => {
                         icon='ShowIcon'
                     />
                     <button
+                        data-testid='button-login'
                         type='submit'
                         className={styles.buttonConstructor}>
                         <p className={styles.buttonText}>Войти</p>

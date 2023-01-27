@@ -1,13 +1,13 @@
 import { expect, test } from '@jest/globals';
-import { constructorReducer, TInitialStateConstructor } from '../services/reducers/constructor';
-import { TConstructorActions } from '../services/actions/constructor';
+import { constructorReducer, TInitialStateConstructor } from './constructor';
+import { TConstructorActions } from '../actions/constructor';
 
 import {
     CONSTRUCTOR_ADD,
     CONSTRUCTOR_DELETE,
     CONSTRUCTOR_REORDER,
     CONSTRUCTOR_RESET
-} from '../services/constants/constructor-constant';
+} from '../constants/constructor-constant';
 
 
 

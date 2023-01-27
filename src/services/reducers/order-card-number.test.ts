@@ -1,12 +1,12 @@
 import { expect, test } from '@jest/globals';
-import { dataNumberCardReducer, initialState } from '../services/reducers/order-card-number';
+import { dataNumberCardReducer, initialState } from './order-card-number';
 
 
 import {
     ORDER_NUMBER_REQUEST,
     ORDER_NUMBER_SUCCESS,
     ORDER_NUMBER_FAILED
-} from '../services/constants/order-card-number';
+} from '../constants/order-card-number';
 
 describe('Redux constructor', () => {
 
