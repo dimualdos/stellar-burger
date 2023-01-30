@@ -1,7 +1,4 @@
-
-
-import { CONSTRUCTOR_REORDER } from '../constants/constructor-constant';
-import { TApplicationActions } from '../types';
+import { AppDispatch } from '../types';
 import {
     ORDER_REQUEST,
     ORDER_SUCCESS,
@@ -16,6 +13,7 @@ export interface IOrderRequestAction {
 export interface IOrderSuccessAction {
     readonly type: typeof ORDER_SUCCESS;
     readonly payload: {};
+
 }
 export interface IOrderFailedAction {
     readonly type: typeof ORDER_FAILED;
@@ -32,23 +30,18 @@ export type TOrderActions =
     | IOrderResetAction;
 
 
-export const orderBurder = (orderData?: any) => {
-    return function (dispatch: (arg0: TApplicationActions) => Promise<any>) {
+export const orderBurder = (orderData: { ingredients: string[]; } | undefined) => {
+    return function (dispatch: AppDispatch) {
         dispatch({
             type: ORDER_REQUEST
         })
         postOrder(orderData).then(async res => {
-            console.log(res)
             if (res && res.success) {
                 dispatch({
                     type: ORDER_SUCCESS,
                     payload: res
-                }).then(
-                    await dispatch({
-                        type: CONSTRUCTOR_REORDER
-                    })
+                })
 
-                )
             } else {
                 dispatch({
                     type: ORDER_FAILED

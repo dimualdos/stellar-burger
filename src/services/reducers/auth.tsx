@@ -24,17 +24,8 @@ import {
     USER_LOGOUT
 } from '../constants/auth';
 
-type TUserData = {
-    name: string;
-    email: string;
-    login: string;
-    password: string;
-    newPassword: string;
-}
-
 export type TInitialStateAuth = {
     data: any,
-
     registerUserRequest: boolean,
     registerUserError: boolean | string,
 

@@ -10,6 +10,7 @@ import {
 
 
 export type TInitialStateIngredients = {
+  length?: number;
   itemsRequest: boolean,
   itemsFailed: boolean,
   items: TProductItem[];

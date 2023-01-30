@@ -1,5 +1,3 @@
-
-
 .constructorElemScroll {
     overflow-y: scroll;
     overflow-x: hidden;
@@ -29,7 +27,7 @@
 
 .constructorCenterElem {
     display: flex;
-    max-width: 568px;
+    width: 568px;
     width: 100%;
     font-family: 'Jet Brains Mono', sans-serif;
     font-size: 16px;
@@ -51,4 +49,3 @@
     top: 12.5%;
     bottom: 11.22%;
 }
-

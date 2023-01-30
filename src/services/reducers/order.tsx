@@ -10,7 +10,7 @@ import {
 export type TInitinalStateOrder = {
     orderRequest?: boolean;
     orderFailed?: boolean;
-    order?: any
+    order: any
 }
 
 export const initialState: TInitinalStateOrder = {

@@ -7,7 +7,7 @@ export type TwsActionTypes = {
     connect: ActionCreatorWithPayload<string>,
     wsConnecting: ActionCreatorWithoutPayload,
     wsOpen: ActionCreatorWithoutPayload,
-    wsMessage: ActionCreatorWithPayload<Array<{}>>,
+    wsMessage: ActionCreatorWithPayload<{}>,
     wsClose: ActionCreatorWithoutPayload,
     disconnect: ActionCreatorWithoutPayload,
     wsError: ActionCreatorWithPayload<string>,

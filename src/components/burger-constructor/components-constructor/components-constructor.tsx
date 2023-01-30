@@ -1,20 +1,21 @@
 import { FC } from 'react';
-import { useDispatch } from 'react-redux';
 import { useRef } from 'react';
 import { useDrop, useDrag, XYCoord } from "react-dnd";
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { CONSTRUCTOR_DELETE, CONSTRUCTOR_REORDER } from '../../../services/constants/constructor-constant';
+import { useAppDispatch } from '../../../hooks/hooks';
 import styles from './components-constructor.module.css';
+import { TProductItem } from '../../../utils/types';
 
 
 type TCardProps = {
-  item: any;
+  item: TProductItem;
   index: number;
 }
 
 const ComponentsContructor: FC<TCardProps> = ({ item, index }) => {
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const ref = useRef<HTMLDivElement>(null);
 
   const [{ handlerId }, drop] = useDrop({
@@ -71,7 +72,6 @@ const ComponentsContructor: FC<TCardProps> = ({ item, index }) => {
 
   return (
     <div className={styles.constructorCenterElem}
-      data-testid="constructor-main"
       ref={ref}
       data-handler-id={handlerId}
       style={{ opacity }}

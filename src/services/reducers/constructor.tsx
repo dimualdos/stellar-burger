@@ -5,19 +5,20 @@ import {
     CONSTRUCTOR_REORDER,
     CONSTRUCTOR_RESET
 } from '../constants/constructor-constant';
+import { TProductItem } from '../../utils/types';
 
 export type TInitialStateConstructor = {
-    bun: null | Object;
-    ingredients: Object[];
+    bun: null | TProductItem;
+    ingredients: TProductItem[];
 }
 
-const initialState: TInitialStateConstructor = {
+export const initialState: TInitialStateConstructor = {
     bun: null,
     ingredients: [],
 }
 
 
-export const constructorReducer = (state = initialState, action: TApplicationActions) => {
+export const constructorReducer = (state = initialState, action: TApplicationActions): TInitialStateConstructor => {
 
     switch (action.type) {
         case CONSTRUCTOR_ADD: {

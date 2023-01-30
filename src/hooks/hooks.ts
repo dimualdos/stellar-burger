@@ -30,5 +30,6 @@ export const useForm = (inputValues: TUseForm) => {
 
 // Use throughout your app instead of plain `useDispatch` and `useSelector`
 
-export const useAppDispatch: () => AppDispatch = useDispatch;
+type DispatchFunc = () => AppDispatch;
+export const useAppDispatch: DispatchFunc = useDispatch;
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;

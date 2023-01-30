@@ -1,13 +1,12 @@
 import { FunctionComponent } from 'react';
 import { useParams } from "react-router-dom";
-import { useSelector } from 'react-redux';
-import { TStateReducer } from '../../services/reducers';
+import { useAppSelector } from '../../hooks/hooks';
 import styles from './ingredient-details.module.css';
 
 
 
 const IngredientDetails: FunctionComponent = () => {
-    const ingredients: any = useSelector((store: TStateReducer) => store.ingredients.items);
+    const ingredients = useAppSelector((store) => store.ingredients.items);
 
     const { id } = useParams<{ id: string }>();
 

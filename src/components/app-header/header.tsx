@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { NavLink, useRouteMatch } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 import { Logo } from '@ya.praktikum/react-developer-burger-ui-components';
+import { useAppSelector } from '../../hooks/hooks';
 import { BurgerIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { MenuIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { ProfileIcon } from '@ya.praktikum/react-developer-burger-ui-components';
@@ -13,7 +13,7 @@ const AppHeader: FC<IProps> = () => {
     const isConstructor = useRouteMatch({ path: '/', exact: true });
     const isFeed = useRouteMatch('/feed');
     const isProfile = useRouteMatch('/profile');
-    const userName = useSelector((state: TStateReducer) => state.user.data?.name);
+    const userName = useAppSelector((state: TStateReducer) => state.user.data?.name);
 
     return (
         <header className={styles.navPanel}>

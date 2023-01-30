@@ -1,6 +1,6 @@
 
 import { expect, test } from '@jest/globals';
-import { TInitialStateAuth } from "./auth";
+import { initialState } from "./auth";
 import { authReducer } from "./auth";
 
 import {
@@ -25,34 +25,7 @@ import {
     USER_LOGOUT
 } from '../constants/auth';
 
-export const initialState: TInitialStateAuth = {
-    data: null,
 
-    registerUserRequest: false,
-    registerUserError: false,
-
-    loginUserRequest: false,
-    loginUserError: false,
-    loginUserFailed: false,
-
-    updateUserRequest: false,
-    updateUserError: false,
-
-    resetPasswordRequest: false,
-    resetPasswordFailed: false,
-    passwordData: null,
-
-    refreshTokenRequest: false,
-    refreshTokenFailed: false,
-
-
-    newPasswordRequest: false,
-    newPasswordFailed: false,
-    newPasswordData: null,
-    registerUserFailed: false,
-    userDataRequest: false,
-    userDataFailed: false
-}
 
 describe("Redux auth store", () => {
 
@@ -84,13 +57,11 @@ describe("Redux auth store", () => {
     it('should handle REGISTER_USER_SUCCESS', () => {
         const state = {
             ...initialState,
-            data: {
-                ...initialState.data,
-            },
+            data: {},
             registerUserRequest: false,
             registerUserFailed: false
         };
-        expect(authReducer(initialState, { type: REGISTER_USER_SUCCESS })).toEqual(state)
+        expect(authReducer(initialState, { type: REGISTER_USER_SUCCESS, data: { name: 'name', email: 'email' } })).toEqual(state)
     });
 
     test('should handle REGISTER_USER_FAILED', () => {

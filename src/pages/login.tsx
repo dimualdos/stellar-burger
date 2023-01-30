@@ -1,20 +1,19 @@
 
 import { useCallback, FunctionComponent, FormEvent } from 'react';
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 import { Input } from "@ya.praktikum/react-developer-burger-ui-components";
 import { PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
-import { useForm, useAppDispatch } from '../hooks/hooks';
-import { TStateReducer } from '../services/reducers';
+import { useForm, useAppDispatch, useAppSelector } from '../hooks/hooks';
 import { loginUser } from '../services/actions/auth';
 import styles from './css/page.module.css';
+import { AppDispatch } from '../services/store';
 
 
 export const LoginPage: FunctionComponent = () => {
-    const dispatch: any = useAppDispatch();
+    const dispatch: AppDispatch = useAppDispatch();
     const { values, handleChange } = useForm({ email: '', password: '' });
 
-    const { loginUserRequest } = useSelector((state: TStateReducer) => state.user);
+    const { loginUserRequest } = useAppSelector((state) => state.user);
 
     const handleClick = useCallback(
         (e: FormEvent<HTMLFormElement>) => {
@@ -37,7 +36,7 @@ export const LoginPage: FunctionComponent = () => {
                         name="email"
                         onChange={(e) => handleChange(e)} />
                     <PasswordInput
-                        data-testid='Пароль'
+                        data-testid='password'
                         placeholder="Пароль"
                         value={values.password}
                         name="password"

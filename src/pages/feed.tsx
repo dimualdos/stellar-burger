@@ -3,7 +3,6 @@ import { ScrollCopmponent } from "../components/scroll-component/scroll-componen
 import { OrderCard } from "../components/order-card/orders-card";
 import { WS_ORDERS_FEED } from "../utils/burger-api";
 import { useAppDispatch, useAppSelector } from "../hooks/hooks";
-import { TStateReducer } from "../services/reducers";
 import { Spinner } from "../components/spinner/spinner";
 import styles from './css/feed.module.css';
 
@@ -11,8 +10,7 @@ import styles from './css/feed.module.css';
 
 export const FeedPage: FunctionComponent = () => {
     const dispatch = useAppDispatch();
-    const { messages }: any = useAppSelector((store: TStateReducer) => store.webSocetFeed);
-
+    const { messages } = useAppSelector((store) => store.webSocetFeed);
     useEffect(() => {
         dispatch({
             type: 'WS_CONNECT',
@@ -30,7 +28,7 @@ export const FeedPage: FunctionComponent = () => {
                     Лента заказов
                 </h1>
                 <ScrollCopmponent>
-                    {messages.orders ? (messages.orders.map((value: any) => < OrderCard {...value} key={value._id} />))
+                    {messages.orders ? (messages.orders.map((value) => < OrderCard {...value} key={value._id} />))
                         : (<div className={styles.divSpinner}>
                             <Spinner />
                         </div>)}
@@ -41,7 +39,7 @@ export const FeedPage: FunctionComponent = () => {
                     <div className={styles.doneBoard}>
                         <p className={styles.headerDone}>Готовы:</p>
                         <ul className={styles.doneBoardUL}>
-                            {messages.orders && (messages.orders.map((value: any, i: number) => {
+                            {messages.orders && (messages!.orders.map((value, i: number) => {
                                 return (
                                     value.status === 'done' ? <li key={i} className={styles.listDone}>{value.number}</li> : null
                                 )
@@ -52,7 +50,7 @@ export const FeedPage: FunctionComponent = () => {
                     <div className={styles.doneBoard}>
                         <p className={styles.headerDone}>В работе:</p>
                         <ul className={styles.doneBoardUL}>
-                            {messages.orders && (messages.orders.map((value: any, i: number) => {
+                            {messages.orders && (messages!.orders.map((value, i: number) => {
                                 return (
                                     value.status === 'pending' ? <li key={i} className={styles.listWork}>{value.number}</li> : null
                                 )

@@ -17,14 +17,15 @@ export type TItemConstructor = {
 }
 
 export type TWSOrder = {
-    createdAt?: string;
-    ingredients?: string[];
-    name?: string;
-    number?: number;
-    status?: string;
-    updatedAt?: string | number;
-    _id?: string;
-    __v?: number;
+    createdAt: string;
+    ingredients: string[];
+    name: string;
+    number: number;
+    owner: string;
+    status: string;
+    updatedAt: string;
+    _id: string;
+    __v: number;
 
 };
 
@@ -47,19 +48,20 @@ export type TDataOrderNumberObject = {
 
 
 export type TProductItem = {
-    id?: Key | null | number;
-    _id?: any;
-    calories?: number;
-    fat?: number;
-    carbohydrates?: number;
-    image?: string;
-    image_large?: string;
-    image_mobile?: string;
-    name?: string;
-    price?: number;
-    proteins?: number;
-    type?: string;
-    __v?: number;
+    //reduce(arg0: (a: number, b: { price: number; }) => number, arg1: number): unknown;
+    id?: string;
+    _id: string;
+    calories: number;
+    fat: number;
+    carbohydrates: number;
+    image: string;
+    image_large: string;
+    image_mobile: string;
+    name: string;
+    price: number;
+    proteins: number;
+    type: string;
+    __v: number;
 };
 
 export type TLocationState = {
@@ -70,14 +72,14 @@ export type TLocationState = {
 export type TUserData = {
     name: string;
     email: string;
-    message: string
-    login: string;
-    password: string;
-    newPassword: string;
+    login?: string;
+    password?: string;
+    newPassword?: string;
 }
 
 export type TLoginData = {
     name: string;
+    password?: string;
     email: string;
 
 }
@@ -85,3 +87,10 @@ export type TLoginData = {
 export type TResetPassMessage = {
     message: string
 }
+
+export type TengToRusStatus = {
+    done: string,
+    pending: string,
+    created: string
+}
+

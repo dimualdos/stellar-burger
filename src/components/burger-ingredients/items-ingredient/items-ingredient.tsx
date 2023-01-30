@@ -46,7 +46,7 @@ const ItemsIngredientBurgers: FC<TItemsIngredient> = ({ ingredientItem,
             </div>
             <div className={style.content}>
                 <div className={style.illustration}>
-                    <img src={image} alt="бургер" />
+                    <img src={image} alt={name} />
                 </div>
                 <div className={style.price}>
                     <div className={style.textPrice}>{price}</div>

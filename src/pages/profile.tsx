@@ -1,15 +1,14 @@
 import { FunctionComponent, MouseEvent } from 'react';
-import { useSelector } from 'react-redux';
 import { NavLink, Link } from 'react-router-dom';
 import { Input } from "@ya.praktikum/react-developer-burger-ui-components";
 import { logoutAuth } from '../services/actions/auth';
-import { useForm, useAppDispatch } from '../hooks/hooks';
-import { TStateReducer } from '../services/reducers';
+import { useForm, useAppDispatch, useAppSelector } from '../hooks/hooks';
+import { AppDispatch } from '../services/store';
 import styles from './css/profile.module.css';
 
 
 export const LeftSectionInProfile: FunctionComponent = () => {
-    const dispatch: any = useAppDispatch();
+    const dispatch: AppDispatch = useAppDispatch();
     let onLogout = (e: MouseEvent<HTMLAnchorElement>) => {
         e.preventDefault();
         dispatch(logoutAuth());
@@ -44,7 +43,7 @@ export const LeftSectionInProfile: FunctionComponent = () => {
 
 
 export const Profile: FunctionComponent = () => {
-    const { data } = useSelector((state: TStateReducer) => state.user);
+    const { data } = useAppSelector((state) => state.user);
     const { values, handleChange } = useForm({ email: `${data ? (data.email) : ('')}`, password: `${data ? (data.password) : ('')}`, name: `${data ? (data.name) : ('')}` });
 
     return (

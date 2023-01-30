@@ -56,6 +56,9 @@ export const store = configureStore({
   devTools: true
 })
 
+export type RootState = ReturnType<typeof rootReducer>
+export type AppDispatch = typeof store.dispatch
+
 
 export default store;
 

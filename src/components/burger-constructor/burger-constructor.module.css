@@ -26,6 +26,7 @@
     flex-direction: column;
     gap: 16px;
     width: 568px;
+    min-height: 20px;
 }
 
 .constructorInfo {
@@ -89,6 +90,7 @@
     line-height: 24px;
     color: #F2F2F3;
 }
+
 .noBuns {
     width: 100%;
     height: 60%;
@@ -109,7 +111,7 @@
     max-height: 250px;
     gap: 16px;
     z-index: 0;
-
+    width: 568px
 }
 
 .constructorElemScroll::-webkit-scrollbar {

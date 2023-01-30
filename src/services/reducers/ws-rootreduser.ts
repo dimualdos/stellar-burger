@@ -1,5 +1,6 @@
 
 import { createReducer } from "@reduxjs/toolkit";
+import { TwsOrdersList } from "../../utils/types";
 import {
     wsError,
     wsClose,
@@ -25,22 +26,22 @@ export enum WebsocketStatus1 {
 }
 
 export type TLiveSocketStore = {
-    status: WebsocketStatus | WebsocketStatus1;
+    status: WebsocketStatus;
     connectionError: string;
-    messages: Array<{}>;
+    messages: TwsOrdersList;
 
 }
 
-export type TLiveSocketStoreProfile = {
-    status: WebsocketStatus | WebsocketStatus1;
+export type TLiveSocketStore1 = {
+    status: WebsocketStatus1;
     connectionError: string;
-    messages1: Array<{}>;
-}
+    messages1: TwsOrdersList;
 
+}
 export const initialState: TLiveSocketStore = {
     status: WebsocketStatus.OFFLINE,
     connectionError: '',
-    messages: [],
+    messages: {},
 }
 
 export const rootSocetReducerFeed = createReducer(initialState, (builder) => {
@@ -62,10 +63,10 @@ export const rootSocetReducerFeed = createReducer(initialState, (builder) => {
         })
 });
 
-export const initialState1: TLiveSocketStoreProfile = {
+export const initialState1: TLiveSocketStore1 = {
     status: WebsocketStatus1.OFFLINE,
     connectionError: '',
-    messages1: [],
+    messages1: {},
 }
 
 export const rootSocetReducerProfileOrders = createReducer(initialState1, (builder) => {

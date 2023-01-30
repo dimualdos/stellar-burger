@@ -2,9 +2,9 @@ import { FunctionComponent, useMemo } from "react";
 import { formatRelative } from 'date-fns';
 import { ru } from 'date-fns/locale';
 import { useAppSelector } from "../../hooks/hooks";
-import { TStateReducer } from "../../services/reducers";
 import subtract from '../../images/subtract.png';
 import styles from './order-number.module.css';
+import { TProductItem } from "../../utils/types";
 
 type TIngredient = {
     price: number;
@@ -13,16 +13,17 @@ type TIngredient = {
 }
 
 export const OrderNumber: FunctionComponent = () => {
-    const dataOrderNumber: any = useAppSelector((store: TStateReducer) => store.dataNumberCard);
-    const items: any = useAppSelector((store: TStateReducer) => store.ingredients);
+    const dataOrderNumber = useAppSelector((store) => store.dataNumberCard);
+    const items = useAppSelector((store) => store.ingredients);
     const maxIngredients = 6;
     const result = formatRelative(new Date(`${dataOrderNumber.dataOrderNumber.updatedAt}`), new Date(), { locale: ru });
+
 
     const orderInfo = useMemo(() => {
         if (!items.length && !dataOrderNumber.dataOrderNumber) return null;
         const count: any = new Map();
-        const ingredientsInfo = dataOrderNumber.dataOrderNumber!.ingredients!.reduce((acc: any[], item: any): any => {
-            const ingredient = items.items.find((ingr: { _id: number; }) => ingr._id === item);
+        const ingredientsInfo = dataOrderNumber.dataOrderNumber.ingredients.reduce((acc: [{}], item: {}) => {
+            const ingredient = items.items.find((ingr) => ingr._id === item);
             if (ingredient) acc.push(ingredient);
             if (ingredient && count.has(ingredient)) {
                 let num = 1;
@@ -37,7 +38,7 @@ export const OrderNumber: FunctionComponent = () => {
         for (let entry of count) {
             ingredientArray.push(entry);
         }
-        const totalPriceCard = ingredientsInfo.reduce((acc: any, item: any) => {
+        const totalPriceCard = ingredientsInfo.reduce((acc: number, item: TProductItem) => {
             return acc + item.price;
         }, 0);
         const ingredientsShow = ingredientsInfo.slice(0, maxIngredients);

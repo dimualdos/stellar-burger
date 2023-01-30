@@ -1,29 +1,26 @@
 
 import { useCallback, FunctionComponent, FormEvent } from 'react';
-import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { registerUser } from '../services/actions/auth';
 import { Input } from "@ya.praktikum/react-developer-burger-ui-components";
 import { PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
-import { useForm, useAppDispatch } from '../hooks/hooks';
-import { TStateReducer } from '../services/reducers';
+import { useForm, useAppDispatch, useAppSelector } from '../hooks/hooks';
+import { AppDispatch } from '../services/store';
 import styles from './css/page.module.css';
 
 
 export const Register: FunctionComponent = () => {
-    const dispatch: any = useAppDispatch();
-    const { data } = useSelector((state: TStateReducer) => state.user);
+    const dispatch: AppDispatch = useAppDispatch();
+    const { data } = useAppSelector((state) => state.user);
     const { values, handleChange } = useForm({ email: '', password: '', name: '' });
-
-    if (data) console.log(data)
-
+    const history = useHistory();
 
     const register = useCallback(
         (e: FormEvent<HTMLFormElement>) => {
             e.preventDefault();
             if (data) return;
             dispatch(registerUser(values));
-            data.replace({ pathname: '/login' });
+            history.replace({ pathname: '/login' });
         }, [dispatch, data, values]);
 
     return (

@@ -1,7 +1,9 @@
 import { registerUserRequest, loginRequest, getUserRequest, logoutRequest, resetPass, recoveryPass, fetchWithRefresh } from '../../utils/burger-api';
 import { _BASE_URL } from '../../utils/burger-api';
 import { deleteCookie, setCookie, getCookie } from '../../utils/cooke';
-import { TUserData, TResetPassMessage, TLoginData } from '../../utils/types';
+import { TLoginData, TUserData } from '../../utils/types';
+import { AppDispatch } from '../types';
+
 
 import {
     REGISTER_USER_REQUEST,
@@ -31,6 +33,7 @@ export interface IRegisterUserRequestAction {
 }
 export interface IRegisterUserSuccessAction {
     readonly type: typeof REGISTER_USER_SUCCESS;
+    readonly data: TUserData;
 }
 export interface IRegisterUserFailedAction {
     readonly type: typeof REGISTER_USER_FAILED;
@@ -41,7 +44,7 @@ export interface ILoginUserRequestAction {
 }
 export interface ILoginUserSuccessAction {
     readonly type: typeof LOGIN_USER_SUCCESS;
-    readonly data: TLoginData;
+    readonly data: TUserData;
 }
 export interface ILoginUserFailedAction {
     readonly type: typeof LOGIN_USER_FAILED;
@@ -84,7 +87,7 @@ export interface IRefreshTokenRequestAction {
     readonly type: typeof REFRESH_TOKEN_REQUEST;
 }
 export interface IRefreshTokenSuccessAction {
-    payload: TLoginData;
+    readonly payload: TUserData;
     readonly type: typeof REFRESH_TOKEN_SUCCESS;
 }
 export interface IRefreshTokenFailedAction {
@@ -126,7 +129,7 @@ export type TUserActions =
     | IDefaultAction;
 
 export const loginUser = (userData: string) => {
-    return async (dispatch: (arg0: TUserActions) => void) => {
+    return async (dispatch: AppDispatch) => {
         dispatch({
             type: LOGIN_USER_REQUEST
         });
@@ -150,7 +153,7 @@ export const loginUser = (userData: string) => {
 }
 
 export const updateToken = () => {
-    return async (dispatch: (arg0: TUserActions) => void) => {
+    return async (dispatch: AppDispatch) => {
         try {
             dispatch({
                 type: REFRESH_TOKEN_REQUEST
@@ -173,7 +176,7 @@ export const updateToken = () => {
 }
 
 export const getUserData = (methodType: string, userData: Object) => {
-    return async (dispatch: (arg0: TUserActions) => void) => {
+    return async (dispatch: AppDispatch) => {
         const accessToken = getCookie('accessToken');
 
         try {
@@ -206,19 +209,24 @@ export const getUserData = (methodType: string, userData: Object) => {
 }
 
 export const logoutAuth = () => {
-    return async (dispatch: (arg0: TUserActions) => void) => {
+    return async (dispatch: AppDispatch) => {
         try {
             await logoutRequest();
             localStorage.clear();
             deleteCookie('accessToken');
-            dispatch({ type: USER_LOGOUT });
+            dispatch({
+                type: USER_LOGOUT
+            });
         } catch {
             alert('Ошибка выхода из личного кабинета');
         }
     }
 }
 
-export const registerUser = (data: string) => async (dispatch: (arg0: TUserActions) => void) => {
+
+
+
+export const registerUser = (data: TUserData) => async (dispatch: AppDispatch) => {
     try {
         dispatch({
             type: REGISTER_USER_REQUEST,
@@ -227,7 +235,8 @@ export const registerUser = (data: string) => async (dispatch: (arg0: TUserActio
         localStorage.setItem('refreshToken', res.refreshToken);
         setCookie('accessToken', res.accessToken);
         dispatch({
-            type: REGISTER_USER_SUCCESS
+            type: REGISTER_USER_SUCCESS,
+            data: data
         })
     }
     catch (err) {
@@ -238,7 +247,7 @@ export const registerUser = (data: string) => async (dispatch: (arg0: TUserActio
 }
 
 export const restorePassword = (form: string) => {
-    return async (dispatch: (arg0: TUserActions) => void) => {
+    return async (dispatch: AppDispatch) => {
         try {
             dispatch({
                 type: RESET_PASSWORD_REQUEST
@@ -260,7 +269,7 @@ export const restorePassword = (form: string) => {
 }
 
 export const getNewPassword = (data: string) => {
-    return async (dispatch: (arg0: TUserActions) => void) => {
+    return async (dispatch: AppDispatch) => {
         try {
             dispatch({
                 type: GET_NEW_PASSWORD_REQUEST

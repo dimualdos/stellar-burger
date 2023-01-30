@@ -30,6 +30,7 @@ describe('Redux constructor', () => {
             number: 0,
             status: '',
             updatedAt: '',
+            owner: '',
             _id: '',
             __v: 0,
         }

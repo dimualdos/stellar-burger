@@ -11,18 +11,16 @@ import { Profile, LoginPage, ResetPass, Register, ForgotPass, NotFound404, MainP
 import styles from './app.module.css';
 import { TLocationState } from '../../utils/types';
 import { OrderID } from "../../pages/order-id";
-import { TStateReducer } from "../../services/reducers";
 import { Spinner } from "../spinner/spinner";
+import { AppDispatch } from "../../services/store";
 
 const App: FunctionComponent = () => {
-  const dispatch: any = useAppDispatch();
-  const dataOrderNumber: any = useAppSelector((store: TStateReducer) => store.dataNumberCard);
+  const dispatch: AppDispatch = useAppDispatch();
+  const dataOrderNumber = useAppSelector((store) => store.dataNumberCard);
   const history = useHistory();
   const location = useLocation<TLocationState>();
   const backgroundApp = location.state && location.state.background;
-
   const handleModalClose = () => history.goBack();
-
 
   useEffect(() => {
     dispatch(getItems());
@@ -44,7 +42,7 @@ const App: FunctionComponent = () => {
             {dataOrderNumber ? (
               <div className={styles.ingredientWrapper}>
                 <div className={styles.orderID}>
-                  {dataOrderNumber.dataOrderNumber.number ? (`#${dataOrderNumber.dataOrderNumber.number}`) : (<Spinner />)}
+                  {dataOrderNumber ? (`#${dataOrderNumber.dataOrderNumber.number}`) : (<Spinner />)}
                 </div>
                 <OrderID />
               </div>) : (<div className={styles.spinner}><Spinner /></div>)}
@@ -65,7 +63,7 @@ const App: FunctionComponent = () => {
             {dataOrderNumber ? (
               <div className={styles.ingredientWrapper}>
                 <div className={styles.orderID}>
-                  {dataOrderNumber.dataOrderNumber.number ? (`#${dataOrderNumber.dataOrderNumber!.number!}`) : (<Spinner />)}
+                  {dataOrderNumber ? (`#${dataOrderNumber.dataOrderNumber.number}`) : (<Spinner />)}
                 </div>
                 <OrderID />
               </div>
@@ -102,7 +100,7 @@ const App: FunctionComponent = () => {
           </Route>
           <ProtectedRoute path='/profile/orders/:number' exact >
             {dataOrderNumber && (
-              <Modal onClose={handleModalClose} title={dataOrderNumber.dataOrderNumber.number} overlay={true}>
+              <Modal onClose={handleModalClose} title1={`#${dataOrderNumber.dataOrderNumber.number}`} overlay={true}>
                 <OrderID />
               </Modal>
             )}
@@ -110,7 +108,7 @@ const App: FunctionComponent = () => {
           </ProtectedRoute>
           <Route path='/feed/:number' exact >
             {dataOrderNumber && (
-              <Modal onClose={handleModalClose} title={dataOrderNumber.dataOrderNumber.number} overlay={true}>
+              <Modal onClose={handleModalClose} title1={`#${dataOrderNumber.dataOrderNumber.number}`} overlay={true}>
                 <OrderID />
               </Modal>
             )

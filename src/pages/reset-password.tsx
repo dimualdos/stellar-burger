@@ -1,27 +1,25 @@
 
 import { useCallback, FormEvent, FunctionComponent } from 'react';
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 import { getNewPassword } from '../services/actions/auth';
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Input } from "@ya.praktikum/react-developer-burger-ui-components";
-import { TStateReducer } from '../services/reducers';
-import { useForm, useAppDispatch } from '../hooks/hooks';
+import { useForm, useAppDispatch, useAppSelector } from '../hooks/hooks';
 import styles from './css/page.module.css';
+import { AppDispatch } from '../services/store';
 
 
 export const ResetPass: FunctionComponent = () => {
 
-    const dispatch: any = useAppDispatch();
+    const dispatch: AppDispatch = useAppDispatch();
     const { values, handleChange } = useForm({ password: '', token: '' });
 
-    const { passwordData } = useSelector((state: TStateReducer) => state.user);
+    const { passwordData } = useAppSelector((state) => state.user);
     //? стандартная отправка формы без пользовательского хука
     // const [form, setValue] = useState({ password: '', token: '' });
     // const onChange = e => {
     //     setValue({ ...form, [e.target.name]: e.target.value });
     // };
-    if (passwordData) console.log(passwordData)
 
 
     const resetPassword = useCallback(

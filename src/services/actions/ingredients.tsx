@@ -2,7 +2,7 @@ import { getResourse } from '../../utils/burger-api';
 import { TProductItem } from '../../utils/types';
 
 import { GET_ITEMS_REQUEST, GET_ITEMS_SUCCESS, GET_ITEMS_FAILED } from '../constants/ingredients';
-import { TApplicationActions } from '../types';
+import { AppDispatch } from '../types';
 
 export interface IGetItemsRequestAction {
   readonly type: typeof GET_ITEMS_REQUEST;
@@ -22,7 +22,7 @@ export type TIngredientsActions =
 
 export const getItems = () => {
 
-  return function (dispatch: (arg0: TApplicationActions) => void) {
+  return function (dispatch: AppDispatch) {
     dispatch({
       type: GET_ITEMS_REQUEST
     })

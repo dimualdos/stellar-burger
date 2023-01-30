@@ -1,16 +1,7 @@
 
 
 
-export function getCookie(name: any) {
-    const matches = document.cookie.match(
-        new RegExp('(?:^|; )' + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + '=([^;]*)')
-    );
-    return matches ? decodeURIComponent(matches[1]) : undefined;
-}
-
-export const cookieWithoutBearer = getCookie('accessToken')?.replace('Bearer ', '');
-
-export function setCookie(name?: any, value?: any, props?: any) {
+export function setCookie(name?: string, value?: any, props?: any) {
     props = {
         path: '/',
         ...props
@@ -36,10 +27,20 @@ export function setCookie(name?: any, value?: any, props?: any) {
     document.cookie = updatedCookie;
 }
 
+export function getCookie(name: string) {
+    const matches = document.cookie.match(
+        new RegExp('(?:^|; )' + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + '=([^;]*)')
+    );
+    return matches ? decodeURIComponent(matches[1]) : '';
+}
+
+//export const cookieWithoutBearer = getCookie('accessToken').replace('Bearer ', '');
 
 export function deleteCookie(name: string) {
     setCookie(name, null, { expires: -1 });
 }
+
+
 
 
 

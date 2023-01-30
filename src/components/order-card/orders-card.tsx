@@ -1,8 +1,7 @@
 import { FunctionComponent, useMemo } from 'react';
 import subtract from '../../images/subtract.png';
-import { TWSOrder } from '../../utils/types';
+import { TengToRusStatus, TProductItem, TWSOrder } from '../../utils/types';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
-import { TStateReducer } from '../../services/reducers';
 import { formatRelative } from 'date-fns';
 import { ru } from 'date-fns/locale';
 import { Link, useLocation } from 'react-router-dom';
@@ -11,9 +10,9 @@ import styles from './order-card.module.css';
 
 
 
-export const OrderCard: FunctionComponent = (value) => {
+export const OrderCard: FunctionComponent = (value: any) => {
     const { name, number, updatedAt, ingredients, status }: TWSOrder = value;
-    const { items }: any = useAppSelector((store: TStateReducer) => store.ingredients);
+    const { items } = useAppSelector((store) => store.ingredients);
     const maxIngredients = 6;
     const location = useLocation();
     const dispatch = useAppDispatch();
@@ -23,12 +22,13 @@ export const OrderCard: FunctionComponent = (value) => {
     const orderInfo = useMemo(() => {
         if (!items.length) return null;
 
-        const ingredientsInfo = ingredients!.reduce((acc: any[], item: any): any => {
-            const ingredient = items.find((ingr: { _id: number; }) => ingr._id === item);
+        const ingredientsInfo = ingredients!.reduce((acc: TProductItem[], item: {}) => {
+            const ingredient = items.find((ingr) => ingr._id === item);
             if (ingredient) acc.push(ingredient);
             return acc;
         }, []);
-        const totalPriceCard = ingredientsInfo.reduce((acc: any, item: any) => {
+
+        const totalPriceCard = ingredientsInfo.reduce((acc: number, item: TProductItem) => {
             return acc + item.price;
         }, 0);
         const ingredientsShow = ingredientsInfo.slice(0, maxIngredients);
@@ -45,12 +45,12 @@ export const OrderCard: FunctionComponent = (value) => {
 
     if (!orderInfo) return null;
 
-    const onIngredientClick = (value: any) => {
+    const onIngredientClick = (value: TWSOrder) => {
         dispatch({ type: SET_INGREDIENT_MODAL, payload: orderInfo })
 
     }
 
-    const engToRusStatus: any = {
+    const engToRusStatus: TengToRusStatus = {
         done: 'Выполнен',
         pending: 'Готовится',
         created: 'Создан'

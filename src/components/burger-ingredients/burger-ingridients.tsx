@@ -1,19 +1,18 @@
 
-import { useSelector } from 'react-redux';
 import { useState, useMemo, useEffect, FunctionComponent } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import TemlateBurger from './template-burgers/template-burgers';
 import { Spinner } from '../spinner/spinner';
 import { SET_INGREDIENT_MODAL } from "../../services/actions/ingredient-detail-modal";
-import { TStateReducer } from '../../services/reducers';
-import styles from './burger-ingridients.module.css';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
+import styles from './burger-ingridients.module.css';
+import { TProductItem } from '../../utils/types';
 
 
 
 export const NewsItems: any = () => {
-    const { items, itemsRequest, itemsFailed }: any = useAppSelector((state: TStateReducer) => state.ingredients);
+    const { items, itemsRequest, itemsFailed } = useAppSelector((state) => state.ingredients);
     const dispatch = useAppDispatch();
 
     const [current, setCurrent] = useState('buns');
@@ -46,7 +45,7 @@ export const NewsItems: any = () => {
         }
     }, [inViewBuns, inViewMains, inViewSauses]);
 
-    const onIngredientClick = (ingredientModal: any) => {
+    const onIngredientClick = (ingredientModal: TProductItem) => {
         dispatch({ type: SET_INGREDIENT_MODAL, payload: ingredientModal })
     }
 

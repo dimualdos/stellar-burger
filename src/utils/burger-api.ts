@@ -1,8 +1,9 @@
-import { cookieWithoutBearer, getCookie, setCookie } from './cooke';
+import { getCookie, setCookie } from './cooke';
+import { TUserData } from './types';
 
 export const _BASE_URL: string = 'https://norma.nomoreparties.space/api';
 export const WS_ORDERS_FEED: string = 'wss://norma.nomoreparties.space/orders/all';
-export const WS_ORDERS_USER: string = `wss://norma.nomoreparties.space/orders?token=${cookieWithoutBearer}`;
+export const WS_ORDERS_USER: string = `wss://norma.nomoreparties.space/orders`;
 
 const request = async (url: RequestInfo | URL, option?: RequestInit | undefined) => {
     const res = await fetch(url, option);
@@ -77,7 +78,7 @@ export const loginRequest = async (form: string) => {
     //    
 };
 
-export const postOrder = async (data: string) => {
+export const postOrder = async (data: { ingredients: string[]; } | undefined) => {
     const dataFetch = await fetchWithRefresh(`${_BASE_URL}/orders`, {
         method: "POST",
         headers: {
@@ -124,7 +125,7 @@ export const getUserRequest = async () => {
 }
 
 
-export const registerUserRequest = async (form: string) => {
+export const registerUserRequest = async (form: TUserData) => {
     const res = await request(`${_BASE_URL}/auth/register`, {
         method: 'POST',
         headers: {

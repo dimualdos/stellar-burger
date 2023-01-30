@@ -1,5 +1,5 @@
 import { TApplicationActions } from '../types';
-import { TProductItem, TWSOrder } from '../../utils/types';
+import { TWSOrder } from '../../utils/types';
 
 import {
     ORDER_NUMBER_REQUEST,
@@ -10,19 +10,22 @@ import {
 
 
 export type TInitialStateIngredients = {
+    number: number | undefined;
     itemsRequest: boolean,
     itemsFailed: boolean,
-    dataOrderNumber: TWSOrder[];
+    dataOrderNumber: any;
 }
 
 export const initialState: TInitialStateIngredients = {
     itemsRequest: false,
     itemsFailed: false,
-    dataOrderNumber: [{}]
+    number: undefined,
+    dataOrderNumber: {},
+
 }
 
 
-export const dataNumberCardReducer = (state = initialState, action: any): TInitialStateIngredients => {
+export const dataNumberCardReducer = (state = initialState, action: TApplicationActions): TInitialStateIngredients => {
     switch (action.type) {
         case ORDER_NUMBER_REQUEST: {
             return {

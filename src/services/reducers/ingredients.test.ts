@@ -47,7 +47,20 @@ describe('Redux constructor', () => {
             itemsRequest: false
         }
         expect(itemsReducer(initialState, {
-            type: GET_ITEMS_SUCCESS, payload: [ingredient]
+            type: GET_ITEMS_SUCCESS, payload: [{
+                _id: '',
+                calories: 0,
+                fat: 0,
+                carbohydrates: 0,
+                image: '',
+                image_large: '',
+                image_mobile: '',
+                name: '',
+                price: 0,
+                proteins: 0,
+                type: '',
+                __v: 0
+            }]
         })).toEqual(state)
     });
 

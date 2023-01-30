@@ -1,4 +1,5 @@
 import { v4 as uuid } from 'uuid';
+import { TProductItem } from '../../utils/types';
 
 import { CONSTRUCTOR_ADD, CONSTRUCTOR_DELETE, CONSTRUCTOR_REORDER, CONSTRUCTOR_RESET } from '../constants/constructor-constant';
 
@@ -9,14 +10,14 @@ export type TPayloadConstructor = {
 
 export interface IConstructorAddAction {
     readonly type: typeof CONSTRUCTOR_ADD;
-    readonly payload: TPayloadConstructor;
+    readonly payload: TProductItem;
 }
 export interface IConstructorResetAction {
     readonly type: typeof CONSTRUCTOR_RESET;
 }
 export interface IConstructorReorderAction {
     [x: string]: any;
-    readonly payload?: any;
+    readonly payload: any;
     readonly type: typeof CONSTRUCTOR_REORDER;
 
 }

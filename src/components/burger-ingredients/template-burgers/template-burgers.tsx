@@ -1,8 +1,9 @@
-import { useSelector } from 'react-redux';
 import React, { useMemo, RefObject } from 'react';
-import styles from './template-burgers.module.css';
 import ItemsIngredientBurgers from '../items-ingredient/items-ingredient';
 import { TProductItem } from '../../../utils/types';
+import { useAppSelector } from '../../../hooks/hooks';
+import styles from './template-burgers.module.css';
+
 
 
 type TTemplateProps = {
@@ -16,11 +17,11 @@ type TTemplateProps = {
 const TemlateBurger = React.forwardRef<HTMLHeadingElement, TTemplateProps>(({
     onIngredientClick, ingredientsItems, headlineText, titleId
 }, ref) => {
-    const { bun, ingredients } = useSelector((state: any) => state.burgerConstructorItem);
+    const { bun, ingredients } = useAppSelector((state) => state.burgerConstructorItem);
 
     const ingredientCount = useMemo(() => {
         let countObj: any = {};
-        ingredients.forEach((element: { _id: number; }) => {
+        ingredients.forEach((element) => {
             if (!countObj[element._id]) countObj[element._id] = 0;
             countObj[element._id]++;
         });

@@ -1,22 +1,12 @@
 import { expect, test } from '@jest/globals';
-import { constructorReducer, TInitialStateConstructor } from './constructor';
-import { TConstructorActions } from '../actions/constructor';
-
+import { constructorReducer } from './constructor';
+import { initialState } from "./constructor";
 import {
     CONSTRUCTOR_ADD,
     CONSTRUCTOR_DELETE,
     CONSTRUCTOR_REORDER,
     CONSTRUCTOR_RESET
 } from '../constants/constructor-constant';
-
-
-
-const initialState: TInitialStateConstructor = {
-    bun: null,
-    ingredients: [],
-}
-
-
 
 describe('Redux constructor', () => {
 
@@ -25,17 +15,49 @@ describe('Redux constructor', () => {
     });
 
     test('Should handle CONSTRUCTOR_ADD', () => {
+        const ingredient = {
+            id: '',
+            _id: '',
+            calories: 0,
+            fat: 0,
+            carbohydrates: 0,
+            image: '',
+            image_large: '',
+            image_mobile: '',
+            name: '',
+            price: 0,
+            proteins: 0,
+            type: '',
+            __v: 0,
+        }
 
         const state = {
             ...initialState, bun: initialState.bun,
             ingredients: [
                 {
-                    id: 1,
-                    type: "type",
+                    ...ingredient,
+                    id: '',
                 },
             ],
         }
-        expect(constructorReducer(initialState, { type: CONSTRUCTOR_ADD, payload: { type: 'type', id: 1 } })).toEqual(state)
+        expect(constructorReducer(initialState, {
+            type: CONSTRUCTOR_ADD,
+            payload: {
+                id: '',
+                _id: '',
+                calories: 0,
+                fat: 0,
+                carbohydrates: 0,
+                image: '',
+                image_large: '',
+                image_mobile: '',
+                name: '',
+                price: 0,
+                proteins: 0,
+                type: '',
+                __v: 0,
+            }
+        })).toEqual(state)
     })
 
     test('Should handle CONSTRUCTOR_DELETE', () => {
@@ -60,7 +82,7 @@ describe('Redux constructor', () => {
             ...initialState,
             ingredients,
         }
-        expect(constructorReducer(initialState, { type: CONSTRUCTOR_REORDER })).toEqual(state)
+        expect(constructorReducer(initialState, { type: CONSTRUCTOR_REORDER, payload: ingredients })).toEqual(state)
     })
 
     test('Should handle CONSTRUCTOR_RESET', () => {

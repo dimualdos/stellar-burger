@@ -1,35 +1,31 @@
 import { useState, useMemo, FunctionComponent } from 'react';
-import { useSelector } from 'react-redux';
 import { useDrop } from "react-dnd";
 import { useHistory, useLocation } from 'react-router-dom';
 import { ConstructorElement, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import ComponentsContructor from './components-constructor/components-constructor';
 import OrderDetails from '../order-details/order-details';
 import { addToConstructor } from '../../services/actions/constructor';
-import styles from './burger-constructor.module.css';
 import Modal from '../modal/modal';
 import { orderBurder } from '../../services/actions/order';
 import { ORDER_RESET } from '../../services/constants/orders'
 import { Spinner } from '../spinner/spinner';
-import { TStateReducer } from '../../services/reducers';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { TProductItem } from '../../utils/types';
+import { AppDispatch } from '../../services/store';
+import { CONSTRUCTOR_RESET } from '../../services/constants/constructor-constant';
+import styles from './burger-constructor.module.css';
 
-type TburgerConstructor = {
-    state: TProductItem;
-    burgerConstructorItem: any;
-}
+
 
 
 const BurgerConstructor: FunctionComponent = () => {
-    const dispatch: any = useAppDispatch();
-    const { bun, ingredients } = useSelector((state: TburgerConstructor) => state.burgerConstructorItem);
-    const { orderRequest, order } = useAppSelector((state: TStateReducer) => state.order)
-    const user = useAppSelector((state: TStateReducer) => state.user.data);
+    const dispatch: AppDispatch = useAppDispatch();
+    const { bun, ingredients } = useAppSelector((state) => state.burgerConstructorItem);
+    const { orderRequest, order } = useAppSelector((state) => state.order)
+    const user = useAppSelector((state) => state.user.data);
     const [open, setOpen] = useState<any>(false);
     const history = useHistory();
     const location = useLocation();
-
 
     const [{ isHover }, dropTargerRef] = useDrop({
         accept: 'ingredient',
@@ -42,7 +38,7 @@ const BurgerConstructor: FunctionComponent = () => {
     });
     function dataPostId() {
         if (bun && ingredients) {
-            const data = { ingredients: [bun, ...ingredients.map((item: TProductItem) => item)].map((value) => value._id) };
+            const data = { ingredients: [bun!, ...ingredients!.map((item) => item)].map((value) => value._id) };
             return data;
         }
     }
@@ -64,6 +60,9 @@ const BurgerConstructor: FunctionComponent = () => {
 
     const closeModal = () => {
         dispatch({ type: ORDER_RESET })
+        dispatch({
+            type: CONSTRUCTOR_RESET
+        })
         setOpen(null)
     };
 
@@ -83,12 +82,12 @@ const BurgerConstructor: FunctionComponent = () => {
 
 
     return (
-        <section className={styles.burgerConstructor} ref={dropTargerRef}>
+        <section className={styles.burgerConstructor} ref={dropTargerRef}
+            data-testid="constructor">
             {bun ? (
                 <div className={styles.constructorElement} >
                     <div className={styles.constructorElemTopBottom}
-                        data-testid="constructor">
-
+                    >
                         <ConstructorElement
                             type="top"
                             isLocked={true}
@@ -98,14 +97,19 @@ const BurgerConstructor: FunctionComponent = () => {
                         />
                     </div>
 
-                    <div className={styles.constructorComponents} >
+                    <div className={styles.constructorComponents}
+                        data-testid="constructor-item"
+                    >
                         <div className={styles.constructorElemScroll}>
+
                             {ingredients.map((itemIngredient: TProductItem, index: number) =>
                                 <ComponentsContructor
                                     item={itemIngredient}
                                     key={itemIngredient.id}
                                     index={index} />
                             )}
+
+
                         </div>
                     </div>
 
@@ -140,7 +144,7 @@ const BurgerConstructor: FunctionComponent = () => {
                 </button>
             </div>
             {open ?
-                (<Modal onClose={closeModal} title='Детали заказа' overlay={false}>
+                (<Modal onClose={closeModal} title='Детали заказа' overlay={true}>
                     <OrderDetails numberOrder={orderData} />
                 </Modal>) : null
             }

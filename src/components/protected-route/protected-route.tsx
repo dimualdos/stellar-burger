@@ -1,8 +1,8 @@
 
 import { FC } from 'react';
 import { Redirect, Route, useLocation } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 import { TStateReducer } from '../../services/reducers';
+import { useAppSelector } from '../../hooks/hooks';
 
 
 type TProtectedRoute = {
@@ -16,7 +16,7 @@ type TProtectedRoute = {
 
 export const ProtectedRoute: FC<TProtectedRoute> = ({ onlyUnAuth = false, children, ...rest }) => {
     const location = useLocation();
-    const user = useSelector((store: TStateReducer) => store.user.data);
+    const user = useAppSelector((store) => store.user.data);
 
     if (onlyUnAuth && user) {
         const { from }: any = location.state || { from: { pathname: '/' } };
