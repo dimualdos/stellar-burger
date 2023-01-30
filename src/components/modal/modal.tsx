@@ -8,14 +8,14 @@ const modalItems: HTMLElement | null = document.getElementById('modals');
 
 type TModal = {
     title?: number | string;
-    title1?: number | string;
     children: ReactNode;
     onClose: () => void;
     overlay: boolean;
+    smallTitle: boolean;
 }
 
 
-const Modal: FC<TModal> = ({ title, title1, children, onClose, overlay = true }) => {
+const Modal: FC<TModal> = ({ title, smallTitle = false, children, onClose, overlay = true }) => {
     useEffect(() => {
         const removeModal = (e: KeyboardEvent) => {
             e.key === 'Escape' && onClose();
@@ -33,31 +33,21 @@ const Modal: FC<TModal> = ({ title, title1, children, onClose, overlay = true })
 
     return ReactDOM.createPortal(
         <>
-
-            <section className={styles.modal}>
-                <div className={styles.header}>
-                    <div className={styles.orderID}>
-                        {title1}
-                    </div>
-
-                    <div className={styles.title}>
+            <section className={smallTitle ? (styles.modalNumber) : (styles.modal)}>
+                <div className={smallTitle ? (styles.headerNumber) : (styles.header)}>
+                    <div className={smallTitle ? (styles.orderID) : (styles.title)}>
                         {title}
                     </div>
                     <button type='button'
-                        className={styles.icon}
+                        className={smallTitle ? (styles.icon1) : (styles.icon)}
                         data-testid='close-modal'
                         onClick={onClose}>
                         <CloseIcon type="primary" />
                     </button>
                 </div>
                 <div className={styles.content}>{children}</div>
-
             </section>
-
-
-
             {overlay ? (<ModalOverlay onClose={onClose} />) : null}
-
         </>, modalItems!
     )
 }

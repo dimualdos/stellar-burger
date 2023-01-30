@@ -5,7 +5,7 @@ import { orderReducer } from './order';
 import { constructorReducer } from './constructor';
 import { reducerDetailModal } from './ingredient-detail-modal';
 import { authReducer } from './auth';
-import { rootSocetReducerFeed, rootSocetReducerProfileOrders } from './ws-rootreduser';
+import { rootSocetReducerFeed } from './ws-rootreduser';
 import { dataNumberCardReducer } from './order-card-number';
 
 
@@ -17,8 +17,7 @@ export const rootReducer = combineReducers({
   ingredientsModal: reducerDetailModal,
   user: authReducer,
   dataNumberCard: dataNumberCardReducer,
-  webSocetFeed: rootSocetReducerFeed,
-  webSocetProfile: rootSocetReducerProfileOrders,
+  webSocetFeed: rootSocetReducerFeed
 });
 
 export type TStateReducer = ReturnType<typeof rootReducer>

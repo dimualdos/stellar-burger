@@ -45,19 +45,14 @@
     flex-direction: row;
     justify-content: flex-end;
     align-items: center;
-    width: 560px;
-}
-
-.headerRow {
-    display: flex;
-    justify-content: space-between;
-    width: 550px;
-    margin-bottom: 20px;
+    gap: 36px;
 }
 
 .headerNumber {
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
+    width: 545px;
+    margin-bottom: 20px;
 }
 
 .title {
@@ -71,7 +66,6 @@
     padding-left: 40px;
     text-align: center;
     padding-top: 20px;
-    display: flex;
 }
 
 

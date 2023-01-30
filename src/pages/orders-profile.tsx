@@ -17,7 +17,7 @@ import styles from './css/profile.module.css';
 export const OrdersProfile: FunctionComponent = () => {
 
     const dispatch: AppDispatch = useAppDispatch();
-    const { messages1 } = useAppSelector((store) => store.webSocetProfile);
+    const { messages } = useAppSelector((store) => store.webSocetFeed);
     const cookieData = document.cookie.match(/(accessToken=)(.+)/);
 
     let webSocketUser = '';
@@ -30,11 +30,11 @@ export const OrdersProfile: FunctionComponent = () => {
 
         dispatch(updateToken())
         dispatch({
-            type: 'WS_CONNECT_PROFILE',
+            type: 'WS_CONNECT',
             payload: webSocketUser,
         });
         return () => {
-            dispatch({ type: 'WS_CONNECTION_CLOSED_PROFILE', payload: undefined });
+            dispatch({ type: 'WS_CONNECTION_CLOSED', payload: undefined });
         }
     }, [dispatch]);
 
@@ -45,9 +45,9 @@ export const OrdersProfile: FunctionComponent = () => {
                 <LeftSectionInProfile />
             </div>
             <section className={styles.rightContainer}>
-                {messages1.success && messages1.orders!.length ? (
+                {messages.success && messages.orders!.length ? (
                     <ScrollCopmponent>
-                        {messages1.orders ? (messages1.orders.map((value) => < OrderCard {...value} key={value._id} />).reverse())
+                        {messages.orders ? (messages.orders.map((value) => < OrderCard {...value} key={value._id} />).reverse())
                             : (<div className={styles.divSpinner}>
                                 <Spinner />
                             </div>)}

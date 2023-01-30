@@ -93,14 +93,14 @@ const App: FunctionComponent = () => {
         <>
           <Route path="/ingredients/:id" exact>
             <div className={styles.ingredientWrapper} >
-              <Modal onClose={handleModalClose} title={'Детали ингредиента'} overlay={true}>
+              <Modal onClose={handleModalClose} smallTitle={false} title={'Детали ингредиента'} overlay={true}>
                 <IngredientDetails />
               </Modal>
             </div>
           </Route>
           <ProtectedRoute path='/profile/orders/:number' exact >
             {dataOrderNumber && (
-              <Modal onClose={handleModalClose} title1={`#${dataOrderNumber.dataOrderNumber.number}`} overlay={true}>
+              <Modal onClose={handleModalClose} smallTitle={true} title={`#${dataOrderNumber.dataOrderNumber.number}`} overlay={true}>
                 <OrderID />
               </Modal>
             )}
@@ -108,7 +108,7 @@ const App: FunctionComponent = () => {
           </ProtectedRoute>
           <Route path='/feed/:number' exact >
             {dataOrderNumber && (
-              <Modal onClose={handleModalClose} title1={`#${dataOrderNumber.dataOrderNumber.number}`} overlay={true}>
+              <Modal onClose={handleModalClose} smallTitle={true} title={`#${dataOrderNumber.dataOrderNumber.number}`} overlay={true}>
                 <OrderID />
               </Modal>
             )

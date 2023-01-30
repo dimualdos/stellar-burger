@@ -7,7 +7,7 @@ import { TIngredientDetailModalActions } from '../actions/ingredient-detail-moda
 import { TIngredientsActions } from '../actions/ingredients';
 import { TOrderActions } from '../actions/order';
 import { TDataOrderActions } from '../actions/order-card-number';
-import { TWSConnectActions, TWSConnectActionsProfileOrders } from '../actions/ws-actions';
+import { TWSConnectActions } from '../actions/ws-actions';
 
 
 
@@ -18,8 +18,7 @@ export type TApplicationActions = TUserActions
     | TIngredientsActions
     | TOrderActions
     | TDataOrderActions
-    | TWSConnectActions
-    | TWSConnectActionsProfileOrders;
+    | TWSConnectActions;
 // Infer the `RootState` and `AppDispatch` types from the store itself
 export type RootState = ReturnType<typeof store.getState>
 

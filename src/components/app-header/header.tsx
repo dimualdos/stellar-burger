@@ -5,7 +5,6 @@ import { useAppSelector } from '../../hooks/hooks';
 import { BurgerIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { MenuIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { ProfileIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import { TStateReducer } from '../../services/reducers';
 import { IProps } from '../../utils/types';
 import styles from './header.module.css';
 
@@ -13,7 +12,7 @@ const AppHeader: FC<IProps> = () => {
     const isConstructor = useRouteMatch({ path: '/', exact: true });
     const isFeed = useRouteMatch('/feed');
     const isProfile = useRouteMatch('/profile');
-    const userName = useAppSelector((state: TStateReducer) => state.user.data?.name);
+    const userName = useAppSelector((state) => state.user.data?.name);
 
     return (
         <header className={styles.navPanel}>

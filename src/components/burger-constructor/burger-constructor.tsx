@@ -144,7 +144,7 @@ const BurgerConstructor: FunctionComponent = () => {
                 </button>
             </div>
             {open ?
-                (<Modal onClose={closeModal} title='Детали заказа' overlay={true}>
+                (<Modal onClose={closeModal} smallTitle={false} title='Детали заказа' overlay={true}>
                     <OrderDetails numberOrder={orderData} />
                 </Modal>) : null
             }
