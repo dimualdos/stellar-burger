@@ -1,6 +1,6 @@
 import { useState, useMemo, FunctionComponent } from 'react';
 import { useDrop } from "react-dnd";
-import { useHistory, useLocation } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { ConstructorElement, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import ComponentsContructor from './components-constructor/components-constructor';
 import OrderDetails from '../order-details/order-details';
@@ -25,7 +25,6 @@ const BurgerConstructor: FunctionComponent = () => {
     const user = useAppSelector((state) => state.user.data);
     const [open, setOpen] = useState<any>(false);
     const history = useHistory();
-    const location = useLocation();
 
     const [{ isHover }, dropTargerRef] = useDrop({
         accept: 'ingredient',

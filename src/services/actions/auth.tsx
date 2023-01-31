@@ -1,7 +1,6 @@
 import { registerUserRequest, loginRequest, getUserRequest, logoutRequest, resetPass, recoveryPass, fetchWithRefresh } from '../../utils/burger-api';
-import { _BASE_URL } from '../../utils/burger-api';
-import { deleteCookie, setCookie, getCookie } from '../../utils/cooke';
-import { TLoginData, TUserData } from '../../utils/types';
+import { deleteCookie, setCookie } from '../../utils/cooke';
+import { TUserData } from '../../utils/types';
 import { AppDispatch } from '../types';
 
 

@@ -1,5 +1,4 @@
 
-import { TResetPassMessage } from '../../utils/types';
 import { TUserActions } from '../actions/auth';
 
 import {

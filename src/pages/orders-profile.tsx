@@ -5,13 +5,8 @@ import { OrderCard } from '../components/order-card/orders-card';
 import { useAppDispatch, useAppSelector } from '../hooks/hooks';
 import { WS_ORDERS_USER } from '../utils/burger-api';
 import { Spinner } from '../components/spinner/spinner';
-import { updateToken } from '../services/actions/auth';
 import { AppDispatch } from '../services/store';
 import styles from './css/profile.module.css';
-
-
-
-
 
 
 export const OrdersProfile: FunctionComponent = () => {
@@ -27,8 +22,6 @@ export const OrdersProfile: FunctionComponent = () => {
     }
 
     useEffect(() => {
-
-        //dispatch(updateToken())
         dispatch({
             type: 'WS_CONNECT',
             payload: webSocketUser,
