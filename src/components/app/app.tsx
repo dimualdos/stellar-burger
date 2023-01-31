@@ -13,6 +13,7 @@ import { TLocationState } from '../../utils/types';
 import { OrderID } from "../../pages/order-id";
 import { Spinner } from "../spinner/spinner";
 import { AppDispatch } from "../../services/store";
+import { cookieData } from "../../utils/cooke";
 
 const App: FunctionComponent = () => {
   const dispatch: AppDispatch = useAppDispatch();
@@ -24,6 +25,7 @@ const App: FunctionComponent = () => {
 
   useEffect(() => {
     dispatch(getItems());
+    if (!cookieData) return;
     dispatch(updateToken());
   }, [dispatch])
 

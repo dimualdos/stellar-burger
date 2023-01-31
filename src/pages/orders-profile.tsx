@@ -28,7 +28,7 @@ export const OrdersProfile: FunctionComponent = () => {
 
     useEffect(() => {
 
-        dispatch(updateToken())
+        //dispatch(updateToken())
         dispatch({
             type: 'WS_CONNECT',
             payload: webSocketUser,

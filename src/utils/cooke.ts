@@ -34,6 +34,8 @@ export function getCookie(name: string) {
     return matches ? decodeURIComponent(matches[1]) : '';
 }
 
+export const cookieData = document.cookie.match(/(accessToken=)(.+)/);
+
 //export const cookieWithoutBearer = getCookie('accessToken').replace('Bearer ', '');
 
 export function deleteCookie(name: string) {

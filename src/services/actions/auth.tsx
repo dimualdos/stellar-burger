@@ -12,9 +12,9 @@ import {
     LOGIN_USER_REQUEST,
     LOGIN_USER_SUCCESS,
     LOGIN_USER_FAILED,
-    UPDATE_USER_DATA_REQUEST,
-    UPDATE_USER_DATA_SUCCESS,
-    UPDATE_USER_DATA_FAILED,
+    // UPDATE_USER_DATA_REQUEST,
+    // UPDATE_USER_DATA_SUCCESS,
+    // UPDATE_USER_DATA_FAILED,
     RESET_PASSWORD_REQUEST,
     RESET_PASSWORD_SUCCESS,
     RESET_PASSWORD_FAILED,
@@ -50,16 +50,16 @@ export interface ILoginUserFailedAction {
     readonly type: typeof LOGIN_USER_FAILED;
 }
 
-export interface IUdateUserRequestAction {
-    readonly type: typeof UPDATE_USER_DATA_REQUEST;
-}
-export interface IUdateUserSuccessAction {
-    readonly type: typeof UPDATE_USER_DATA_SUCCESS;
-    readonly data: TLoginData;
-}
-export interface IUdateUserFailedAction {
-    readonly type: typeof UPDATE_USER_DATA_FAILED;
-}
+// export interface IUdateUserRequestAction {
+//     readonly type: typeof UPDATE_USER_DATA_REQUEST;
+// }
+// export interface IUdateUserSuccessAction {
+//     readonly type: typeof UPDATE_USER_DATA_SUCCESS;
+//     readonly data: TLoginData;
+// }
+// export interface IUdateUserFailedAction {
+//     readonly type: typeof UPDATE_USER_DATA_FAILED;
+// }
 
 export interface IResetPasswordRequestAction {
     readonly type: typeof RESET_PASSWORD_REQUEST;
@@ -110,9 +110,9 @@ export type TUserActions =
     | ILoginUserRequestAction
     | ILoginUserSuccessAction
     | ILoginUserFailedAction
-    | IUdateUserRequestAction
-    | IUdateUserSuccessAction
-    | IUdateUserFailedAction
+    // | IUdateUserRequestAction
+    // | IUdateUserSuccessAction
+    // | IUdateUserFailedAction
     | IResetPasswordRequestAction
     | IResetPasswordSuccessAction
     | IResetPasswordFailedAction
@@ -175,38 +175,7 @@ export const updateToken = () => {
     }
 }
 
-export const getUserData = (methodType: string, userData: Object) => {
-    return async (dispatch: AppDispatch) => {
-        const accessToken = getCookie('accessToken');
 
-        try {
-            dispatch({
-                type: UPDATE_USER_DATA_REQUEST
-            });
-
-            const data = await fetchWithRefresh(`${_BASE_URL}/auth/user`, {
-                method: methodType,
-                headers: {
-                    'authorization': accessToken,
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(userData)
-            });
-
-            if (!data.success) throw new Error('');
-
-            dispatch({
-                type: UPDATE_USER_DATA_SUCCESS,
-                data: data.user
-            });
-        }
-        catch (err) {
-            dispatch({
-                type: UPDATE_USER_DATA_FAILED
-            })
-        }
-    }
-}
 
 export const logoutAuth = () => {
     return async (dispatch: AppDispatch) => {
@@ -291,3 +260,35 @@ export const getNewPassword = (data: string) => {
     }
 }
 
+// export const getUserData = (methodType: string, userData: Object) => {
+//     return async (dispatch: AppDispatch) => {
+//         const accessToken = getCookie('accessToken');
+
+//         try {
+//             dispatch({
+//                 type: UPDATE_USER_DATA_REQUEST
+//             });
+
+//             const data = await fetchWithRefresh(`${_BASE_URL}/auth/user`, {
+//                 method: methodType,
+//                 headers: {
+//                     'authorization': accessToken,
+//                     'Content-Type': 'application/json'
+//                 },
+//                 body: JSON.stringify(userData)
+//             });
+
+//             if (!data.success) throw new Error('');
+
+//             dispatch({
+//                 type: UPDATE_USER_DATA_SUCCESS,
+//                 data: data.user
+//             });
+//         }
+//         catch (err) {
+//             dispatch({
+//                 type: UPDATE_USER_DATA_FAILED
+//             })
+//         }
+//     }
+// }

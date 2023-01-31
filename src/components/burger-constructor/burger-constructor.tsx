@@ -46,10 +46,6 @@ const BurgerConstructor: FunctionComponent = () => {
     const handleClick = () => {
         if (!bun || orderRequest) return;
         if (!user) {
-            history.replace({
-                pathname: '/login',
-                state: { background: location }
-            });
             history.push('/login');
         }
         else {

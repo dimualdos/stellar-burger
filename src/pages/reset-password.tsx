@@ -1,6 +1,6 @@
 
 import { useCallback, FormEvent, FunctionComponent } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { getNewPassword } from '../services/actions/auth';
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Input } from "@ya.praktikum/react-developer-burger-ui-components";
@@ -10,7 +10,7 @@ import { AppDispatch } from '../services/store';
 
 
 export const ResetPass: FunctionComponent = () => {
-
+    const history = useHistory();
     const dispatch: AppDispatch = useAppDispatch();
     const { values, handleChange } = useForm({ password: '', token: '' });
 
@@ -21,12 +21,12 @@ export const ResetPass: FunctionComponent = () => {
     //     setValue({ ...form, [e.target.name]: e.target.value });
     // };
 
-
     const resetPassword = useCallback(
         (e: FormEvent<HTMLFormElement>) => {
             e.preventDefault();
-            if (!passwordData) return;
             dispatch(getNewPassword(values));
+            if (!passwordData) return;
+            history.push('/login');
         },
         [dispatch, passwordData, values]);
 

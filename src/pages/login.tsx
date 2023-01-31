@@ -12,7 +12,6 @@ import { AppDispatch } from '../services/store';
 export const LoginPage: FunctionComponent = () => {
     const dispatch: AppDispatch = useAppDispatch();
     const { values, handleChange } = useForm({ email: '', password: '' });
-
     const { loginUserRequest } = useAppSelector((state) => state.user);
 
     const handleClick = useCallback(
