@@ -5,7 +5,9 @@ export const _BASE_URL: string = 'https://norma.nomoreparties.space/api';
 export const WS_ORDERS_FEED: string = 'wss://norma.nomoreparties.space/orders/all';
 export const WS_ORDERS_USER: string = `wss://norma.nomoreparties.space/orders`;
 
-const request = async (url: RequestInfo | URL, option?: RequestInit | undefined) => {
+//export const WS_ORDERS_USER: string = `wss://norma.nomoreparties.space/orders?token=${cookieWithoutBearer}`;
+
+const request = async (url: RequestInfo | URL, option?: RequestInit) => {
     const res = await fetch(url, option);
     if (!res.ok) {
         throw new Error(`Could not fetch ${url}, status: ${res.status}`);
@@ -39,7 +41,7 @@ export const refreshToken = async () => {
 
 export const fetchWithRefresh = async (url: RequestInfo | URL, options?: any) => {
     try {
-        const res = await fetch(url, options);
+        const res = await fetch(url, options,);
         return await checkResponse(res);
     } catch (err: any) {
         if (err.message === 'jwt expired') {
@@ -104,9 +106,16 @@ export const getOrderByNumber = async (number: string) => {
     return await res;
 }
 
-export const getUserRequest = async () => {
-    return fetchWithRefresh(`${_BASE_URL}/auth/user`, {
-        method: 'GET',
+export const getUserRequest = async (getMethod?: boolean, data?: {},) => {
+    const methodData = () => {
+        if (getMethod) {
+            return 'GET'
+        } else {
+            return 'PATCH'
+        }
+    }
+    const dataFetch = await fetchWithRefresh(`${_BASE_URL}/auth/user`, {
+        method: methodData(),
         mode: 'cors',
         cache: 'no-cache',
         credentials: 'same-origin',
@@ -114,14 +123,13 @@ export const getUserRequest = async () => {
             'Content-Type': 'application/json',
             authorization: getCookie('accessToken')
         },
+        body: (!getMethod ? JSON.stringify(data!) : null),
         redirect: 'follow',
         referrerPolicy: 'no-referrer'
-    })
-        .then(data => {
-            if (data?.success) return data;
-            return Promise.reject(data)
-        });
-
+    });
+    if (dataFetch?.success)
+        return dataFetch;
+    return Promise.reject(dataFetch);
 }
 
 

@@ -1,11 +1,12 @@
 import { createAction } from "@reduxjs/toolkit";
+import { TwsOrdersList } from "../../utils/types";
 
 
 //!!Redux Toolkit
-export const wsConnect = createAction<string, 'WS_CONNECT'>('WS_CONNECT');
+export const wsConnect = createAction<any, 'WS_CONNECT'>('WS_CONNECT');
 export const wsConnecting = createAction('WS_CONNECTION_SUCCESS');
 export const wsOpen = createAction('WS_CONNECTION_OPEN');
-export const wsMessage = createAction<{}, 'WS_MESSAGE'>('WS_MESSAGE');
+export const wsMessage = createAction<TwsOrdersList, 'WS_MESSAGE'>('WS_MESSAGE');
 export const wsClose = createAction('WS_CONNECTION_CLOSED');
 export const wsDisconnect = createAction('WS_DISCONNECT');
 export const wsError = createAction<string, 'WS_CONNECTION_ERROR'>('WS_CONNECTION_ERROR');

@@ -26,7 +26,14 @@ describe('rootSocetReducerFeed reducer', () => {
         expect(rootSocetReducerFeed(initialState, {
             type: wsConnect,
             status: WebsocketStatus.CONNECTING
-        })).toEqual({ connectionError: "", messages: {}, status: "CONNECTING..." })
+        })).toEqual({
+            connectionError: "", messages: {
+                orders: [],
+                success: false,
+                total: 0,
+                totalToday: 0,
+            }, orders: null, status: undefined, success: false
+        })
     });
 
     test('should handle wsOpen', () => {
@@ -34,7 +41,14 @@ describe('rootSocetReducerFeed reducer', () => {
         expect(rootSocetReducerFeed(initialState, {
             type: wsOpen,
             status: WebsocketStatus.ONLINE
-        })).toEqual({ connectionError: "", messages: {}, status: "ONLINE" })
+        })).toEqual({
+            connectionError: "", messages: {
+                orders: [],
+                success: false,
+                total: 0,
+                totalToday: 0,
+            }, orders: null, status: "ONLINE", success: false
+        })
     });
 
 
@@ -43,7 +57,14 @@ describe('rootSocetReducerFeed reducer', () => {
         expect(rootSocetReducerFeed(initialState, {
             type: wsError,
             status: WebsocketStatus.ONLINE
-        })).toEqual({ connectionError: undefined, messages: {}, status: "OFFLINE" })
+        })).toEqual({
+            connectionError: undefined, messages: {
+                orders: [],
+                success: false,
+                total: 0,
+                totalToday: 0,
+            }, orders: null, status: "OFFLINE", success: false
+        })
     })
 
     test('should handle wsClose', () => {
@@ -51,7 +72,14 @@ describe('rootSocetReducerFeed reducer', () => {
         expect(rootSocetReducerFeed(initialState, {
             type: wsClose,
             status: WebsocketStatus.OFFLINE
-        })).toEqual({ connectionError: '', messages: {}, status: "OFFLINE" })
+        })).toEqual({
+            connectionError: '', messages: {
+                orders: [],
+                success: false,
+                total: 0,
+                totalToday: 0,
+            }, orders: null, status: "OFFLINE", success: false
+        })
     })
 
     test('should handle wsMessage', () => {
@@ -59,7 +87,7 @@ describe('rootSocetReducerFeed reducer', () => {
         expect(rootSocetReducerFeed(initialState, {
             type: wsMessage,
             status: WebsocketStatus.ONLINE
-        })).toEqual({ connectionError: '', messages: undefined, status: "OFFLINE" })
+        })).toEqual({ connectionError: '', messages: undefined, orders: null, status: "OFFLINE", success: false })
     })
 })
 

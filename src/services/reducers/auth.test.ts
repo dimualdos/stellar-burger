@@ -10,9 +10,9 @@ import {
     LOGIN_USER_REQUEST,
     LOGIN_USER_SUCCESS,
     LOGIN_USER_FAILED,
-    // UPDATE_USER_DATA_REQUEST,
-    // UPDATE_USER_DATA_FAILED,
-    // UPDATE_USER_DATA_SUCCESS,
+    UPDATE_USER_DATA_REQUEST,
+    UPDATE_USER_DATA_FAILED,
+    UPDATE_USER_DATA_SUCCESS,
     RESET_PASSWORD_REQUEST,
     RESET_PASSWORD_SUCCESS,
     RESET_PASSWORD_FAILED,
@@ -61,7 +61,7 @@ describe("Redux auth store", () => {
             registerUserRequest: false,
             registerUserFailed: false
         };
-        expect(authReducer(initialState, { type: REGISTER_USER_SUCCESS, data: { name: 'name', email: 'email' } })).toEqual(state)
+        expect(authReducer(initialState, { type: REGISTER_USER_SUCCESS, data: { name: 'name', email: 'email', password: 'password' } })).toEqual(state)
     });
 
     test('should handle REGISTER_USER_FAILED', () => {
@@ -86,14 +86,14 @@ describe("Redux auth store", () => {
             ...initialState,
             data: {
                 email: "email",
-                name: "name",
+                name: 'name',
                 password: "",
             },
             loginUserRequest: false,
             loginUserFailed: false,
         };
         expect(authReducer(initialState,
-            { type: LOGIN_USER_SUCCESS, data: { name: 'name', email: 'email' } })).toEqual(state)
+            { type: LOGIN_USER_SUCCESS, data: { name: 'name', password: 'password', email: 'email' } })).toEqual(state)
     });
 
     it('should handle LOGIN_USER_FAILED', () => {
@@ -107,37 +107,37 @@ describe("Redux auth store", () => {
 
 
 
-    // it('should handle UPDATE_USER_DATA_REQUEST', () => {
-    //     const state = {
-    //         ...initialState,
-    //         userDataRequest: true
-    //     };
-    //     expect(authReducer(initialState, { type: UPDATE_USER_DATA_REQUEST })).toEqual(state)
-    // });
+    it('should handle UPDATE_USER_DATA_REQUEST', () => {
+        const state = {
+            ...initialState,
+            userDataRequest: true
+        };
+        expect(authReducer(initialState, { type: UPDATE_USER_DATA_REQUEST })).toEqual(state)
+    });
 
-    // test('should handle UPDATE_USER_DATA_SUCCESS', () => {
-    //     const state = {
-    //         ...initialState,
-    //         userDataRequest: false,
-    //         userDataFailed: false,
-    //         data: {
-    //             email: "email",
-    //             name: "name",
-    //             password: "",
-    //         }
-    //     };
-    //     expect(authReducer(initialState,
-    //         { type: UPDATE_USER_DATA_SUCCESS, data: { name: 'name', email: 'email' } })).toEqual(state)
-    // });
+    test('should handle UPDATE_USER_DATA_SUCCESS', () => {
+        const state = {
+            ...initialState,
+            userDataRequest: false,
+            userDataFailed: false,
+            data: {
+                email: "email",
+                name: "name",
+                password: "",
+            }
+        };
+        expect(authReducer(initialState,
+            { type: UPDATE_USER_DATA_SUCCESS, data: { name: 'name', email: 'email', password: 'password' } })).toEqual(state)
+    });
 
-    // test('should handle UPDATE_USER_DATA_FAILED', () => {
-    //     const state = {
-    //         ...initialState,
-    //         userDataRequest: false,
-    //         userDataFailed: true
-    //     };
-    //     expect(authReducer(initialState, { type: UPDATE_USER_DATA_FAILED })).toEqual(state)
-    // });
+    test('should handle UPDATE_USER_DATA_FAILED', () => {
+        const state = {
+            ...initialState,
+            userDataRequest: false,
+            userDataFailed: true
+        };
+        expect(authReducer(initialState, { type: UPDATE_USER_DATA_FAILED })).toEqual(state)
+    });
 
 
     test('should handle RESET_PASSWORD_REQUEST', () => {
@@ -212,11 +212,12 @@ describe("Redux auth store", () => {
             data: {
                 email: "email",
                 name: "name",
+                password: 'password'
             },
             refreshTokenRequest: false,
             refreshTokenFailed: false
         };
-        expect(authReducer(initialState, { type: REFRESH_TOKEN_SUCCESS, payload: { name: 'name', email: 'email' } })).toEqual(state)
+        expect(authReducer(initialState, { type: REFRESH_TOKEN_SUCCESS, payload: { name: 'name', email: 'email', password: 'password' } })).toEqual(state)
     })
     test('should handle REFRESH_TOKEN_FAILED', () => {
         const state = {

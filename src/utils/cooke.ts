@@ -17,7 +17,7 @@ export function setCookie(name?: string, value?: any, props?: any) {
     }
     value = encodeURIComponent(value);
     let updatedCookie = name + '=' + value;
-    for (const propName in props) {
+    for (let propName in props) {
         updatedCookie += '; ' + propName;
         const propValue = props[propName];
         if (propValue !== true) {
@@ -34,9 +34,9 @@ export function getCookie(name: string) {
     return matches ? decodeURIComponent(matches[1]) : '';
 }
 
-export const cookieData = document.cookie.match(/(accessToken=)(.+)/);
+export const cookieData = document.cookie!.match(/(accessToken=)(.+)/);
 
-//export const cookieWithoutBearer = getCookie('accessToken').replace('Bearer ', '');
+export const cookieWithoutBearer = getCookie('accessToken').replace('Bearer ', '');
 
 export function deleteCookie(name: string) {
     setCookie(name, null, { expires: -1 });

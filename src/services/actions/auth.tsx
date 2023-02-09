@@ -1,5 +1,5 @@
-import { registerUserRequest, loginRequest, getUserRequest, logoutRequest, resetPass, recoveryPass, fetchWithRefresh } from '../../utils/burger-api';
-import { deleteCookie, setCookie } from '../../utils/cooke';
+import { registerUserRequest, loginRequest, getUserRequest, logoutRequest, resetPass, recoveryPass, fetchWithRefresh, _BASE_URL } from '../../utils/burger-api';
+import { deleteCookie, setCookie, getCookie } from '../../utils/cooke';
 import { TUserData } from '../../utils/types';
 import { AppDispatch } from '../types';
 
@@ -11,9 +11,10 @@ import {
     LOGIN_USER_REQUEST,
     LOGIN_USER_SUCCESS,
     LOGIN_USER_FAILED,
-    // UPDATE_USER_DATA_REQUEST,
-    // UPDATE_USER_DATA_SUCCESS,
-    // UPDATE_USER_DATA_FAILED,
+    UPDATE_USER_DATA_REQUEST,
+    UPDATE_USER_DATA_SUCCESS,
+    UPDATE_USER_DATA_FAILED,
+    UPDATE_USER_DATA_RESET,
     RESET_PASSWORD_REQUEST,
     RESET_PASSWORD_SUCCESS,
     RESET_PASSWORD_FAILED,
@@ -49,16 +50,20 @@ export interface ILoginUserFailedAction {
     readonly type: typeof LOGIN_USER_FAILED;
 }
 
-// export interface IUdateUserRequestAction {
-//     readonly type: typeof UPDATE_USER_DATA_REQUEST;
-// }
-// export interface IUdateUserSuccessAction {
-//     readonly type: typeof UPDATE_USER_DATA_SUCCESS;
-//     readonly data: TLoginData;
-// }
-// export interface IUdateUserFailedAction {
-//     readonly type: typeof UPDATE_USER_DATA_FAILED;
-// }
+export interface IUdateUserRequestAction {
+    readonly type: typeof UPDATE_USER_DATA_REQUEST;
+}
+export interface IUdateUserSuccessAction {
+    readonly type: typeof UPDATE_USER_DATA_SUCCESS;
+    readonly data: TUserData;
+}
+export interface IUdateUserFailedAction {
+    readonly type: typeof UPDATE_USER_DATA_FAILED;
+}
+
+export interface IUdateUserRESETAction {
+    readonly type: typeof UPDATE_USER_DATA_RESET;
+}
 
 export interface IResetPasswordRequestAction {
     readonly type: typeof RESET_PASSWORD_REQUEST;
@@ -109,9 +114,10 @@ export type TUserActions =
     | ILoginUserRequestAction
     | ILoginUserSuccessAction
     | ILoginUserFailedAction
-    // | IUdateUserRequestAction
-    // | IUdateUserSuccessAction
-    // | IUdateUserFailedAction
+    | IUdateUserRequestAction
+    | IUdateUserSuccessAction
+    | IUdateUserFailedAction
+    | IUdateUserRESETAction
     | IResetPasswordRequestAction
     | IResetPasswordSuccessAction
     | IResetPasswordFailedAction
@@ -151,14 +157,15 @@ export const loginUser = (userData: string) => {
     }
 }
 
-export const updateToken = () => {
+export const updateToken = (getMethod: boolean) => {
     return async (dispatch: AppDispatch) => {
         try {
             dispatch({
                 type: REFRESH_TOKEN_REQUEST
             });
 
-            getUserRequest()
+            getUserRequest(getMethod)
+
                 .then((res) => {
                     dispatch({
                         type: REFRESH_TOKEN_SUCCESS,
@@ -259,35 +266,26 @@ export const getNewPassword = (data: string) => {
     }
 }
 
-// export const getUserData = (methodType: string, userData: Object) => {
-//     return async (dispatch: AppDispatch) => {
-//         const accessToken = getCookie('accessToken');
+export const getUserData = (data: Object) => {
+    return async (dispatch: AppDispatch) => {
+        try {
+            dispatch({
+                type: UPDATE_USER_DATA_REQUEST
+            });
 
-//         try {
-//             dispatch({
-//                 type: UPDATE_USER_DATA_REQUEST
-//             });
+            getUserRequest(false, data)
+                .then((data) => {
+                    dispatch({
+                        type: UPDATE_USER_DATA_SUCCESS,
+                        data: data.user
+                    })
 
-//             const data = await fetchWithRefresh(`${_BASE_URL}/auth/user`, {
-//                 method: methodType,
-//                 headers: {
-//                     'authorization': accessToken,
-//                     'Content-Type': 'application/json'
-//                 },
-//                 body: JSON.stringify(userData)
-//             });
-
-//             if (!data.success) throw new Error('');
-
-//             dispatch({
-//                 type: UPDATE_USER_DATA_SUCCESS,
-//                 data: data.user
-//             });
-//         }
-//         catch (err) {
-//             dispatch({
-//                 type: UPDATE_USER_DATA_FAILED
-//             })
-//         }
-//     }
-// }
+                })
+        }
+        catch (err) {
+            dispatch({
+                type: UPDATE_USER_DATA_FAILED
+            })
+        }
+    }
+}

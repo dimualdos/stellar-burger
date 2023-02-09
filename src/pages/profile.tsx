@@ -1,10 +1,17 @@
-import { FunctionComponent, MouseEvent } from 'react';
+import { FormEvent, FunctionComponent, MouseEvent, useCallback, useEffect, useRef, useState } from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import { Input } from "@ya.praktikum/react-developer-burger-ui-components";
-import { logoutAuth } from '../services/actions/auth';
+import { getUserData, logoutAuth, updateToken } from '../services/actions/auth';
 import { useForm, useAppDispatch, useAppSelector } from '../hooks/hooks';
 import { AppDispatch } from '../services/store';
 import styles from './css/profile.module.css';
+import { cookieData } from '../utils/cooke';
+import likeIcon from '../images/likeIcon.png';
+import { UPDATE_USER_DATA_RESET } from '../services/constants/auth';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faThumbsUp } from '@fortawesome/free-solid-svg-icons'
+
+const elementIcon = <FontAwesomeIcon icon={faThumbsUp} />
 
 
 export const LeftSectionInProfile: FunctionComponent = () => {
@@ -43,14 +50,48 @@ export const LeftSectionInProfile: FunctionComponent = () => {
 
 
 export const Profile: FunctionComponent = () => {
-    const { data } = useAppSelector((state) => state.user);
-    const { values, handleChange } = useForm({ email: `${data ? (data.email) : ('')}`, password: `${data ? (data.password) : ('')}`, name: `${data ? (data.name) : ('')}` });
+    const { data, success } = useAppSelector((state) => state.user);
+    const dispatch: AppDispatch = useAppDispatch();
+    const { name, email, password } = data;
+    const { values, handleChange } = useForm({
+        email: `${email ? (email) : ('')}`,
+        password: `${password ? (password) : ('')}`,
+        name: `${name ? (name) : ('')}`
+    });
+    const [successMessage, SetSuccessMessage] = useState<string | null>();
+    const [successInput, setSuccessInput] = useState<{} | null>();
+
+    useEffect(() => {
+        if (!cookieData) return;
+
+        if (success) {
+            const timeout = setTimeout(() => {
+                SetSuccessMessage('Данные изменены');
+                setTimeout(() => {
+                    dispatch({ type: UPDATE_USER_DATA_RESET })
+                }, 5000)
+            })
+            return () => clearTimeout(timeout)
+        }
+
+    }, [dispatch, success, handleChange, values]);
+
+
+    const resetUpdateProfile = useCallback(
+
+        (e: FormEvent<HTMLFormElement>) => {
+            e.preventDefault();
+            dispatch(getUserData(values));
+        },
+        [dispatch, values]);
 
     return (
         <section className={styles.section}>
             <div className={styles.leftContainer}>
                 <LeftSectionInProfile />
+
                 <form
+                    onSubmit={resetUpdateProfile}
                     className={styles.form}>
                     <Input
                         type={'text'}
@@ -58,6 +99,7 @@ export const Profile: FunctionComponent = () => {
                         value={values.name}
                         name={"name"}
                         onChange={(e) => handleChange(e)}
+                        onInput={(e) => setSuccessInput(e)}
                         icon={'EditIcon'}
                     />
                     <Input
@@ -66,6 +108,7 @@ export const Profile: FunctionComponent = () => {
                         value={values.email}
                         name={"email"}
                         onChange={(e) => handleChange(e)}
+                        onInput={(e) => setSuccessInput(e)}
                         icon={'EditIcon'}
                     />
                     <Input
@@ -74,10 +117,30 @@ export const Profile: FunctionComponent = () => {
                         value={values.password}
                         name={"password"}
                         onChange={(e) => handleChange(e)}
+                        onInput={(e) => setSuccessInput(e)}
                         icon={'EditIcon'}
                     />
-                </form>
+                    <div className={styles.row}>
+                        {successInput ? (
+                            <>
+                                <button
+                                    type='submit'
+                                    className={styles.buttonConstructor}>
+                                    <p className={styles.buttonText}>Изменить данные</p>
+                                </button>
+                            </>
 
+                        ) : (null)}
+
+                        {success ? (<p className={styles.buttonText}>
+                            {elementIcon} {successMessage}
+                        </p>) : (
+                            null
+                        )}
+
+                    </div>
+
+                </form>
             </div>
         </section>
     )

@@ -4,7 +4,7 @@ import type { RootState, AppDispatch } from '../services/types/index';
 
 // import type { } from "redux-thunk/extend-redux";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 export type TDict = {
     name: string;
     value: string;
@@ -26,6 +26,14 @@ export const useForm = (inputValues: TUseForm) => {
         setValues({ ...values, [name]: value });
     };
     return { values, handleChange, setValues };
+}
+
+export const useTimeout = (callback: () => void, timeout: number) => {
+    useEffect(() => {
+        const timeoutReference = setTimeout(callback, timeout);
+
+        return () => clearTimeout(timeoutReference);
+    }, [callback, timeout])
 }
 
 // Use throughout your app instead of plain `useDispatch` and `useSelector`

@@ -33,6 +33,8 @@ describe('Redux constructor', () => {
             owner: '',
             _id: '',
             __v: 0,
+            length: 0,
+            map: undefined
         }
         const state = {
             ...initialState,

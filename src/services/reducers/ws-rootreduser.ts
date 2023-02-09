@@ -15,8 +15,9 @@ export enum WebsocketStatus {
     OFFLINE = 'OFFLINE'
 }
 
-
 export type TLiveSocketStore = {
+    orders: any;
+    success: boolean;
     status: WebsocketStatus;
     connectionError: string;
     messages: TwsOrdersList;
@@ -27,18 +28,25 @@ export type TLiveSocketStore = {
 export const initialState: TLiveSocketStore = {
     status: WebsocketStatus.OFFLINE,
     connectionError: '',
-    messages: {},
+    messages: {
+        success: false,
+        orders: [],
+        total: 0,
+        totalToday: 0
+    },
+    orders: null,
+    success: false
 }
 
 export const rootSocetReducerFeed = createReducer(initialState, (builder) => {
     builder
-        .addCase(wsConnect, (state) => {
-            state.status = WebsocketStatus.CONNECTING
+        .addCase(wsConnect, (state, action) => {
+            state.status = (WebsocketStatus.CONNECTING, action.payload)
         })
         .addCase(wsOpen, (state) => {
             state.status = WebsocketStatus.ONLINE
         })
-        .addCase(wsClose, (state, action) => {
+        .addCase(wsClose, (state) => {
             state.status = WebsocketStatus.OFFLINE
         })
         .addCase(wsError, (state, action) => {

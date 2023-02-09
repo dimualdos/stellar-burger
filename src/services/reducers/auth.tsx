@@ -8,9 +8,10 @@ import {
     LOGIN_USER_REQUEST,
     LOGIN_USER_SUCCESS,
     LOGIN_USER_FAILED,
-    // UPDATE_USER_DATA_REQUEST,
-    // UPDATE_USER_DATA_FAILED,
-    // UPDATE_USER_DATA_SUCCESS,
+    UPDATE_USER_DATA_REQUEST,
+    UPDATE_USER_DATA_FAILED,
+    UPDATE_USER_DATA_RESET,
+    UPDATE_USER_DATA_SUCCESS,
     RESET_PASSWORD_REQUEST,
     RESET_PASSWORD_SUCCESS,
     RESET_PASSWORD_FAILED,
@@ -47,7 +48,9 @@ export type TInitialStateAuth = {
     newPasswordData: null | string,
     registerUserFailed: boolean,
     userDataRequest: boolean,
-    userDataFailed: boolean
+    userDataFailed: boolean,
+
+    success: boolean
 }
 
 export const initialState: TInitialStateAuth = {
@@ -76,7 +79,9 @@ export const initialState: TInitialStateAuth = {
     newPasswordData: null,
     registerUserFailed: false,
     userDataRequest: false,
-    userDataFailed: false
+    userDataFailed: false,
+
+    success: false
 }
 
 
@@ -141,33 +146,47 @@ export const authReducer = (state = initialState, action: TUserActions): TInitia
                 loginUserFailed: true,
             }
         }
+        //? Update User data
+        case UPDATE_USER_DATA_REQUEST: {
+            return {
+                ...state,
+                userDataRequest: true,
+            }
+        }
+        case UPDATE_USER_DATA_SUCCESS: {
+            return {
+                ...state,
+                userDataRequest: false,
+                userDataFailed: false,
+                data: {
+                    ...state.data,
+                    name: action.data.name,
+                    email: action.data.email,
+                    password: ''
+                },
+                success: true
+            }
+        }
+        case UPDATE_USER_DATA_FAILED: {
+            return {
+                ...state,
+                userDataRequest: false,
+                userDataFailed: true,
+            }
+        }
 
-        // case UPDATE_USER_DATA_REQUEST: {
-        //     return {
-        //         ...state,
-        //         userDataRequest: true,
-        //     }
-        // }
-        // case UPDATE_USER_DATA_SUCCESS: {
-        //     return {
-        //         ...state,
-        //         userDataRequest: false,
-        //         userDataFailed: false,
-        //         data: {
-        //             ...state.data,
-        //             name: action.data.name,
-        //             email: action.data.email,
-        //             password: ''
-        //         }
-        //     }
-        // }
-        // case UPDATE_USER_DATA_FAILED: {
-        //     return {
-        //         ...state,
-        //         userDataRequest: false,
-        //         userDataFailed: true,
-        //     }
-        // }
+        case UPDATE_USER_DATA_RESET: {
+            return {
+                ...state,
+                userDataRequest: false,
+                userDataFailed: false,
+                success: false
+            }
+        }
+
+
+
+        //? reset pass
 
         case RESET_PASSWORD_REQUEST: {
             return {

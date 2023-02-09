@@ -15,6 +15,7 @@ import { Spinner } from "../spinner/spinner";
 import { AppDispatch } from "../../services/store";
 import { cookieData } from "../../utils/cooke";
 
+
 const App: FunctionComponent = () => {
   const dispatch: AppDispatch = useAppDispatch();
   const dataOrderNumber = useAppSelector((store) => store.dataNumberCard);
@@ -26,7 +27,7 @@ const App: FunctionComponent = () => {
   useEffect(() => {
     dispatch(getItems());
     if (!cookieData) return;
-    dispatch(updateToken());
+    dispatch(updateToken(true));
   }, [dispatch])
 
   return (

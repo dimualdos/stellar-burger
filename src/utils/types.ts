@@ -1,6 +1,5 @@
 import { ReactNode } from 'react';
 import { Location } from 'history';
-import { Key } from 'react';
 
 export interface IProps {
     children?: ReactNode;
@@ -11,12 +10,14 @@ export type TItem = {
 }
 
 export type TItemConstructor = {
-    name?: string;
-    price?: number;
-    image?: string;
+    name: string;
+    price: number;
+    image: string;
 }
 
 export type TWSOrder = {
+    length: number;
+    map: any;
     createdAt: string;
     ingredients: string[];
     name: string;
@@ -30,10 +31,10 @@ export type TWSOrder = {
 };
 
 export type TwsOrdersList = {
-    success?: boolean;
-    orders?: Array<TWSOrder>;
-    total?: number;
-    totalToday?: number;
+    success: boolean;
+    orders: Array<TWSOrder>;
+    total: number;
+    totalToday: number;
 }
 
 
@@ -72,17 +73,13 @@ export type TLocationState = {
 export type TUserData = {
     name: string;
     email: string;
-    login?: string;
-    password?: string;
-    newPassword?: string;
+    password: string;
+    // login?: string;
+    // newPassword?: string;
 }
 
-export type TLoginData = {
-    name: string;
-    password?: string;
-    email: string;
 
-}
+//export type TLoginData = Omit<TRegisterData, 'name'>
 
 export type TResetPassMessage = {
     message: string

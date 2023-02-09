@@ -1,5 +1,6 @@
 import type { Middleware } from 'redux';
 import { ActionCreatorWithoutPayload, ActionCreatorWithPayload } from "@reduxjs/toolkit";
+import { TwsOrdersList } from '../../utils/types';
 
 import type { RootState } from '../types/index';
 
@@ -7,7 +8,7 @@ export type TwsActionTypes = {
     connect: ActionCreatorWithPayload<string>,
     wsConnecting: ActionCreatorWithoutPayload,
     wsOpen: ActionCreatorWithoutPayload,
-    wsMessage: ActionCreatorWithPayload<{}>,
+    wsMessage: ActionCreatorWithPayload<TwsOrdersList>,
     wsClose: ActionCreatorWithoutPayload,
     disconnect: ActionCreatorWithoutPayload,
     wsError: ActionCreatorWithPayload<string>,
@@ -76,4 +77,3 @@ export const createSocketMiddleware = (wsActions: TwsActionTypes): Middleware<{}
         }
     }
 }
-

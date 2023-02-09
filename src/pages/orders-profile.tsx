@@ -7,27 +7,31 @@ import { WS_ORDERS_USER } from '../utils/burger-api';
 import { Spinner } from '../components/spinner/spinner';
 import { AppDispatch } from '../services/store';
 import styles from './css/profile.module.css';
+import { updateToken } from '../services/actions/auth';
 
 
 export const OrdersProfile: FunctionComponent = () => {
 
     const dispatch: AppDispatch = useAppDispatch();
-    const { messages } = useAppSelector((store) => store.webSocetFeed);
-    const cookieData = document.cookie.match(/(accessToken=)(.+)/);
-
-    let webSocketUser = '';
-    if (cookieData) {
-        const cookieWithoutBearer = cookieData![2].replace('Bearer%20', '');
-        webSocketUser = `${WS_ORDERS_USER}?token=${cookieWithoutBearer}`
-    }
+    const messagesOrder = useAppSelector((store) => store.webSocetFeed.messages);
 
     useEffect(() => {
+        const cookieData = document.cookie.match(/(accessToken=)(.+)/);
+
+        if (!cookieData) return;
+        dispatch(updateToken(true));
+
+        let webSocketUser = '';
+        if (cookieData) {
+            const cookieWithoutBearer = cookieData![2].replace('Bearer%20', '');
+            webSocketUser = `${WS_ORDERS_USER}?token=${cookieWithoutBearer}`
+        }
         dispatch({
             type: 'WS_CONNECT',
-            payload: webSocketUser,
+            payload: webSocketUser
         });
         return () => {
-            dispatch({ type: 'WS_CONNECTION_CLOSED', payload: undefined });
+            dispatch({ type: 'WS_CONNECTION_CLOSED' });
         }
     }, [dispatch]);
 
@@ -38,9 +42,9 @@ export const OrdersProfile: FunctionComponent = () => {
                 <LeftSectionInProfile />
             </div>
             <section className={styles.rightContainer}>
-                {messages.success && messages.orders!.length ? (
+                {messagesOrder.orders && messagesOrder.orders.length > 0 ? (
                     <ScrollCopmponent>
-                        {messages.orders ? (messages.orders.map((value) => < OrderCard {...value} key={value._id} />).reverse())
+                        {messagesOrder.orders! ? (messagesOrder.orders.map((value) => < OrderCard {...value} key={value._id} />).reverse())
                             : (<div className={styles.divSpinner}>
                                 <Spinner />
                             </div>)}
